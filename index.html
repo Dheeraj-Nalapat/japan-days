@@ -1394,7 +1394,16 @@
   [data-theme="dark"] .food-grid { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.06); }
   [data-theme="dark"] .food-city { background: var(--paper); }
 
+  /* ── DARK MODE — Hero & Meta ──────────────── */
+  [data-theme="dark"] .meta-item .value { color: rgba(232,224,212,0.7); }
+  [data-theme="dark"] .meta-item .label { color: var(--mist); }
+
+  /* ── DARK MODE — Flights ────────────────── */
+  [data-theme="dark"] .airport-code { color: rgba(232,224,212,0.8); }
+
+  /* ── DARK MODE — Itinerary ──────────────── */
   [data-theme="dark"] .itinerary-section { background: var(--paper); }
+  [data-theme="dark"] .itinerary-section .section-title { color: var(--ink); }
   [data-theme="dark"] .city-block-name { color: var(--ink); }
   [data-theme="dark"] .city-block-jp { color: rgba(232,224,212,0.4); }
   [data-theme="dark"] .city-block-dates,
@@ -1406,6 +1415,36 @@
   [data-theme="dark"] .place-tag { border-color: rgba(255,255,255,0.15); color: rgba(232,224,212,0.5); }
   [data-theme="dark"] .day-entry { border-color: rgba(255,255,255,0.06); }
   [data-theme="dark"] .city-block { background: rgba(255,255,255,0.02); }
+
+  /* ── DARK MODE — Budget ─────────────────── */
+  [data-theme="dark"] .budget-section { background: var(--paper); }
+  [data-theme="dark"] .budget-section .section-title { color: var(--ink); }
+  [data-theme="dark"] .budget-name { color: rgba(232,224,212,0.6); }
+  [data-theme="dark"] .budget-total .label { color: rgba(232,224,212,0.3); }
+  [data-theme="dark"] .budget-total { border-color: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .budget-item { border-color: rgba(255,255,255,0.04); }
+  [data-theme="dark"] .budget-summary h3 { color: rgba(232,224,212,0.7); }
+  [data-theme="dark"] .budget-summary p { color: rgba(232,224,212,0.5); }
+  [data-theme="dark"] .buffer-amount { color: var(--sage); }
+
+  /* ── DARK MODE — Checklist ──────────────── */
+  [data-theme="dark"] .checklist-section { background: var(--paper); }
+  [data-theme="dark"] .checklist-section .section-title { color: var(--ink); }
+  [data-theme="dark"] .checklist-group h3 { color: rgba(232,224,212,0.6); }
+  [data-theme="dark"] .check-text { color: rgba(232,224,212,0.55); }
+  [data-theme="dark"] .checklist-section .section-eyebrow { color: var(--torii); }
+
+  /* ── DARK MODE — Route ──────────────────── */
+  [data-theme="dark"] .route-section .section-title { color: var(--ink); }
+  [data-theme="dark"] .city-name { color: rgba(232,224,212,0.7); }
+  [data-theme="dark"] .city-dates { color: rgba(232,224,212,0.35); }
+  [data-theme="dark"] .city-nights { color: rgba(232,224,212,0.3); }
+
+  /* ── DARK MODE — Map ────────────────────── */
+  [data-theme="dark"] .map-section .section-title { color: var(--ink); }
+
+  /* ── DARK MODE — Hidden Gems ────────────── */
+  [data-theme="dark"] .quiet-section .section-title { color: var(--ink); }
   [data-theme="dark"] .quiet-card { background: var(--paper); }
   [data-theme="dark"] .budget-bar-track { background: rgba(255,255,255,0.08); }
   [data-theme="dark"] .check-box { border-color: rgba(255,255,255,0.2); }
@@ -2014,7 +2053,7 @@
 <!-- ── ITINERARY ──────────────────────────── -->
 <section id="itinerary" class="itinerary-section">
   <div class="section-eyebrow">Day by Day</div>
-  <h2 class="section-title" style="color:var(--paper);">Full Itinerary</h2>
+  <h2 class="section-title">Full Itinerary</h2>
   <div class="city-blocks" id="cityBlocks"></div>
 </section>
 
