@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Japan 2026 — Dheeraj's Travel Plan</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1208">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -18,6 +22,14 @@
     --sakura: #e8c4c4;
     --deep: #2c1810;
     --torii: #d4521a;
+  }
+
+  [data-theme="dark"] {
+    --ink: #e8e0d4;
+    --paper: #121212;
+    --cream: #1a1a1a;
+    --deep: #0a0a0a;
+    --mist: #6a7a80;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -184,6 +196,21 @@
     font-size: 1.1rem;
     color: var(--paper);
     font-weight: 300;
+  }
+
+  .hero-countdown {
+    position: relative; z-index: 2;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    margin-top: 1.5rem;
+  }
+  .hero-countdown .countdown-value {
+    color: var(--torii);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
   }
 
   .hero-scroll {
@@ -377,6 +404,9 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
     min-width: 120px;
     cursor: pointer;
     transition: transform 0.3s;
@@ -564,6 +594,7 @@
     width: 100%;
     height: 160px;
     object-fit: cover;
+    background: linear-gradient(135deg, rgba(26,18,8,0.3), rgba(107,124,94,0.2));
     border-radius: 2px;
     opacity: 0.85;
     transition: opacity 0.4s;
@@ -665,6 +696,20 @@
     color: var(--paper);
     font-weight: 400;
   }
+  .place-maps {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    color: rgba(245,240,232,0.25);
+    text-decoration: none;
+    margin-left: 0.4rem;
+    opacity: 0;
+    transition: opacity 0.2s, color 0.2s;
+    vertical-align: middle;
+  }
+  .place-item:hover .place-maps { opacity: 1; }
+  .place-maps:hover { color: var(--torii); }
 
   /* ── QUIET PLACES ───────────────────────────── */
   .quiet-section { background: var(--cream); }
@@ -695,6 +740,7 @@
     object-fit: cover;
     display: block;
     transition: transform 0.5s;
+    background: linear-gradient(135deg, rgba(26,18,8,0.15), rgba(107,124,94,0.12));
   }
   .quiet-card:hover .quiet-card-img { transform: scale(1.05); }
 
@@ -738,6 +784,27 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
+
+  .gem-maps-link {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(26,18,8,0.3);
+    text-decoration: none;
+    margin-top: 0.8rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid rgba(26,18,8,0.1);
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .gem-maps-link:hover {
+    color: var(--torii);
+    border-color: var(--torii);
+  }
+  [data-theme="dark"] .gem-maps-link { color: rgba(232,224,212,0.25); border-color: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .gem-maps-link:hover { color: var(--torii); border-color: var(--torii); }
 
   /* ── FOOD ───────────────────────────────────── */
   .food-section { background: var(--paper); }
@@ -829,11 +896,64 @@
   .check-text { font-size: 0.88rem; line-height: 1.5; color: rgba(26,18,8,0.75); }
 
   /* ── FOOTER ─────────────────────────────────── */
+  /* ── SHARE TOOLBAR ────────────────────────── */
+  .share-section {
+    background: var(--deep);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .share-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.25);
+    margin-bottom: 1rem;
+  }
+  .share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .share-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    background: none;
+    border: 1px solid rgba(245,240,232,0.1);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .share-btn:hover {
+    color: var(--torii);
+    border-color: var(--torii);
+  }
+  #qrContainer {
+    margin-top: 1.5rem;
+    display: none;
+  }
+  #qrContainer.open { display: block; }
+  #qrContainer canvas, #qrContainer img {
+    border-radius: 8px;
+    border: 3px solid rgba(245,240,232,0.1);
+  }
+  [data-theme="dark"] .share-section { background: #0a0a0a; }
+
   footer {
     background: var(--deep);
     color: rgba(245,240,232,0.3);
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 2rem 2rem 3rem;
     font-family: 'Space Mono', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.2em;
@@ -877,6 +997,357 @@
   }
   .nav-links a:hover { color: var(--torii); }
 
+  /* ── MODAL ─────────────────────────────────── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,8,5,0.75);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-panel {
+    background: var(--paper);
+    width: 100%;
+    max-width: 640px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 16px 16px 0 0;
+    padding: 2.5rem 2.5rem 3rem;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+  }
+  .modal-overlay.open .modal-panel {
+    transform: translateY(0);
+  }
+  @media (min-width: 700px) {
+    .modal-overlay { align-items: center; }
+    .modal-panel {
+      border-radius: 12px;
+      max-height: 80vh;
+      transform: translateY(40px);
+      opacity: 0;
+    }
+    .modal-overlay.open .modal-panel {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .modal-close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: none;
+    border: 1px solid rgba(26,18,8,0.1);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(26,18,8,0.4);
+    transition: all 0.2s;
+  }
+  .modal-close:hover {
+    background: rgba(26,18,8,0.05);
+    color: var(--vermilion);
+    border-color: var(--vermilion);
+  }
+
+  .modal-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--torii);
+    margin-bottom: 0.5rem;
+  }
+  .modal-title {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+  .modal-subtitle {
+    font-size: 0.82rem;
+    color: rgba(26,18,8,0.55);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .modal-body { margin-bottom: 1.5rem; }
+  .modal-body p {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(26,18,8,0.75);
+    margin-bottom: 1rem;
+  }
+  .modal-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .modal-meta-item {
+    padding: 0.8rem;
+    background: var(--cream);
+    border-radius: 6px;
+  }
+  .modal-meta-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(26,18,8,0.35);
+    margin-bottom: 0.3rem;
+  }
+  .modal-meta-value {
+    font-size: 0.8rem;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .modal-tip {
+    background: rgba(184,134,11,0.06);
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.2rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 1rem;
+  }
+  .modal-tip-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .modal-tip p {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: rgba(26,18,8,0.7);
+  }
+  .modal-maps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--torii);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--torii);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .modal-maps-link:hover {
+    background: var(--torii);
+    color: white;
+  }
+
+  .modal-activity {
+    background: rgba(107,124,94,0.08);
+    border-left: 3px solid var(--sage);
+    padding: 1rem 1.2rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 1rem;
+  }
+  .modal-activity-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.6rem;
+  }
+  .modal-activity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .modal-activity-item {
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+  .modal-activity-item strong {
+    display: block;
+    font-size: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(26,18,8,0.35);
+    font-weight: 400;
+    margin-bottom: 0.15rem;
+  }
+
+  .modal-food-where {
+    font-size: 0.82rem;
+    color: rgba(26,18,8,0.6);
+    margin-bottom: 0.5rem;
+  }
+  .modal-food-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .modal-food-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.6rem;
+    border-radius: 3px;
+    background: var(--cream);
+  }
+
+  .modal-gem-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .modal-gem-block {
+    padding: 0.8rem;
+    background: var(--cream);
+    border-radius: 6px;
+  }
+  .modal-gem-block-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(26,18,8,0.35);
+    margin-bottom: 0.3rem;
+  }
+  .modal-gem-block-value {
+    font-size: 0.82rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  [data-theme="dark"] .modal-panel { background: #1a1a1a; }
+  [data-theme="dark"] .modal-close { border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); }
+  [data-theme="dark"] .modal-close:hover { background: rgba(255,255,255,0.05); }
+  [data-theme="dark"] .modal-subtitle { color: rgba(232,224,212,0.45); }
+  [data-theme="dark"] .modal-body p { color: rgba(232,224,212,0.65); }
+  [data-theme="dark"] .modal-meta-item { background: rgba(255,255,255,0.04); }
+  [data-theme="dark"] .modal-meta-label { color: rgba(255,255,255,0.3); }
+  [data-theme="dark"] .modal-tip { background: rgba(184,134,11,0.08); }
+  [data-theme="dark"] .modal-tip p { color: rgba(232,224,212,0.6); }
+  [data-theme="dark"] .modal-activity { background: rgba(107,124,94,0.1); }
+  [data-theme="dark"] .modal-food-badge { background: rgba(255,255,255,0.06); }
+  [data-theme="dark"] .modal-gem-block { background: rgba(255,255,255,0.04); }
+
+  .place-item { cursor: pointer; transition: background 0.2s; }
+  .place-item:hover { background: rgba(26,18,8,0.03); }
+  [data-theme="dark"] .place-item:hover { background: rgba(255,255,255,0.03); }
+  .food-item { cursor: pointer; transition: background 0.2s; }
+  .food-item:hover { background: rgba(26,18,8,0.03); }
+  .quiet-card { cursor: pointer; }
+
+  /* ── DARK MODE TOGGLE ───────────────────────── */
+  .theme-toggle {
+    background: none;
+    border: 1px solid rgba(245,240,232,0.2);
+    color: rgba(245,240,232,0.5);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .theme-toggle:hover {
+    border-color: var(--torii);
+    color: var(--torii);
+  }
+
+  [data-theme="dark"] .route-section,
+  [data-theme="dark"] .quiet-section,
+  [data-theme="dark"] .checklist-section { background: var(--cream); }
+  [data-theme="dark"] .budget-section,
+  [data-theme="dark"] .food-section { background: var(--paper); }
+  [data-theme="dark"] .flights-strip { background: #0d0d0d; }
+  [data-theme="dark"] .budget-summary { background: #0d0d0d; }
+  [data-theme="dark"] .food-grid { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.06); }
+  [data-theme="dark"] .food-city { background: var(--paper); }
+  [data-theme="dark"] .quiet-card { background: var(--paper); }
+  [data-theme="dark"] .budget-bar-track { background: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .check-box { border-color: rgba(255,255,255,0.2); }
+  [data-theme="dark"] .check-text { color: rgba(255,255,255,0.6); }
+  [data-theme="dark"] .checklist-group h3 { border-bottom-color: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .city-dot { border-color: var(--cream); }
+  [data-theme="dark"] .city-nights { background: var(--paper); color: var(--ink); }
+  [data-theme="dark"] .loading-screen { background: #0a0a0a; }
+  [data-theme="dark"] footer { background: #0a0a0a; }
+  [data-theme="dark"] .quiet-card .city-badge { color: var(--mist); }
+  [data-theme="dark"] .quiet-card h3 { color: var(--ink); }
+  [data-theme="dark"] .quiet-card p { color: rgba(232,224,212,0.5); }
+
+  /* ── DAY NOTES ─────────────────────────────── */
+  .day-notes-toggle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.25);
+    background: none;
+    border: 1px solid rgba(245,240,232,0.1);
+    padding: 0.25rem 0.6rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.2s;
+  }
+  .day-notes-toggle:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+  .day-notes-toggle.has-notes {
+    color: var(--gold);
+    border-color: rgba(184,134,11,0.3);
+  }
+
+  .day-notes-area {
+    display: none;
+    margin-top: 0.8rem;
+  }
+  .day-notes-area.open { display: block; }
+
+  .day-notes-area textarea {
+    width: 100%;
+    min-height: 60px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,240,232,0.1);
+    color: rgba(245,240,232,0.6);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    padding: 0.7rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .day-notes-area textarea:focus {
+    border-color: var(--gold);
+  }
+  .day-notes-area textarea::placeholder {
+    color: rgba(245,240,232,0.2);
+  }
+
   /* ── ANIMATIONS ─────────────────────────────── */
   @keyframes slideUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -908,6 +1379,59 @@
     .hero-jp { display: none; }
     .nav-links { display: none; }
   }
+
+  /* ── PRINT ───────────────────────────────── */
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { background: white; color: #1a1208; font-size: 11pt; }
+    nav, .loading-screen, .hero-scroll, .hero-bg, .hero-pattern,
+    .hero-jp, .flights-strip, .modal-overlay, .theme-toggle,
+    .day-notes-toggle, .day-notes-area, .hero-countdown,
+    .share-section { display: none !important; }
+    section { padding: 1.5rem 0; }
+    .hero { min-height: auto; padding: 2rem; background: white; }
+    .hero-title { color: #1a1208; font-size: 24pt; }
+    .hero-title em { color: #c0392b; }
+    .hero-label, .hero-subtitle { color: #555; }
+    .hero-content { padding: 0; }
+    .hero-meta { gap: 1rem; }
+    .meta-item .label, .meta-item .value { color: #1a1208; }
+    .route-section { background: white; page-break-after: always; }
+    .route-visual { flex-wrap: wrap; gap: 0.5rem; }
+    .city-dot { border-color: #ddd; }
+    .city-name, .city-dates, .city-nights { color: #1a1208; }
+    .itinerary-section { background: white; color: #1a1208; }
+    .section-title { color: #1a1208 !important; }
+    .section-eyebrow { color: #c0392b; }
+    .city-block { grid-template-columns: 1fr; border: 1px solid #ddd; margin-bottom: 1rem; page-break-inside: avoid; }
+    .city-header { background: #f5f0e8; }
+    .city-header-img { display: none; }
+    .city-block-name, .city-block-jp, .city-block-dates, .city-block-nights { color: #1a1208; }
+    .day-entry { border-color: #ddd; }
+    .day-num { color: #c0392b; }
+    .day-date { color: #555; }
+    .day-content h4 { color: #1a1208; }
+    .place-tag { border: 1px solid #999; color: #555; background: #f0f0f0; }
+    .place-desc, .place-name { color: #1a1208; }
+    .place-maps, .gem-maps-link { display: none; }
+    .quiet-section, .budget-section, .food-section, .checklist-section { background: white; }
+    .quiet-card { border: 1px solid #ddd; page-break-inside: avoid; }
+    .quiet-card-img { display: none; }
+    .quiet-card h3, .quiet-card p, .quiet-card .city-badge { color: #1a1208; }
+    .crowd-dot { background: #ddd; border-color: #999; }
+    .crowd-dot.filled { background: #6b7c5e; }
+    .budget-summary { background: #f5f0e8; color: #1a1208; }
+    .budget-name, .budget-amount { color: #1a1208; }
+    .food-city { border: 1px solid #ddd; }
+    .food-city-name { color: #c0392b; }
+    .food-item { color: #1a1208; }
+    .checklist-group h3 { color: #1a1208; }
+    .check-text { color: #1a1208; }
+    .check-box { border-color: #999; }
+    footer { background: white; color: #555; border-top: 1px solid #ddd; }
+    footer span { color: #c0392b; }
+    a { color: #1a1208; text-decoration: none; }
+  }
 </style>
 </head>
 <body>
@@ -922,6 +1446,7 @@
 <nav id="nav">
   <div class="nav-logo">日本 2026</div>
   <div class="nav-links" id="navLinks"></div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
 </nav>
 
 <!-- ── HERO ──────────────────────────────── -->
@@ -934,6 +1459,7 @@
     <h1 class="hero-title">Japan<br><em>2026</em></h1>
     <p class="hero-subtitle" id="heroSubtitle"></p>
     <div class="hero-meta" id="heroMeta"></div>
+    <div class="hero-countdown" id="heroCountdown"></div>
   </div>
   <div class="hero-scroll">
     <div class="scroll-line"></div>
@@ -989,10 +1515,30 @@
 </section>
 
 <!-- ── FOOTER ──────────────────────────────── -->
+<!-- ── MODAL ──────────────────────────────── -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-panel" id="modalPanel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ── SHARE ──────────────────────────────── -->
+<div class="share-section" id="shareSection">
+  <div class="share-label">Share & Export</div>
+  <div class="share-buttons">
+    <button class="share-btn" id="btnShare" onclick="shareTrip()" style="display:none">📤 Share</button>
+    <button class="share-btn" onclick="exportICS()">📅 Calendar (.ics)</button>
+    <button class="share-btn" onclick="toggleQR()">🔳 QR Code</button>
+  </div>
+  <div id="qrContainer"></div>
+</div>
+
 <footer id="footer"></footer>
 
 <!-- ── DATA ENGINE ─────────────────────────── -->
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <script>
 (async function JapanDays() {
   const DATA_DIR = 'data';
@@ -1036,6 +1582,25 @@
         <span class="value">${esc(m.value)}</span>
       </div>`
     ).join('');
+
+    if (t.departure_date) {
+      const cdEl = document.getElementById('heroCountdown');
+      function updateCountdown() {
+        const dep = new Date(t.departure_date);
+        const now = new Date();
+        const diff = dep - now;
+        if (diff <= 0) {
+          cdEl.innerHTML = '<span class="countdown-value">You\'re in Japan!</span> 🇯🇵';
+          return;
+        }
+        const days = Math.floor(diff / 86400000);
+        const hrs = Math.floor((diff % 86400000) / 3600000);
+        const mins = Math.floor((diff % 3600000) / 60000);
+        cdEl.innerHTML = `<span class="countdown-value">${days}d ${hrs}h ${mins}m</span> until Japan`;
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 60000);
+    }
   }
 
   function renderFlights(data) {
@@ -1062,18 +1627,27 @@
     container.innerHTML = cardsHTML + cardsHTML;
   }
 
+  function citySlug(name) {
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
   function renderRoute(data) {
+    const cityNames = new Set(data.itinerary.cities.map(c => c.name.toLowerCase()));
     const container = document.getElementById('routeVisual');
     let html = '';
     data.route.route.forEach((city, i) => {
       const dotClass = city.transit ? 'city-dot transit' : 'city-dot';
       const dotStyle = city.special_style ? ` style="${city.special_style}"` : '';
-      html += `<div class="route-city">
+      const slug = citySlug(city.name);
+      const hasBlock = cityNames.has(city.name.toLowerCase());
+      const tag = hasBlock ? 'a' : 'div';
+      const href = hasBlock ? ` href="#city-${slug}"` : '';
+      html += `<${tag} class="route-city"${href}>
         <div class="${dotClass}"${dotStyle}></div>
         <div class="city-name">${esc(city.name)}</div>
         <div class="city-dates">${esc(city.dates)}</div>
         <div class="city-nights">${esc(city.nights)}</div>
-      </div>`;
+      </${tag}>`;
       if (city.line_after) {
         const lineClass = city.line_after === 'flight' ? 'route-line flight' : 'route-line';
         html += `<div class="${lineClass}"></div>`;
@@ -1083,15 +1657,23 @@
   }
 
   function renderItinerary(data) {
+    const savedNotes = JSON.parse(localStorage.getItem('jd-day-notes') || '{}');
     const container = document.getElementById('cityBlocks');
-    container.innerHTML = data.itinerary.cities.map(city => {
-      const daysHTML = city.days.map(day => {
-        const placesHTML = day.places.map(p =>
-          `<div class="place-item">
+    container.innerHTML = data.itinerary.cities.map((city, ci) => {
+      const daysHTML = city.days.map((day, di) => {
+        const noteKey = `${ci}-${di}`;
+        const noteVal = savedNotes[noteKey] || '';
+        const hasNotes = noteVal ? ' has-notes' : '';
+        const placesHTML = day.places.map((p, pi) => {
+          const clickable = p.extended ? ` onclick="openPlaceModal(${ci},${di},${pi})"` : '';
+          const mapsQ = (p.extended && p.extended.maps_query) || p.name + ' Japan';
+          const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQ)}`;
+          const mapsLink = `<a class="place-maps" href="${mapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍</a>`;
+          return `<div class="place-item"${clickable}>
             <span class="place-tag ${esc(p.tag)}">${esc(p.tag_text)}</span>
-            <span class="place-desc"><span class="place-name">${esc(p.name)}</span> — ${esc(p.desc)}</span>
-          </div>`
-        ).join('');
+            <span class="place-desc"><span class="place-name">${esc(p.name)}</span>${mapsLink} — ${esc(p.desc)}</span>
+          </div>`;
+        }).join('');
         return `<div class="day-entry">
           <div>
             <div class="day-num">${esc(day.num)}</div>
@@ -1100,13 +1682,18 @@
           <div class="day-content">
             <h4>${esc(day.title)}</h4>
             <div class="places-list">${placesHTML}</div>
+            <button class="day-notes-toggle${hasNotes}" onclick="toggleDayNotes(this)" data-nk="${noteKey}">📝 Notes</button>
+            <div class="day-notes-area" data-nk="${noteKey}">
+              <textarea placeholder="Booking refs, restaurant names, tips..." data-nk="${noteKey}" oninput="saveDayNote(this)">${esc(noteVal)}</textarea>
+            </div>
           </div>
         </div>`;
       }).join('');
 
+      const slug = citySlug(city.name);
       const cityImg = city.image
-        ? `<img class="city-header-img" src="${esc(city.image)}" alt="${esc(city.name)}" loading="lazy">` : '';
-      return `<div class="city-block">
+        ? `<img class="city-header-img" src="${esc(city.image)}" alt="${esc(city.name)}" loading="lazy" onerror="this.style.display='none'">` : '';
+      return `<div class="city-block" id="city-${slug}">
         <div class="city-header">
           ${cityImg}
           <div class="city-flag">${city.flag}</div>
@@ -1120,15 +1707,37 @@
     }).join('');
   }
 
+  function toggleDayNotes(btn) {
+    const area = btn.nextElementSibling;
+    area.classList.toggle('open');
+    if (area.classList.contains('open')) area.querySelector('textarea').focus();
+  }
+
+  function saveDayNote(textarea) {
+    const key = textarea.dataset.nk;
+    const notes = JSON.parse(localStorage.getItem('jd-day-notes') || '{}');
+    if (textarea.value.trim()) {
+      notes[key] = textarea.value;
+    } else {
+      delete notes[key];
+    }
+    localStorage.setItem('jd-day-notes', JSON.stringify(notes));
+    const btn = textarea.closest('.day-content').querySelector('.day-notes-toggle');
+    btn.classList.toggle('has-notes', !!textarea.value.trim());
+  }
+
   function renderHiddenGems(data) {
     const container = document.getElementById('quietGrid');
-    container.innerHTML = data['hidden-gems'].gems.map(gem => {
+    container.innerHTML = data['hidden-gems'].gems.map((gem, gi) => {
       const dots = Array.from({length: 5}, (_, i) =>
         `<div class="crowd-dot${i < gem.crowd_level ? ' filled' : ''}"></div>`
       ).join('');
       const imgHTML = gem.image
-        ? `<div style="overflow:hidden"><img class="quiet-card-img" src="${esc(gem.image)}" alt="${esc(gem.name)}" loading="lazy"></div>` : '';
-      return `<div class="quiet-card">
+        ? `<div style="overflow:hidden"><img class="quiet-card-img" src="${esc(gem.image)}" alt="${esc(gem.name)}" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+      const click = gem.extended ? ` onclick="openGemModal(${gi})"` : '';
+      const mapsQ = gem.name + ' ' + gem.city + ' Japan';
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQ)}`;
+      return `<div class="quiet-card"${click}>
         ${imgHTML}
         <div class="quiet-card-body">
           <div class="city-badge">${esc(gem.city)}</div>
@@ -1138,6 +1747,7 @@
             <div class="crowd-dots">${dots}</div>
             <span class="crowd-label">${esc(gem.crowd_label)}</span>
           </div>
+          <a class="gem-maps-link" href="${mapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍 Google Maps</a>
         </div>
       </div>`;
     }).join('');
@@ -1176,31 +1786,49 @@
 
   function renderFood(data) {
     const container = document.getElementById('foodGrid');
-    container.innerHTML = data.food.cities.map(city =>
+    container.innerHTML = data.food.cities.map((city, ci) =>
       `<div class="food-city">
         <div class="food-city-name">${esc(city.name)}</div>
         <div class="food-items">
-          ${city.items.map(item => `<div class="food-item">${esc(item)}</div>`).join('')}
+          ${city.items.map((item, fi) => {
+            const name = typeof item === 'string' ? item : item.name;
+            const hasExt = typeof item === 'object' && item.extended;
+            const click = hasExt ? ` onclick="openFoodModal(${ci},${fi})"` : '';
+            return `<div class="food-item"${click}>${esc(name)}</div>`;
+          }).join('')}
         </div>
       </div>`
     ).join('');
   }
 
   function renderChecklist(data) {
+    const saved = JSON.parse(localStorage.getItem('jd-checklist') || '{}');
     const container = document.getElementById('checklistGrid');
-    container.innerHTML = data.checklist.groups.map(group =>
+    container.innerHTML = data.checklist.groups.map((group, gi) =>
       `<div class="checklist-group">
         <h3>${esc(group.title)}</h3>
         <div class="check-items">
-          ${group.items.map(item =>
-            `<div class="check-item" onclick="this.classList.toggle('done')">
+          ${group.items.map((item, ii) => {
+            const key = `${gi}-${ii}`;
+            const done = saved[key] ? ' done' : '';
+            return `<div class="check-item${done}" data-ck="${key}" onclick="toggleCheck(this)">
               <div class="check-box"></div>
               <span class="check-text">${esc(item)}</span>
-            </div>`
-          ).join('')}
+            </div>`;
+          }).join('')}
         </div>
       </div>`
     ).join('');
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+    const all = document.querySelectorAll('.check-item');
+    const state = {};
+    all.forEach(item => {
+      if (item.classList.contains('done')) state[item.dataset.ck] = true;
+    });
+    localStorage.setItem('jd-checklist', JSON.stringify(state));
   }
 
   function renderFooter(data) {
@@ -1209,6 +1837,223 @@
       <p>${f.line1}</p>
       <p style="margin-top:0.5rem;">${f.line2}</p>`;
   }
+
+  // ── Modal system ───────────────────────────
+
+  let _modalData = {};
+
+  function openModal(html) {
+    document.getElementById('modalContent').innerHTML = html;
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function mapsLink(query) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  }
+
+  function openPlaceModal(ci, di, pi) {
+    const place = _modalData.itinerary.cities[ci].days[di].places[pi];
+    const ext = place.extended;
+    if (!ext) return;
+
+    const metaItems = [
+      ext.hours ? {label: 'Hours', value: ext.hours} : null,
+      ext.time_needed ? {label: 'Time Needed', value: ext.time_needed} : null,
+      ext.station ? {label: 'Nearest Station', value: ext.station} : null,
+    ].filter(Boolean);
+
+    const metaHTML = metaItems.length ? `<div class="modal-meta">${metaItems.map(m =>
+      `<div class="modal-meta-item"><div class="modal-meta-label">${esc(m.label)}</div><div class="modal-meta-value">${esc(m.value)}</div></div>`
+    ).join('')}</div>` : '';
+
+    const tipHTML = ext.tips ? `<div class="modal-tip"><div class="modal-tip-label">💡 Tips</div><p>${esc(ext.tips)}</p></div>` : '';
+
+    const activityHTML = ext.activity ? `<div class="modal-activity">
+      <div class="modal-activity-label">🎯 Activity Info</div>
+      <div class="modal-activity-grid">
+        ${ext.activity.booking ? `<div class="modal-activity-item"><strong>Booking</strong>${esc(ext.activity.booking)}</div>` : ''}
+        ${ext.activity.cost ? `<div class="modal-activity-item"><strong>Cost</strong>${esc(ext.activity.cost)}</div>` : ''}
+        ${ext.activity.duration ? `<div class="modal-activity-item"><strong>Duration</strong>${esc(ext.activity.duration)}</div>` : ''}
+        ${ext.activity.what_to_bring ? `<div class="modal-activity-item"><strong>What to Bring</strong>${esc(ext.activity.what_to_bring)}</div>` : ''}
+      </div>
+    </div>` : '';
+
+    const mapHTML = ext.maps_query ? `<a class="modal-maps-link" href="${mapsLink(ext.maps_query)}" target="_blank" rel="noopener">📍 Open in Google Maps</a>` : '';
+
+    openModal(`
+      <div class="modal-tag">${esc(place.tag_text)}</div>
+      <div class="modal-title">${esc(place.name)}</div>
+      <div class="modal-subtitle">${esc(place.desc)}</div>
+      <div class="modal-body"><p>${esc(ext.full_desc)}</p></div>
+      ${metaHTML}
+      ${tipHTML}
+      ${activityHTML}
+      ${mapHTML}
+    `);
+  }
+
+  function openFoodModal(ci, fi) {
+    const city = _modalData.food.cities[ci];
+    const food = city.items[fi];
+    if (!food.extended) return;
+    const ext = food.extended;
+
+    const whereHTML = ext.where ? `<div class="modal-food-where">📍 ${esc(ext.where)}</div>` : '';
+    const metaHTML = `<div class="modal-food-meta">
+      ${ext.price ? `<span class="modal-food-badge">💰 ${esc(ext.price)}</span>` : ''}
+      ${ext.dietary ? `<span class="modal-food-badge">🍽️ ${esc(ext.dietary)}</span>` : ''}
+    </div>`;
+
+    openModal(`
+      <div class="modal-tag">${esc(city.name)} · Food</div>
+      <div class="modal-title">${esc(food.name)}</div>
+      ${whereHTML}
+      ${metaHTML}
+      <div class="modal-body"><p>${esc(ext.description)}</p></div>
+    `);
+  }
+
+  function openGemModal(gi) {
+    const gem = _modalData['hidden-gems'].gems[gi];
+    if (!gem.extended) return;
+    const ext = gem.extended;
+
+    const infoBlocks = [
+      ext.best_time ? {label: 'Best Time', value: ext.best_time} : null,
+      ext.how_to_get ? {label: 'How to Get There', value: ext.how_to_get} : null,
+      ext.nearby ? {label: 'Nearby', value: ext.nearby} : null,
+      ext.crowd_tips ? {label: 'Crowd Tips', value: ext.crowd_tips} : null,
+    ].filter(Boolean);
+
+    const infoHTML = infoBlocks.length ? `<div class="modal-gem-info">${infoBlocks.map(b =>
+      `<div class="modal-gem-block"><div class="modal-gem-block-label">${esc(b.label)}</div><div class="modal-gem-block-value">${esc(b.value)}</div></div>`
+    ).join('')}</div>` : '';
+
+    openModal(`
+      <div class="modal-tag">${esc(gem.city)} · Hidden Gem</div>
+      <div class="modal-title">${esc(gem.name)}</div>
+      <div class="modal-subtitle">${esc(gem.description)}</div>
+      <div class="modal-body"><p>${esc(ext.full_desc)}</p></div>
+      ${infoHTML}
+    `);
+  }
+
+  // ── Sharing & Export ───────────────────────
+
+  function shareTrip() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Japan 2026 — Travel Plan',
+        text: '15-day Japan trip: Osaka → Kyoto → Hiroshima → Okinawa → Tokyo. Check out the full itinerary!',
+        url: window.location.href
+      }).catch(() => {});
+    }
+  }
+
+  function exportICS() {
+    const cities = _modalData.itinerary.cities;
+    let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//JapanDays//Trip//EN\r\nCALSCALE:GREGORIAN\r\n';
+
+    cities.forEach(city => {
+      city.days.forEach(day => {
+        const dateStr = day.date + ', 2026';
+        const d = new Date(dateStr);
+        if (isNaN(d)) return;
+        const ymd = d.toISOString().slice(0, 10).replace(/-/g, '');
+        const places = day.places.map(p => p.name).join(', ');
+        const desc = day.places.map(p => `${p.name} — ${p.desc}`).join('\\n');
+
+        ics += 'BEGIN:VEVENT\r\n';
+        ics += `DTSTART;VALUE=DATE:${ymd}\r\n`;
+        ics += `DTEND;VALUE=DATE:${ymd}\r\n`;
+        ics += `SUMMARY:${city.name}: ${day.title}\r\n`;
+        ics += `DESCRIPTION:${desc.replace(/\r?\n/g, '\\n')}\r\n`;
+        ics += `LOCATION:${places}\r\n`;
+        ics += 'END:VEVENT\r\n';
+      });
+    });
+
+    ics += 'END:VCALENDAR\r\n';
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'japan-2026-itinerary.ics';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function toggleQR() {
+    const container = document.getElementById('qrContainer');
+    if (container.classList.contains('open')) {
+      container.classList.remove('open');
+      return;
+    }
+    container.innerHTML = '';
+    if (typeof qrcode === 'function') {
+      const qr = qrcode(0, 'M');
+      qr.addData(window.location.href);
+      qr.make();
+      container.innerHTML = qr.createSvgTag({ scalable: true });
+      const svg = container.querySelector('svg');
+      if (svg) {
+        svg.style.width = '180px';
+        svg.style.height = '180px';
+        svg.style.borderRadius = '8px';
+        svg.style.border = '3px solid rgba(245,240,232,0.1)';
+      }
+      container.classList.add('open');
+    } else {
+      container.innerHTML = '<p style="color:rgba(245,240,232,0.3);font-size:0.6rem;">QR library not available</p>';
+      container.classList.add('open');
+    }
+  }
+
+  if (navigator.share) {
+    document.getElementById('btnShare').style.display = '';
+  }
+
+  // ── Theme toggle ───────────────────────────
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const btn = document.getElementById('themeToggle');
+    if (btn) btn.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('jd-theme', next);
+    applyTheme(next);
+  }
+
+  // Apply saved theme immediately
+  const savedTheme = localStorage.getItem('jd-theme') || 'light';
+  applyTheme(savedTheme);
+
+  // Expose interactive functions to onclick handlers
+  window.toggleTheme = toggleTheme;
+  window.toggleCheck = toggleCheck;
+  window.toggleDayNotes = toggleDayNotes;
+  window.saveDayNote = saveDayNote;
+  window.openPlaceModal = openPlaceModal;
+  window.openFoodModal = openFoodModal;
+  window.openGemModal = openGemModal;
+  window.closeModal = closeModal;
+  window.shareTrip = shareTrip;
+  window.exportICS = exportICS;
+  window.toggleQR = toggleQR;
 
   // ── Animations ─────────────────────────────
 
@@ -1252,12 +2097,18 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.city-block').forEach(el => cityObs.observe(el));
+
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 800);
+    }
   }
 
   // ── Boot ───────────────────────────────────
 
   try {
     const data = await loadAllData();
+    _modalData = data;
 
     renderNav(data);
     renderHero(data);
@@ -1284,6 +2135,10 @@
       </div>`;
   }
 })();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>

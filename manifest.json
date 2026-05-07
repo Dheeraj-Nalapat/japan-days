@@ -1,0 +1,16 @@
+{
+  "name": "Japan 2026 — Travel Plan",
+  "short_name": "Japan 2026",
+  "description": "15-day Japan itinerary: Osaka → Kyoto → Hiroshima → Okinawa → Tokyo",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a1208",
+  "theme_color": "#1a1208",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗾</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
