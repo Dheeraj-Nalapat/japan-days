@@ -223,11 +223,39 @@
     background: var(--ink);
     padding: 0;
     overflow: hidden;
+    position: relative;
+  }
+  .flights-strip::before,
+  .flights-strip::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 60px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .flights-strip::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--ink), transparent);
+  }
+  .flights-strip::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--ink), transparent);
   }
 
   .flights-ticker {
     display: flex;
     gap: 0;
+    animation: tickerScroll 30s linear infinite;
+    width: max-content;
+    cursor: grab;
+  }
+  .flights-ticker:active { cursor: grabbing; }
+  .flights-ticker:hover { animation-play-state: paused; }
+
+  @keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
   .flight-card {
@@ -236,8 +264,8 @@
     gap: 2rem;
     padding: 2.5rem 3rem;
     border-right: 1px solid rgba(255,255,255,0.06);
-    min-width: fit-content;
-    flex: 1;
+    min-width: 320px;
+    flex-shrink: 0;
     position: relative;
     transition: background 0.3s;
   }
@@ -856,8 +884,9 @@
     .city-header { position: static; flex-direction: row; flex-wrap: wrap; align-items: center; }
     .budget-grid { grid-template-columns: 1fr; }
     .checklist-grid { grid-template-columns: 1fr; }
-    .flights-ticker { flex-direction: column; }
-    .flight-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .flights-ticker { flex-direction: column; animation: none; width: 100%; cursor: default; }
+    .flights-strip::before, .flights-strip::after { display: none; }
+    .flight-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); min-width: unset; }
     .hero-jp { display: none; }
     .nav-links { display: none; }
   }
@@ -993,7 +1022,7 @@
 
   function renderFlights(data) {
     const container = document.getElementById('flightsTicker');
-    container.innerHTML = data.flights.flights.map(f => {
+    const cardsHTML = data.flights.flights.map(f => {
       const badgeStyle = f.badge_style ? ` style="${esc(f.badge_style)}"` : '';
       const rescheduledHTML = f.rescheduled
         ? `<div class="rescheduled-tag">${esc(f.rescheduled_note)}</div>` : '';
@@ -1012,6 +1041,7 @@
         </div>
       </div>`;
     }).join('');
+    container.innerHTML = cardsHTML + cardsHTML;
   }
 
   function renderRoute(data) {
