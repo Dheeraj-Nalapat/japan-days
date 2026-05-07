@@ -1,7 +1,9 @@
-const CACHE_NAME = 'japan-days-v1';
+const CACHE_NAME = 'japan-days-v2';
 const ASSETS = [
   './',
   './index.html',
+  './icon.svg',
+  './manifest.json',
   './data/trip.yaml',
   './data/flights.yaml',
   './data/route.yaml',

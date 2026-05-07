@@ -4,13 +4,41 @@
   "description": "15-day Japan itinerary: Osaka → Kyoto → Hiroshima → Okinawa → Tokyo",
   "start_url": "./index.html",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#1a1208",
   "theme_color": "#1a1208",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗾</text></svg>",
+      "src": "icon.svg",
       "sizes": "any",
-      "type": "image/svg+xml"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's Plan",
+      "short_name": "Today",
+      "url": "./index.html?view=today",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Checklist",
+      "short_name": "Checklist",
+      "url": "./index.html?view=checklist",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Budget",
+      "short_name": "Budget",
+      "url": "./index.html?view=budget",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Map",
+      "short_name": "Map",
+      "url": "./index.html?view=map",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
     }
   ]
 }

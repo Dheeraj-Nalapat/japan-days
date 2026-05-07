@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="80" fill="#1a1208"/>
+  <!-- Torii gate -->
+  <g fill="none" stroke="#d4521a" stroke-width="16" stroke-linecap="round">
+    <!-- Pillars -->
+    <line x1="156" y1="180" x2="156" y2="380"/>
+    <line x1="356" y1="180" x2="356" y2="380"/>
+    <!-- Top beam (kasagi) curved -->
+    <path d="M120 180 Q256 150 392 180" stroke-width="20"/>
+    <!-- Second beam -->
+    <line x1="130" y1="210" x2="382" y2="210" stroke-width="14"/>
+    <!-- Cross beam -->
+    <line x1="190" y1="260" x2="322" y2="260" stroke-width="10"/>
+  </g>
+  <!-- 2026 text -->
+  <text x="256" y="445" font-family="monospace" font-size="56" fill="#f5f0e8" text-anchor="middle" letter-spacing="8">2026</text>
+</svg>

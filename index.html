@@ -6,8 +6,12 @@
 <title>Japan 2026 — Dheeraj's Travel Plan</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1a1208">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Japan 2026">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -1465,6 +1469,393 @@
     color: rgba(245,240,232,0.2);
   }
 
+  /* ── INSTALL BANNER ─────────────────────────── */
+  .install-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 200;
+    background: var(--deep);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 1rem 1.5rem;
+    display: none;
+    align-items: center;
+    gap: 1rem;
+    animation: slideUp 0.4s ease;
+  }
+  .install-banner.show { display: flex; }
+  .install-banner-text {
+    flex: 1;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: rgba(245,240,232,0.6);
+  }
+  .install-banner-text strong { color: var(--torii); }
+  .install-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--torii);
+    color: var(--torii);
+    background: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .install-btn:hover { background: var(--torii); color: white; }
+  .install-dismiss {
+    background: none; border: none; color: rgba(245,240,232,0.3);
+    cursor: pointer; font-size: 1.2rem; padding: 0.3rem;
+  }
+
+  /* ── WIDGET VIEWS ──────────────────────────── */
+  .widget-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: var(--paper);
+    overflow-y: auto;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .widget-overlay.open { display: block; }
+  .widget-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--deep);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .widget-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--paper);
+    font-weight: 300;
+  }
+  .widget-title span { color: var(--torii); }
+  .widget-close {
+    background: none; border: none;
+    color: rgba(245,240,232,0.4);
+    font-size: 1.5rem; cursor: pointer;
+    padding: 0.2rem 0.5rem;
+  }
+  .widget-body { padding: 1.5rem; }
+
+  .widget-day-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .widget-city-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--torii);
+    margin-bottom: 1.5rem;
+  }
+  .widget-place {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(26,18,8,0.06);
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+  .widget-place-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(26,18,8,0.15);
+    border-radius: 3px;
+    color: rgba(26,18,8,0.4);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+  .widget-place-info { flex: 1; }
+  .widget-place-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .widget-place-desc {
+    font-size: 0.75rem;
+    color: rgba(26,18,8,0.5);
+    margin-top: 0.15rem;
+  }
+  .widget-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--torii);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(26,18,8,0.06);
+  }
+  .widget-food-item {
+    padding: 0.4rem 0;
+    font-size: 0.8rem;
+    color: rgba(26,18,8,0.6);
+    padding-left: 0.7rem;
+    border-left: 2px solid var(--gold);
+  }
+  .widget-no-data {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(26,18,8,0.3);
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+
+  /* countdown widget */
+  .widget-countdown {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  .widget-countdown-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--torii);
+    line-height: 1;
+  }
+  .widget-countdown-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,18,8,0.3);
+    margin-top: 0.3rem;
+  }
+  .widget-countdown-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  .widget-countdown-unit { text-align: center; }
+  .widget-progress-bar {
+    height: 4px;
+    background: rgba(26,18,8,0.06);
+    border-radius: 2px;
+    margin: 1.5rem auto;
+    max-width: 300px;
+  }
+  .widget-progress-fill {
+    height: 100%;
+    background: var(--torii);
+    border-radius: 2px;
+    transition: width 0.5s;
+  }
+  .widget-flight-card {
+    background: var(--deep);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 350px;
+    color: rgba(245,240,232,0.5);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    text-align: left;
+  }
+  .widget-flight-card strong { color: var(--torii); }
+
+  /* checklist widget */
+  .widget-progress-ring {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .widget-progress-ring svg {
+    transform: rotate(-90deg);
+  }
+  .widget-progress-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(26,18,8,0.4);
+  }
+  .widget-progress-text strong {
+    font-size: 1.4rem;
+    color: var(--ink);
+    display: block;
+  }
+  .widget-check-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(26,18,8,0.04);
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: rgba(26,18,8,0.6);
+  }
+  .widget-check-item.checked { text-decoration: line-through; opacity: 0.4; }
+  .widget-check-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid rgba(26,18,8,0.2);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.65rem;
+  }
+  .widget-check-item.checked .widget-check-box {
+    background: var(--torii);
+    border-color: var(--torii);
+    color: white;
+  }
+  .widget-group-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--torii);
+    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* budget widget */
+  .widget-budget-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(26,18,8,0.04);
+    font-size: 0.75rem;
+  }
+  .widget-budget-name { color: rgba(26,18,8,0.5); }
+  .widget-budget-amount { color: var(--torii); font-weight: 700; font-family: 'Space Mono', monospace; font-size: 0.65rem; }
+  .widget-budget-total {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--torii);
+    text-align: center;
+    margin: 1rem 0 0.3rem;
+  }
+  .widget-budget-total-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(26,18,8,0.3);
+    text-align: center;
+  }
+
+  /* dark mode widget overrides */
+  [data-theme="dark"] .widget-overlay { background: var(--paper); }
+  [data-theme="dark"] .widget-day-heading,
+  [data-theme="dark"] .widget-place-name { color: var(--ink); }
+  [data-theme="dark"] .widget-place-desc { color: rgba(232,224,212,0.45); }
+  [data-theme="dark"] .widget-food-item { color: rgba(232,224,212,0.55); }
+  [data-theme="dark"] .widget-place,
+  [data-theme="dark"] .widget-check-item,
+  [data-theme="dark"] .widget-budget-item { border-color: rgba(255,255,255,0.04); }
+  [data-theme="dark"] .widget-place-tag { border-color: rgba(255,255,255,0.1); color: rgba(232,224,212,0.35); }
+  [data-theme="dark"] .widget-no-data { color: rgba(232,224,212,0.2); }
+  [data-theme="dark"] .widget-check-item { color: rgba(232,224,212,0.5); }
+  [data-theme="dark"] .widget-check-box { border-color: rgba(255,255,255,0.15); }
+  [data-theme="dark"] .widget-budget-name { color: rgba(232,224,212,0.4); }
+  [data-theme="dark"] .widget-countdown-label,
+  [data-theme="dark"] .widget-budget-total-label { color: rgba(232,224,212,0.25); }
+  [data-theme="dark"] .widget-progress-bar { background: rgba(255,255,255,0.06); }
+  [data-theme="dark"] .widget-progress-text { color: rgba(232,224,212,0.35); }
+  [data-theme="dark"] .widget-progress-text strong { color: var(--ink); }
+  [data-theme="dark"] .widget-section-label { color: var(--torii); border-color: rgba(255,255,255,0.04); }
+  [data-theme="dark"] .widget-group-label { color: var(--torii); }
+
+  /* ── BOTTOM TAB BAR ────────────────────────── */
+  .bottom-tabs {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 150;
+    background: var(--deep);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 0.4rem 0 calc(0.4rem + env(safe-area-inset-bottom));
+  }
+  .bottom-tabs-inner {
+    display: flex;
+    justify-content: space-around;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .bottom-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    background: none; border: none;
+    color: rgba(245,240,232,0.35);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.4rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .bottom-tab-icon { font-size: 1.1rem; }
+  .bottom-tab.active { color: var(--torii); }
+  @media (display-mode: standalone) {
+    .bottom-tabs { display: block; }
+    nav .nav-links { display: none; }
+    body { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
+  }
+  @media (max-width: 768px) {
+    @media (display-mode: standalone) {
+      .bottom-tabs { display: block; }
+    }
+  }
+
+  /* ── OFFLINE INDICATOR ─────────────────────── */
+  .offline-pill {
+    display: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    background: rgba(192,57,43,0.25);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .offline-pill.show { display: inline-flex; }
+  .offline-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--vermilion);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .sync-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.4rem;
+    letter-spacing: 0.08em;
+    color: rgba(245,240,232,0.2);
+    margin-left: auto;
+  }
+
   /* ── ANIMATIONS ─────────────────────────────── */
   @keyframes slideUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -1504,7 +1895,8 @@
     nav, .loading-screen, .hero-scroll, .hero-bg, .hero-pattern,
     .hero-jp, .flights-strip, .modal-overlay, .theme-toggle,
     .day-notes-toggle, .day-notes-area, .hero-countdown,
-    .share-section, .map-section { display: none !important; }
+    .share-section, .map-section, .install-banner, .widget-overlay,
+    .bottom-tabs, .offline-pill, .sync-badge { display: none !important; }
     section { padding: 1.5rem 0; }
     .hero { min-height: auto; padding: 2rem; background: white; }
     .hero-title { color: #1a1208; font-size: 24pt; }
@@ -1563,8 +1955,31 @@
 <nav id="nav">
   <div class="nav-logo">日本 2026</div>
   <div class="nav-links" id="navLinks"></div>
+  <span class="offline-pill" id="offlinePill"><span class="offline-dot"></span> Offline</span>
+  <span class="sync-badge" id="syncBadge"></span>
   <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
 </nav>
+
+<!-- ── INSTALL BANNER ───────────────────────── -->
+<div class="install-banner" id="installBanner">
+  <div class="install-banner-text"><strong>Japan 2026</strong> — Install as an app for offline access & home screen shortcut</div>
+  <button class="install-btn" id="installBtn">Install</button>
+  <button class="install-dismiss" onclick="dismissInstall()">✕</button>
+</div>
+
+<!-- ── WIDGET OVERLAY ───────────────────────── -->
+<div class="widget-overlay" id="widgetOverlay"></div>
+
+<!-- ── BOTTOM TAB BAR ───────────────────────── -->
+<div class="bottom-tabs" id="bottomTabs">
+  <div class="bottom-tabs-inner">
+    <button class="bottom-tab" onclick="openWidget('today')"><span class="bottom-tab-icon">📅</span>Today</button>
+    <a class="bottom-tab" href="#itinerary" onclick="closeWidget()"><span class="bottom-tab-icon">🗓️</span>Days</a>
+    <a class="bottom-tab" href="#map" onclick="closeWidget()"><span class="bottom-tab-icon">🗺️</span>Map</a>
+    <button class="bottom-tab" onclick="openWidget('checklist')"><span class="bottom-tab-icon">✅</span>Check</button>
+    <button class="bottom-tab" onclick="openWidget('budget')"><span class="bottom-tab-icon">💰</span>Budget</button>
+  </div>
+</div>
 
 <!-- ── HERO ──────────────────────────────── -->
 <section class="hero" id="top">
@@ -2345,6 +2760,286 @@
   const savedTheme = localStorage.getItem('jd-theme') || 'light';
   applyTheme(savedTheme);
 
+  // ── Install Prompt ─────────────────────────
+
+  let _deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    _deferredPrompt = e;
+    const dismissed = localStorage.getItem('jd-install-dismissed');
+    if (!dismissed) {
+      document.getElementById('installBanner').classList.add('show');
+    }
+  });
+
+  document.getElementById('installBtn').addEventListener('click', async () => {
+    if (_deferredPrompt) {
+      _deferredPrompt.prompt();
+      await _deferredPrompt.userChoice;
+      _deferredPrompt = null;
+    }
+    document.getElementById('installBanner').classList.remove('show');
+  });
+
+  function dismissInstall() {
+    document.getElementById('installBanner').classList.remove('show');
+    localStorage.setItem('jd-install-dismissed', '1');
+  }
+
+  // iOS detection — show instructions instead
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+  if (isIOS && !isStandalone) {
+    const banner = document.getElementById('installBanner');
+    banner.querySelector('.install-banner-text').innerHTML =
+      '<strong>Japan 2026</strong> — Tap <span style="font-size:1.1em">⎙</span> Share then <strong>"Add to Home Screen"</strong>';
+    banner.querySelector('.install-btn').style.display = 'none';
+    const dismissed = localStorage.getItem('jd-install-dismissed');
+    if (!dismissed) banner.classList.add('show');
+  }
+
+  // ── Widget Views ──────────────────────────
+
+  function openWidget(type) {
+    const overlay = document.getElementById('widgetOverlay');
+    const data = _modalData;
+    let html = '';
+
+    if (type === 'today') {
+      html = renderTodayWidget(data);
+    } else if (type === 'countdown') {
+      html = renderCountdownWidget(data);
+    } else if (type === 'checklist') {
+      html = renderChecklistWidget(data);
+    } else if (type === 'budget') {
+      html = renderBudgetWidget(data);
+    }
+
+    overlay.innerHTML = html;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    document.querySelectorAll('.bottom-tab').forEach(t => t.classList.remove('active'));
+    const tabs = document.querySelectorAll('.bottom-tab');
+    const tabMap = { today: 0, checklist: 3, budget: 4 };
+    if (tabMap[type] !== undefined && tabs[tabMap[type]]) tabs[tabMap[type]].classList.add('active');
+  }
+
+  function closeWidget() {
+    const overlay = document.getElementById('widgetOverlay');
+    overlay.classList.remove('open');
+    overlay.innerHTML = '';
+    document.body.style.overflow = '';
+    document.querySelectorAll('.bottom-tab').forEach(t => t.classList.remove('active'));
+  }
+
+  function renderTodayWidget(data) {
+    const t = data.trip;
+    const depDate = new Date(t.departure_date);
+    const now = new Date();
+
+    let todayCity = null, todayDay = null, dayNum = 0;
+    const cities = data.itinerary.cities;
+    let cumDays = 0;
+    for (const city of cities) {
+      for (const day of city.days) {
+        const dStr = day.date + ', 2026';
+        const dd = new Date(dStr);
+        if (!isNaN(dd)) {
+          cumDays++;
+          const sameDay = dd.toDateString() === now.toDateString();
+          if (sameDay) { todayCity = city; todayDay = day; dayNum = cumDays; break; }
+        }
+      }
+      if (todayDay) break;
+    }
+
+    let header = `<div class="widget-header"><div class="widget-title"><span>Today</span></div><button class="widget-close" onclick="closeWidget()">✕</button></div>`;
+
+    if (!todayDay) {
+      const diff = Math.ceil((depDate - now) / 86400000);
+      let msg = '';
+      if (diff > 0) msg = `Your trip starts in <strong>${diff} days</strong>. Check the countdown!<br><br><button class="install-btn" onclick="closeWidget();openWidget('countdown')" style="margin-top:0.5rem;">View Countdown</button>`;
+      else msg = `Your trip has ended. Hope you had an amazing time in Japan! 🗾`;
+      return header + `<div class="widget-body"><div class="widget-no-data">${msg}</div></div>`;
+    }
+
+    const foods = data.food.cities.find(c => c.name === todayCity.name);
+    const places = todayDay.places.map(p => `
+      <div class="widget-place">
+        <span class="widget-place-tag">${esc(p.tag_text)}</span>
+        <div class="widget-place-info">
+          <div class="widget-place-name">${esc(p.name)}</div>
+          <div class="widget-place-desc">${esc(p.desc)}</div>
+        </div>
+      </div>`).join('');
+
+    let foodHTML = '';
+    if (foods) {
+      foodHTML = `<div class="widget-section-label">🍜 Try Today in ${esc(todayCity.name)}</div>` +
+        foods.items.slice(0, 4).map(f => {
+          const name = typeof f === 'string' ? f : f.name;
+          return `<div class="widget-food-item">${esc(name)}</div>`;
+        }).join('');
+    }
+
+    header = `<div class="widget-header"><div class="widget-title">Day ${dayNum} — <span>${esc(todayCity.name)}</span></div><button class="widget-close" onclick="closeWidget()">✕</button></div>`;
+
+    return header + `<div class="widget-body">
+      <div class="widget-day-heading">${esc(todayDay.title)}</div>
+      <div class="widget-city-badge">${todayCity.flag} ${esc(todayCity.name)} · ${esc(todayDay.date)}</div>
+      ${places}
+      ${foodHTML}
+    </div>`;
+  }
+
+  function renderCountdownWidget(data) {
+    const t = data.trip;
+    const dep = new Date(t.departure_date);
+    const now = new Date();
+    const diff = dep - now;
+    const days = Math.max(0, Math.floor(diff / 86400000));
+    const hours = Math.max(0, Math.floor((diff % 86400000) / 3600000));
+    const mins = Math.max(0, Math.floor((diff % 3600000) / 60000));
+
+    const totalDays = 15;
+    const elapsed = Math.max(0, totalDays - days);
+    const pct = diff > 0 ? 0 : Math.min(100, (elapsed / totalDays) * 100);
+
+    const flights = data.flights.flights || [];
+    let flightCard = '';
+    if (flights.length > 0) {
+      const f = flights[0];
+      flightCard = `<div class="widget-flight-card">
+        <strong>${esc(f.flight_num)}</strong><br>
+        ${esc(f.from_city)} → ${esc(f.to_city)}<br>
+        ${esc(f.time)}
+      </div>`;
+    }
+
+    return `<div class="widget-header"><div class="widget-title"><span>Countdown</span></div><button class="widget-close" onclick="closeWidget()">✕</button></div>
+    <div class="widget-body">
+      <div class="widget-countdown">
+        <div class="widget-countdown-row">
+          <div class="widget-countdown-unit"><div class="widget-countdown-big">${days}</div><div class="widget-countdown-label">Days</div></div>
+          <div class="widget-countdown-unit"><div class="widget-countdown-big">${hours}</div><div class="widget-countdown-label">Hours</div></div>
+          <div class="widget-countdown-unit"><div class="widget-countdown-big">${mins}</div><div class="widget-countdown-label">Minutes</div></div>
+        </div>
+        <div class="widget-countdown-label" style="margin-bottom:1rem;">until Japan 🗾</div>
+        <div class="widget-progress-bar"><div class="widget-progress-fill" style="width:${pct}%"></div></div>
+        ${flightCard}
+      </div>
+    </div>`;
+  }
+
+  function renderChecklistWidget(data) {
+    const saved = JSON.parse(localStorage.getItem('jd-checklist') || '{}');
+    const groups = data.checklist.groups;
+    let total = 0, done = 0;
+    groups.forEach(g => g.items.forEach(item => { total++; if (saved[item]) done++; }));
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    const r = 40, circ = 2 * Math.PI * r;
+    const offset = circ - (pct / 100) * circ;
+
+    const items = groups.map(g => {
+      const groupItems = g.items.map(item => {
+        const checked = saved[item] ? ' checked' : '';
+        return `<div class="widget-check-item${checked}" onclick="widgetToggleCheck(this)" data-ck="${esc(item)}">
+          <div class="widget-check-box">${saved[item] ? '✓' : ''}</div>
+          <span>${esc(item)}</span>
+        </div>`;
+      }).join('');
+      return `<div class="widget-group-label">${esc(g.title)}</div>${groupItems}`;
+    }).join('');
+
+    return `<div class="widget-header"><div class="widget-title"><span>Checklist</span></div><button class="widget-close" onclick="closeWidget()">✕</button></div>
+    <div class="widget-body">
+      <div class="widget-progress-ring">
+        <svg width="100" height="100">
+          <circle cx="50" cy="50" r="${r}" fill="none" stroke="rgba(26,18,8,0.06)" stroke-width="6"/>
+          <circle cx="50" cy="50" r="${r}" fill="none" stroke="var(--torii)" stroke-width="6"
+            stroke-dasharray="${circ}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+        </svg>
+        <div class="widget-progress-text"><strong>${done}/${total}</strong>${pct}% complete</div>
+      </div>
+      ${items}
+    </div>`;
+  }
+
+  function widgetToggleCheck(el) {
+    const key = el.dataset.ck;
+    const saved = JSON.parse(localStorage.getItem('jd-checklist') || '{}');
+    if (saved[key]) { delete saved[key]; } else { saved[key] = true; }
+    localStorage.setItem('jd-checklist', JSON.stringify(saved));
+    openWidget('checklist');
+    syncChecklistToMain();
+  }
+
+  function syncChecklistToMain() {
+    const saved = JSON.parse(localStorage.getItem('jd-checklist') || '{}');
+    document.querySelectorAll('.check-item').forEach(el => {
+      const key = el.dataset.ck;
+      el.classList.toggle('checked', !!saved[key]);
+    });
+  }
+
+  function renderBudgetWidget(data) {
+    const b = data.budget;
+    const items = b.items.map(item =>
+      `<div class="widget-budget-item">
+        <span class="widget-budget-name">${esc(item.name)}</span>
+        <span class="widget-budget-amount">${esc(item.amount)}${_jpyRate ? ' <span style="color:rgba(26,18,8,0.25);font-weight:400">' + inrToJPY(item.amount) + '</span>' : ''}</span>
+      </div>`
+    ).join('');
+
+    return `<div class="widget-header"><div class="widget-title"><span>Budget</span></div><button class="widget-close" onclick="closeWidget()">✕</button></div>
+    <div class="widget-body">
+      <div class="widget-budget-total">${esc(b.total)}</div>
+      <div class="widget-budget-total-label">Total Estimated${_jpyRate ? ' · ' + inrToJPY(b.total) : ''}</div>
+      <div style="margin-top:1.5rem">${items}</div>
+      <div class="widget-section-label" style="margin-top:2rem">Buffer</div>
+      <div style="font-size:0.75rem;color:rgba(26,18,8,0.5)">${b.summary.paragraphs[0]}</div>
+    </div>`;
+  }
+
+  // ── Offline Indicator ─────────────────────
+
+  function updateOnlineStatus() {
+    const pill = document.getElementById('offlinePill');
+    const badge = document.getElementById('syncBadge');
+    if (navigator.onLine) {
+      pill.classList.remove('show');
+      badge.textContent = '';
+      localStorage.setItem('jd-last-sync', new Date().toISOString());
+    } else {
+      pill.classList.add('show');
+      const lastSync = localStorage.getItem('jd-last-sync');
+      if (lastSync) {
+        const ago = Math.round((Date.now() - new Date(lastSync)) / 60000);
+        badge.textContent = ago < 60 ? `synced ${ago}m ago` : `synced ${Math.round(ago/60)}h ago`;
+      }
+    }
+  }
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+  updateOnlineStatus();
+
+  // ── Background Sync ──────────────────────
+
+  function queueSync(type, payload) {
+    const queue = JSON.parse(localStorage.getItem('jd-sync-queue') || '[]');
+    queue.push({ type, payload, ts: Date.now() });
+    localStorage.setItem('jd-sync-queue', JSON.stringify(queue));
+  }
+
+  function flushSyncQueue() {
+    const queue = JSON.parse(localStorage.getItem('jd-sync-queue') || '[]');
+    if (queue.length === 0) return;
+    localStorage.setItem('jd-sync-queue', '[]');
+  }
+
+  window.addEventListener('online', flushSyncQueue);
+
   // Expose interactive functions to onclick handlers
   window.toggleTheme = toggleTheme;
   window.toggleCheck = toggleCheck;
@@ -2357,6 +3052,10 @@
   window.shareTrip = shareTrip;
   window.exportICS = exportICS;
   window.toggleQR = toggleQR;
+  window.openWidget = openWidget;
+  window.closeWidget = closeWidget;
+  window.widgetToggleCheck = widgetToggleCheck;
+  window.dismissInstall = dismissInstall;
 
   // ── Animations ─────────────────────────────
 
@@ -2429,6 +3128,12 @@
     renderWeather(data);
 
     initAnimations();
+
+    // Handle PWA shortcut views
+    const viewParam = new URLSearchParams(window.location.search).get('view');
+    if (viewParam && ['today', 'checklist', 'budget', 'countdown'].includes(viewParam)) {
+      setTimeout(() => openWidget(viewParam), 300);
+    }
 
     const loader = document.getElementById('loadingScreen');
     loader.classList.add('hidden');
