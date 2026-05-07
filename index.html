@@ -896,6 +896,107 @@
   .check-text { font-size: 0.88rem; line-height: 1.5; color: rgba(26,18,8,0.75); }
 
   /* ── FOOTER ─────────────────────────────────── */
+  /* ── MAP ─────────────────────────────────── */
+  .map-section {
+    background: var(--parchment);
+    padding: 6rem 2rem;
+  }
+  .trip-map {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+    border: 2px solid rgba(26,18,8,0.08);
+  }
+  .leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+  }
+  .map-popup-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: var(--ink);
+  }
+  .map-popup-city {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--torii);
+    margin-bottom: 0.3rem;
+  }
+  .map-popup-desc {
+    font-size: 0.65rem;
+    color: rgba(26,18,8,0.6);
+    line-height: 1.4;
+  }
+  [data-theme="dark"] .map-section { background: #111; }
+  [data-theme="dark"] .trip-map { border-color: rgba(255,255,255,0.06); }
+
+  /* ── CURRENCY ───────────────────────────── */
+  .currency-widget {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(26,18,8,0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(26,18,8,0.06);
+  }
+  .currency-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+  .currency-label {
+    text-transform: uppercase;
+    color: rgba(26,18,8,0.4);
+  }
+  .currency-rate {
+    color: var(--torii);
+    font-weight: 700;
+  }
+  .currency-jpy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(26,18,8,0.35);
+    margin-left: auto;
+  }
+  .budget-item .currency-jpy {
+    font-size: 0.5rem;
+    margin-left: 0;
+    display: block;
+    margin-top: 0.15rem;
+  }
+  [data-theme="dark"] .currency-widget { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
+  [data-theme="dark"] .currency-label { color: rgba(232,224,212,0.3); }
+  [data-theme="dark"] .currency-jpy { color: rgba(232,224,212,0.25); }
+
+  /* ── WEATHER ────────────────────────────── */
+  .weather-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.05em;
+    color: rgba(26,18,8,0.35);
+    background: rgba(26,18,8,0.03);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.3rem;
+  }
+  .weather-badge img {
+    width: 20px;
+    height: 20px;
+  }
+  [data-theme="dark"] .weather-badge { background: rgba(255,255,255,0.04); color: rgba(232,224,212,0.3); }
+
   /* ── SHARE TOOLBAR ────────────────────────── */
   .share-section {
     background: var(--deep);
@@ -1281,10 +1382,26 @@
   [data-theme="dark"] .checklist-section { background: var(--cream); }
   [data-theme="dark"] .budget-section,
   [data-theme="dark"] .food-section { background: var(--paper); }
+  [data-theme="dark"] .food-city-name { color: var(--torii); }
+  [data-theme="dark"] .food-item { color: rgba(232,224,212,0.7); }
+  [data-theme="dark"] .food-item:hover { background: rgba(255,255,255,0.04); }
   [data-theme="dark"] .flights-strip { background: #0d0d0d; }
   [data-theme="dark"] .budget-summary { background: #0d0d0d; }
   [data-theme="dark"] .food-grid { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.06); }
   [data-theme="dark"] .food-city { background: var(--paper); }
+
+  [data-theme="dark"] .itinerary-section { background: var(--paper); }
+  [data-theme="dark"] .city-block-name { color: var(--ink); }
+  [data-theme="dark"] .city-block-jp { color: rgba(232,224,212,0.4); }
+  [data-theme="dark"] .city-block-dates,
+  [data-theme="dark"] .city-block-nights { color: rgba(232,224,212,0.35); }
+  [data-theme="dark"] .day-content h4 { color: var(--ink); }
+  [data-theme="dark"] .day-date { color: rgba(232,224,212,0.3); }
+  [data-theme="dark"] .place-name { color: var(--ink); }
+  [data-theme="dark"] .place-desc { color: rgba(232,224,212,0.55); }
+  [data-theme="dark"] .place-tag { border-color: rgba(255,255,255,0.15); color: rgba(232,224,212,0.5); }
+  [data-theme="dark"] .day-entry { border-color: rgba(255,255,255,0.06); }
+  [data-theme="dark"] .city-block { background: rgba(255,255,255,0.02); }
   [data-theme="dark"] .quiet-card { background: var(--paper); }
   [data-theme="dark"] .budget-bar-track { background: rgba(255,255,255,0.08); }
   [data-theme="dark"] .check-box { border-color: rgba(255,255,255,0.2); }
@@ -1387,7 +1504,7 @@
     nav, .loading-screen, .hero-scroll, .hero-bg, .hero-pattern,
     .hero-jp, .flights-strip, .modal-overlay, .theme-toggle,
     .day-notes-toggle, .day-notes-area, .hero-countdown,
-    .share-section { display: none !important; }
+    .share-section, .map-section { display: none !important; }
     section { padding: 1.5rem 0; }
     .hero { min-height: auto; padding: 2rem; background: white; }
     .hero-title { color: #1a1208; font-size: 24pt; }
@@ -1514,6 +1631,13 @@
   <div class="checklist-grid" id="checklistGrid"></div>
 </section>
 
+<!-- ── MAP ─────────────────────────────────── -->
+<section id="map" class="map-section">
+  <div class="section-eyebrow">Explore</div>
+  <h2 class="section-title">Interactive Map</h2>
+  <div id="tripMap" class="trip-map"></div>
+</section>
+
 <!-- ── FOOTER ──────────────────────────────── -->
 <!-- ── MODAL ──────────────────────────────── -->
 <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
@@ -1537,6 +1661,8 @@
 <footer id="footer"></footer>
 
 <!-- ── DATA ENGINE ─────────────────────────── -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <script>
@@ -1838,6 +1964,183 @@
       <p style="margin-top:0.5rem;">${f.line2}</p>`;
   }
 
+  // ── Interactive Map ────────────────────────
+
+  function renderMap(data) {
+    const mapEl = document.getElementById('tripMap');
+    if (!mapEl || typeof L === 'undefined') return;
+
+    const map = L.map('tripMap', { scrollWheelZoom: false }).setView([33.5, 134], 6);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+      maxZoom: 18
+    }).addTo(map);
+
+    const cityIcon = L.divIcon({
+      className: '',
+      html: '<div style="background:var(--torii,#c0392b);width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>',
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+    const gemIcon = L.divIcon({
+      className: '',
+      html: '<div style="background:#2ecc71;width:10px;height:10px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>',
+      iconSize: [10, 10],
+      iconAnchor: [5, 5]
+    });
+
+    const bounds = [];
+
+    data.itinerary.cities.forEach(city => {
+      if (!city.lat) return;
+      const pos = [city.lat, city.lng];
+      bounds.push(pos);
+      const places = city.days.flatMap(d => d.places.map(p => p.name)).join(', ');
+      L.marker(pos, { icon: cityIcon }).addTo(map)
+        .bindPopup(`<div class="map-popup-city">${esc(city.dates)}</div><div class="map-popup-title">${city.flag} ${esc(city.name)}</div><div class="map-popup-desc">${esc(city.nights)} · ${esc(places.slice(0, 120))}…</div>`);
+    });
+
+    data['hidden-gems'].gems.forEach(gem => {
+      if (!gem.lat) return;
+      const pos = [gem.lat, gem.lng];
+      bounds.push(pos);
+      L.marker(pos, { icon: gemIcon }).addTo(map)
+        .bindPopup(`<div class="map-popup-city">Hidden Gem · ${esc(gem.city)}</div><div class="map-popup-title">${esc(gem.name)}</div><div class="map-popup-desc">${esc(gem.description.slice(0, 100))}…</div>`);
+    });
+
+    if (bounds.length > 1) map.fitBounds(bounds, { padding: [30, 30] });
+
+    const routeCoords = data.itinerary.cities.filter(c => c.lat).map(c => [c.lat, c.lng]);
+    if (routeCoords.length > 1) {
+      L.polyline(routeCoords, { color: 'var(--torii, #c0392b)', weight: 2, opacity: 0.4, dashArray: '6 4' }).addTo(map);
+    }
+  }
+
+  // ── Currency Converter ────────────────────
+
+  let _jpyRate = null;
+
+  async function fetchExchangeRate() {
+    try {
+      const resp = await fetch('https://api.exchangerate-api.com/v4/latest/INR');
+      const data = await resp.json();
+      _jpyRate = data.rates.JPY;
+      return _jpyRate;
+    } catch (e) {
+      try {
+        const resp2 = await fetch('https://open.er-api.com/v6/latest/INR');
+        const data2 = await resp2.json();
+        _jpyRate = data2.rates.JPY;
+        return _jpyRate;
+      } catch { return null; }
+    }
+  }
+
+  function inrToJPY(inrStr) {
+    if (!_jpyRate) return '';
+    const num = parseInt(inrStr.replace(/[₹,\s]/g, ''), 10);
+    if (isNaN(num)) return '';
+    const jpy = Math.round(num * _jpyRate);
+    return `≈ ¥${jpy.toLocaleString()}`;
+  }
+
+  async function renderCurrency(data) {
+    const rate = await fetchExchangeRate();
+    if (!rate) return;
+
+    const widget = document.createElement('div');
+    widget.className = 'currency-widget';
+    widget.innerHTML = `<div class="currency-row"><span class="currency-label">Live Rate</span><span class="currency-rate">₹1 = ¥${rate.toFixed(2)}</span><span class="currency-jpy">via exchangerate-api.com</span></div>`;
+    const budgetGrid = document.getElementById('budgetGrid');
+    if (budgetGrid) budgetGrid.parentNode.insertBefore(widget, budgetGrid.nextSibling);
+
+    document.querySelectorAll('.budget-amount').forEach(el => {
+      const jpy = inrToJPY(el.textContent);
+      if (jpy) {
+        const span = document.createElement('span');
+        span.className = 'currency-jpy';
+        span.textContent = jpy;
+        el.parentNode.appendChild(span);
+      }
+    });
+
+    const totalBig = document.querySelector('.budget-total .big');
+    if (totalBig) {
+      const jpy = inrToJPY(totalBig.textContent);
+      if (jpy) {
+        const span = document.createElement('span');
+        span.className = 'currency-jpy';
+        span.style.display = 'block';
+        span.style.marginTop = '0.3rem';
+        span.textContent = jpy;
+        totalBig.parentNode.appendChild(span);
+      }
+    }
+  }
+
+  // ── Weather Forecast ──────────────────────
+
+  async function renderWeather(data) {
+    const cities = data.itinerary.cities.filter(c => c.lat);
+    for (const city of cities) {
+      try {
+        const resp = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lng}&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=Asia/Tokyo&forecast_days=16`);
+        const weather = await resp.json();
+        if (!weather.daily) continue;
+
+        city.days.forEach(day => {
+          const dateStr = day.date + ', 2026';
+          const d = new Date(dateStr);
+          if (isNaN(d)) return;
+          const iso = d.toISOString().slice(0, 10);
+          const idx = weather.daily.time.indexOf(iso);
+          if (idx === -1) return;
+
+          const code = weather.daily.weathercode[idx];
+          const hi = Math.round(weather.daily.temperature_2m_max[idx]);
+          const lo = Math.round(weather.daily.temperature_2m_min[idx]);
+          const icon = weatherIcon(code);
+          const label = weatherLabel(code);
+
+          const slug = citySlug(city.name);
+          const dayEls = document.querySelectorAll(`#city-${slug} .day-entry`);
+          const dayIdx = city.days.indexOf(day);
+          if (dayEls[dayIdx]) {
+            const badge = document.createElement('div');
+            badge.className = 'weather-badge';
+            badge.innerHTML = `${icon} ${lo}°–${hi}°C · ${label}`;
+            const content = dayEls[dayIdx].querySelector('.day-content h4');
+            if (content) content.after(badge);
+          }
+        });
+      } catch { /* weather is non-critical */ }
+    }
+  }
+
+  function weatherIcon(code) {
+    if (code === 0) return '☀️';
+    if (code <= 3) return '⛅';
+    if (code <= 48) return '🌫️';
+    if (code <= 57) return '🌦️';
+    if (code <= 67) return '🌧️';
+    if (code <= 77) return '🌨️';
+    if (code <= 82) return '🌧️';
+    if (code <= 86) return '❄️';
+    return '⛈️';
+  }
+
+  function weatherLabel(code) {
+    if (code === 0) return 'Clear';
+    if (code <= 3) return 'Partly Cloudy';
+    if (code <= 48) return 'Foggy';
+    if (code <= 57) return 'Drizzle';
+    if (code <= 67) return 'Rain';
+    if (code <= 77) return 'Snow';
+    if (code <= 82) return 'Showers';
+    if (code <= 86) return 'Snow Showers';
+    return 'Thunderstorm';
+  }
+
   // ── Modal system ───────────────────────────
 
   let _modalData = {};
@@ -2119,7 +2422,11 @@
     renderBudget(data);
     renderFood(data);
     renderChecklist(data);
+    renderMap(data);
     renderFooter(data);
+
+    renderCurrency(data);
+    renderWeather(data);
 
     initAnimations();
 

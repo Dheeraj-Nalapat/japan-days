@@ -28,6 +28,8 @@ nav_links:
     href: "#budget"
   - text: "Checklist"
     href: "#checklist"
+  - text: "Map"
+    href: "#map"
 
 footer:
   line1: "Japan 2026 · PNR G9395C · Built from Gmail + Google Calendar data · 15 days, 5 cities, ₹2L budget"

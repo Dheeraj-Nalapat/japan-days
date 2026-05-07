@@ -2,6 +2,8 @@ cities:
   - name: "Osaka"
     jp: "大阪"
     flag: "🏯"
+    lat: 34.6937
+    lng: 135.5023
     dates: "Oct 11 – 12"
     nights: "2 nights"
     image: "https://images.unsplash.com/photo-1759746334715-fae30ec56600?w=1200&h=600&fit=crop&q=80"
@@ -96,6 +98,8 @@ cities:
   - name: "Kyoto"
     jp: "京都"
     flag: "⛩️"
+    lat: 35.0116
+    lng: 135.7681
     dates: "Oct 12 – 15"
     nights: "3 nights"
     image: "https://images.unsplash.com/photo-1758470476240-dcbd04d3f799?w=1200&h=600&fit=crop&q=80"
@@ -238,6 +242,8 @@ cities:
   - name: "Hiroshima"
     jp: "広島"
     flag: "☮️"
+    lat: 34.3853
+    lng: 132.4553
     dates: "Oct 16 – 17"
     nights: "2 nights"
     image: "https://images.unsplash.com/photo-1768946579156-e29e7397b0bc?w=1200&h=600&fit=crop&q=80"
@@ -326,6 +332,8 @@ cities:
   - name: "Okinawa"
     jp: "沖縄"
     flag: "🌊"
+    lat: 26.3344
+    lng: 127.8056
     dates: "Oct 18 – 21"
     nights: "3 nights"
     image: "https://images.unsplash.com/photo-1754228811035-d220f70b86d9?w=1200&h=600&fit=crop&q=80"
@@ -468,6 +476,8 @@ cities:
   - name: "Tokyo"
     jp: "東京"
     flag: "🗼"
+    lat: 35.6762
+    lng: 139.6503
     dates: "Oct 21 – 24"
     nights: "3 nights"
     image: "https://images.unsplash.com/photo-1764418658791-771bb04efdcd?w=1200&h=600&fit=crop&q=80"
