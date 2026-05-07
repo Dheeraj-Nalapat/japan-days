@@ -4,6 +4,7 @@ cities:
     flag: "🏯"
     dates: "Oct 11 – 12"
     nights: "2 nights"
+    image: "https://images.unsplash.com/photo-1759746334715-fae30ec56600?w=1200&h=600&fit=crop&q=80"
     days:
       - num: "DAY 1"
         date: "Oct 11"
@@ -48,6 +49,7 @@ cities:
     flag: "⛩️"
     dates: "Oct 12 – 15"
     nights: "3 nights"
+    image: "https://images.unsplash.com/photo-1758470476240-dcbd04d3f799?w=1200&h=600&fit=crop&q=80"
     days:
       - num: "DAY 3"
         date: "Oct 12"
@@ -114,6 +116,7 @@ cities:
     flag: "☮️"
     dates: "Oct 16 – 17"
     nights: "2 nights"
+    image: "https://images.unsplash.com/photo-1768946579156-e29e7397b0bc?w=1200&h=600&fit=crop&q=80"
     days:
       - num: "DAY 7"
         date: "Oct 16"
@@ -154,6 +157,7 @@ cities:
     flag: "🌊"
     dates: "Oct 18 – 21"
     nights: "3 nights"
+    image: "https://images.unsplash.com/photo-1754228811035-d220f70b86d9?w=1200&h=600&fit=crop&q=80"
     days:
       - num: "DAY 9"
         date: "Oct 18"
@@ -220,6 +224,7 @@ cities:
     flag: "🗼"
     dates: "Oct 21 – 24"
     nights: "3 nights"
+    image: "https://images.unsplash.com/photo-1764418658791-771bb04efdcd?w=1200&h=600&fit=crop&q=80"
     days:
       - num: "DAY 13"
         date: "Oct 22"

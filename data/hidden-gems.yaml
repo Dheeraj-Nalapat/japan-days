@@ -4,69 +4,81 @@ gems:
     description: "Lantern-lit mossy alley beside a tiny moss-draped temple. 50 metres from Dotonbori chaos, feels like a different century."
     crowd_level: 1
     crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1759746334715-fae30ec56600?w=800&h=500&fit=crop&q=80"
 
   - city: "Osaka"
     name: "Nakazaki-cho"
     description: "Osaka's bohemian quarter — vintage coffee shops, old wooden machiya townhouses. Almost entirely unknown to foreign tourists."
     crowd_level: 1
     crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1770284212085-20ef07376ffa?w=800&h=500&fit=crop&q=80"
 
   - city: "Kyoto"
     name: "Kurama & Kibune"
     description: "Two mountain villages linked by a cedar forest hike. Riverside kawadoko lunch above the stream. Almost no foreign tourists make it here."
     crowd_level: 2
     crowd_label: "Low"
+    image: "https://images.unsplash.com/photo-1527974361724-67fd5ebfd6d2?w=800&h=500&fit=crop&q=80"
 
   - city: "Kyoto"
     name: "Jojakko-ji Temple"
     description: "A 5-min walk from the Arashiyama bamboo grove that virtually nobody visits. Moss-covered steps through maple trees. October colours are stunning."
     crowd_level: 1
     crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1527974361724-67fd5ebfd6d2?w=800&h=500&fit=crop&q=80&crop=bottom"
 
   - city: "Nara"
     name: "Isuien Garden"
     description: "A two-section strolling garden that uses \"borrowed scenery\" to frame Todai-ji's great roof. Most visitors to Nara walk right past."
     crowd_level: 2
     crowd_label: "Low"
+    image: "https://images.unsplash.com/photo-1748525591561-f19fdfe637b5?w=800&h=500&fit=crop&q=80"
 
   - city: "Hiroshima"
     name: "Shukkei-en Garden"
     description: "A 400-year-old miniature landscape garden in central Hiroshima. Serene, almost always uncrowded — a world away from the Peace Park."
     crowd_level: 1
     crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1768946579156-e29e7397b0bc?w=800&h=500&fit=crop&q=80"
 
   - city: "Miyajima"
     name: "Daisho-in Temple"
     description: "Past the tourist trail, spinning prayer wheels and stone Buddhas in hand-knitted hats. Multiple sub-temples in a cedar grove — rarely crowded."
     crowd_level: 2
     crowd_label: "Low"
+    image: "https://images.unsplash.com/photo-1504109586057-7a2ae83d1338?w=800&h=500&fit=crop&q=80"
 
   - city: "Okinawa"
     name: "Cape Manzamo"
     description: "Dramatic limestone cliffs shaped like an elephant's trunk by the sea. Free entry, wild flowers, arrive at sunrise for near-total solitude."
     crowd_level: 1
     crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1754228811035-d220f70b86d9?w=800&h=500&fit=crop&q=80"
 
   - city: "Okinawa"
     name: "Katsuren Castle Ruins"
     description: "A hilltop Ryukyuan fortress on a peninsula with 360° sea views. UNESCO listed. Almost always quiet — one of Okinawa's best kept secrets."
     crowd_level: 1
     crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1610971250019-f677bc1300be?w=800&h=500&fit=crop&q=80"
 
   - city: "Okinawa"
     name: "Sefa-utaki"
     description: "Okinawa's holiest Ryukyuan shrine hidden inside a banyan forest. Enter through towering limestone formations into a space that feels genuinely ancient. UNESCO."
     crowd_level: 2
     crowd_label: "Low"
+    image: "https://images.unsplash.com/photo-1610971250019-f677bc1300be?w=800&h=500&fit=crop&q=80&crop=top"
 
   - city: "Tokyo"
     name: "Yanaka Ginza"
     description: "Tokyo's most nostalgic old shopping street — tofu shops, sembei crackers, cats on rooftops. Almost no tourists despite being walkable from Ueno."
     crowd_level: 2
     crowd_label: "Low"
+    image: "https://images.unsplash.com/photo-1565707990801-71e6d5f10ac6?w=800&h=500&fit=crop&q=80"
 
   - city: "Tokyo"
     name: "Shimokitazawa"
     description: "Tokyo's indie music and vintage fashion hub. No chain stores, no tourist traps — just record shops, coffee, and neighbourhood bars. Zero tourist vibe."
     crowd_level: 1
     crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1764418658791-771bb04efdcd?w=800&h=500&fit=crop&q=80"
