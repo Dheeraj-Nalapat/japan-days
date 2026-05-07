@@ -1,0 +1,20 @@
+{
+  "name": "japan-days",
+  "version": "1.0.0",
+  "description": "Japan 2026 travel plan — data-driven static website",
+  "private": true,
+  "scripts": {
+    "start": "node scripts/serve.js",
+    "serve": "node scripts/serve.js",
+    "process-md": "node scripts/process-claude-md.js",
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}

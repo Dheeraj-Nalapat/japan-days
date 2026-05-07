@@ -1,0 +1,61 @@
+flights:
+  - badge: "Leg 1"
+    badge_style: ""
+    from_code: "COK"
+    to_code: "DMK"
+    from_city: "Kochi"
+    to_city: "Bangkok Don Mueang"
+    time: "Oct 10  23:10 IST → Oct 11  03:10 IST"
+    flight_num: "FD 171 · AirAsia"
+    rescheduled: false
+
+  - badge: "Rescheduled"
+    badge_style: "background:#8a3010;"
+    from_code: "DMK"
+    to_code: "KIX"
+    from_city: "Bangkok Don Mueang"
+    to_city: "Osaka Kansai"
+    time: "Oct 11  09:50 local → 18:25 local"
+    flight_num: "XJ 610 · Thai AirAsia X"
+    rescheduled: true
+    rescheduled_note: "⚠ Was 12:00 → rescheduled to 09:50"
+
+  - badge: "Internal"
+    badge_style: "background:#4a6741;"
+    from_code: "KIX"
+    to_code: "OKA"
+    from_city: "Osaka"
+    to_city: "Okinawa Naha"
+    time: "~Oct 18 · ~2h 11m"
+    flight_num: "Peach Aviation · ~₹6,300"
+    rescheduled: false
+
+  - badge: "Internal"
+    badge_style: "background:#4a6741;"
+    from_code: "OKA"
+    to_code: "NRT"
+    from_city: "Okinawa"
+    to_city: "Tokyo Narita"
+    time: "~Oct 21 · ~2h 58m"
+    flight_num: "Jetstar Japan · ~₹4,700"
+    rescheduled: false
+
+  - badge: "Leg 2"
+    badge_style: ""
+    from_code: "NRT"
+    to_code: "DMK"
+    from_city: "Tokyo Narita"
+    to_city: "Bangkok Don Mueang"
+    time: "Oct 24  05:45 IST → 13:10 IST"
+    flight_num: "XJ 601 · Thai AirAsia X"
+    rescheduled: false
+
+  - badge: "Leg 3"
+    badge_style: ""
+    from_code: "DMK"
+    to_code: "COK"
+    from_city: "Bangkok Don Mueang"
+    to_city: "Kochi"
+    time: "Oct 24  18:50 IST → 22:30 IST"
+    flight_num: "FD 170 · AirAsia"
+    rescheduled: false

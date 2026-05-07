@@ -1,0 +1,33 @@
+title: "Japan 2026 — Dheeraj's Travel Plan"
+dates: "Oct 10 – Oct 24, 2026"
+duration: "15 Days"
+route_summary: "Kochi → Bangkok → Osaka → Kyoto → Hiroshima → Okinawa → Tokyo → Bangkok → Kochi"
+hero_jp: "日本旅行"
+
+meta:
+  - label: "Booking"
+    value: "PNR G9395C"
+  - label: "Airline"
+    value: "AirAsia / Thai AirAsia X"
+  - label: "Budget"
+    value: "₹2,00,000"
+  - label: "Cities"
+    value: "5 + Layover"
+
+nav_links:
+  - text: "Flights"
+    href: "#flights"
+  - text: "Route"
+    href: "#route"
+  - text: "Days"
+    href: "#itinerary"
+  - text: "Hidden Gems"
+    href: "#quiet"
+  - text: "Budget"
+    href: "#budget"
+  - text: "Checklist"
+    href: "#checklist"
+
+footer:
+  line1: "Japan 2026 · PNR G9395C · Built from Gmail + Google Calendar data · 15 days, 5 cities, ₹2L budget"
+  line2: "日本旅行計画 · Oct 10 – Oct 24, 2026"

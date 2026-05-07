@@ -1,0 +1,53 @@
+---
+description: Rules for editing YAML data files
+globs: "data/**/*.yaml"
+alwaysApply: false
+---
+
+# Data File Editing Rules
+
+## Schema Constraints
+
+Each YAML file has a specific schema. When editing, preserve the structure.
+
+### itinerary.yaml
+```yaml
+cities:
+  - name: "City Name"
+    jp: "日本語"           # Japanese characters for the city
+    flag: "🏯"             # Single emoji
+    dates: "Oct X – Y"
+    nights: "N nights"
+    days:
+      - num: "DAY N"
+        date: "Oct X"
+        title: "Day title"
+        places:
+          - tag: "main|quiet|food"    # CSS class for styling
+            tag_text: "Morning"       # Display label
+            name: "Place Name"
+            desc: "Description text"
+```
+
+### hidden-gems.yaml
+```yaml
+gems:
+  - city: "City Name"
+    name: "Place Name"
+    description: "Why it's special"
+    crowd_level: 1          # 1-5, controls filled dots
+    crowd_label: "Very Low" # Very Low, Low, Moderate, High, Very High
+```
+
+### budget.yaml
+- `weight` is a 0-1 float controlling bar width (1.0 = full bar)
+- Recalculate weights relative to the highest item when adding new entries
+
+### checklist.yaml
+- Items are plain strings in arrays under group titles
+- Keep groups to 4-7 items for readability
+
+## Validation
+- All YAML must be valid — use proper quoting for strings with colons or special chars
+- Emoji should be used sparingly in `desc` fields
+- Japanese text (`jp` fields) should use proper kanji/hiragana

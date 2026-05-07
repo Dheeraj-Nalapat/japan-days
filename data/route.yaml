@@ -1,0 +1,67 @@
+route:
+  - name: "Kochi"
+    dates: "Oct 10"
+    nights: "Depart"
+    transit: true
+    line_after: "flight"
+
+  - name: "Bangkok"
+    dates: "Oct 11"
+    nights: "Layover"
+    transit: true
+    line_after: "flight"
+
+  - name: "Osaka"
+    dates: "Oct 11–12"
+    nights: "2 Nights"
+    transit: false
+    line_after: "train"
+
+  - name: "Kyoto"
+    dates: "Oct 12–15"
+    nights: "3 Nights"
+    transit: false
+    line_after: "train"
+
+  - name: "Nara"
+    dates: "Oct 15"
+    nights: "Day Trip"
+    transit: false
+    line_after: "train"
+
+  - name: "Hiroshima"
+    dates: "Oct 16–17"
+    nights: "2 Nights"
+    transit: false
+    line_after: "train"
+
+  - name: "Miyajima"
+    dates: "Oct 17"
+    nights: "Day Trip"
+    transit: false
+    line_after: "flight"
+
+  - name: "Okinawa"
+    dates: "Oct 18–21"
+    nights: "3 Nights"
+    transit: false
+    special_style: "background: var(--sage); box-shadow: 0 0 0 2px var(--sage);"
+    line_after: "flight"
+
+  - name: "Tokyo"
+    dates: "Oct 21–24"
+    nights: "3 Nights"
+    transit: false
+    line_after: "flight"
+
+  - name: "Bangkok"
+    dates: "Oct 24"
+    nights: "Transit"
+    transit: true
+    line_after: "flight"
+
+  - name: "Kochi"
+    dates: "Oct 24"
+    nights: "Home"
+    transit: true
+    line_after: null

@@ -1,0 +1,38 @@
+items:
+  - name: "Accommodation (14 nights)"
+    amount: "₹55,000"
+    weight: 0.916
+
+  - name: "Okinawa Internal Flights (Peach + Jetstar)"
+    amount: "₹11,000"
+    weight: 0.183
+
+  - name: "JR Pass (7-day)"
+    amount: "₹22,000"
+    weight: 0.367
+
+  - name: "Food (~₹2,000/day × 14)"
+    amount: "₹30,000"
+    weight: 0.5
+
+  - name: "Local Transport (IC Card)"
+    amount: "₹10,000"
+    weight: 0.167
+
+  - name: "Activities & Entry Fees"
+    amount: "₹15,000"
+    weight: 0.25
+
+  - name: "Shopping & Miscellaneous"
+    amount: "₹12,000"
+    weight: 0.2
+
+total: "₹1,55,000"
+
+summary:
+  title: "The Buffer"
+  paragraphs:
+    - "With flights already booked via AirAsia (PNR G9395C), the remaining spend fits well within ₹2 lakhs — leaving a healthy emergency buffer."
+    - "Note: XJ 610 has been <strong>rescheduled</strong> from 12:00 to 09:50 (Bangkok → Osaka). Make sure to check in earlier accordingly — be at DMK by 06:50 at the latest."
+  buffer_amount: "₹45,000 buffer"
+  extra_note: "Consider Okinawa car rental for ¥3,000–5,000/day — it unlocks the whole island."

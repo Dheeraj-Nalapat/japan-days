@@ -1,0 +1,37 @@
+cities:
+  - name: "Osaka"
+    items:
+      - "Takoyaki at Kukuru 🐙"
+      - "Okonomiyaki at Mizuno"
+      - "Kushikatsu at Daruma"
+      - "Ramen at Kinryu"
+
+  - name: "Kyoto"
+    items:
+      - "Kaiseki lunch set"
+      - "Yudofu tofu hot pot"
+      - "Matcha parfait — Nakamura Tokichi 🍵"
+      - "Pontocho riverside dinner"
+
+  - name: "Hiroshima"
+    items:
+      - "Hiroshima okonomiyaki (Okonomi-mura)"
+      - "Fresh grilled oysters 🦪"
+      - "Tsukemen dipping ramen"
+
+  - name: "Okinawa"
+    items:
+      - "Goya champuru (bitter melon stir fry)"
+      - "Okinawa soba 🍜"
+      - "Rafute braised pork belly"
+      - "Awamori rice spirit 🍶"
+      - "Blue Seal ice cream 🍦"
+      - "Makishi Market seafood"
+
+  - name: "Tokyo"
+    items:
+      - "Tsukiji sushi breakfast 🍣"
+      - "Yakitori under Yurakucho tracks"
+      - "Ichiran solo ramen booth"
+      - "Tempura at Daikokuya"
+      - "Conveyor belt sushi at Uobei"

@@ -1,0 +1,64 @@
+---
+description: Japan Days project conventions and data-driven architecture
+globs: "**/*"
+alwaysApply: true
+---
+
+# Japan Days — Project Rules
+
+## Architecture
+
+This is a **data-driven static website** for managing a Japan trip plan. All content is stored in YAML files under `data/` and rendered client-side via JavaScript.
+
+### Key Principle
+**Never hardcode content in `index.html`.** All displayable data lives in YAML files. The HTML file is a template with empty containers that get populated at runtime.
+
+## Data Files (`data/`)
+
+| File | Purpose |
+|------|---------|
+| `trip.yaml` | Hero section, navigation, meta info, footer |
+| `flights.yaml` | Flight cards (legs, internal flights) |
+| `route.yaml` | Route overview with city stops |
+| `itinerary.yaml` | Day-by-day itinerary per city |
+| `hidden-gems.yaml` | Off-the-beaten-path places with crowd levels |
+| `budget.yaml` | Budget breakdown items and summary |
+| `food.yaml` | Must-try foods by city |
+| `checklist.yaml` | Pre-departure checklist groups |
+
+## Workflow
+
+1. User chats with Claude on the web, gets markdown outputs
+2. User saves markdown to `claude-md-files/` folder
+3. Run `npm run process-md` to parse markdown into YAML
+4. Website automatically reflects data from YAML on next load
+5. For manual edits, directly modify YAML files in `data/`
+
+## When modifying data
+
+- Edit the relevant YAML file in `data/`, never the HTML
+- Maintain the existing YAML schema structure
+- Test changes by running `npm start` and viewing localhost:8080
+
+## When modifying the website template
+
+- CSS and rendering logic live in `index.html`
+- Each section has a `render*()` function in the `<script>` block
+- Adding a new section requires: a YAML file, a render function, and an HTML container
+
+## Claude MD Files
+
+Files in `claude-md-files/` use structured markdown with `##` headings to delimit sections. The processor (`scripts/process-claude-md.js`) detects section types by keywords in headings.
+
+## Testing
+
+- Playwright tests live in `tests/`
+- Run with `npm test`
+- Tests verify all sections render correctly from YAML data
+- Test data integrity: every YAML entry should appear in the rendered page
+
+## Design System
+
+- Fonts: Cormorant Garamond (body), Noto Serif JP (Japanese), Space Mono (labels)
+- Colors: `--ink`, `--paper`, `--torii` (accent), `--sage` (quiet), `--gold` (food)
+- Keep the Japanese aesthetic: minimal, warm, editorial

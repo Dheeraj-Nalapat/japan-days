@@ -31,6 +31,43 @@
     overflow-x: hidden;
   }
 
+  /* ── LOADING STATE ─────────────────────────── */
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--deep);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease;
+  }
+  .loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .loading-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 200;
+    font-size: 2.5rem;
+    color: rgba(245,240,232,0.15);
+    letter-spacing: 0.3em;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  .loading-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--torii);
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
   /* ── HERO ───────────────────────────────────── */
   .hero {
     min-height: 100vh;
@@ -49,7 +86,6 @@
       linear-gradient(160deg, #1a0f08 0%, #2c1810 40%, #1a1a2e 100%);
   }
 
-  /* Animated Japanese pattern */
   .hero-pattern {
     position: absolute; inset: 0;
     opacity: 0.04;
@@ -829,50 +865,29 @@
 </head>
 <body>
 
+<!-- ── LOADING SCREEN ──────────────────────── -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-jp">日本</div>
+  <div class="loading-text">Loading travel plan...</div>
+</div>
+
 <!-- ── NAV ──────────────────────────────── -->
 <nav id="nav">
   <div class="nav-logo">日本 2026</div>
-  <div class="nav-links">
-    <a href="#flights">Flights</a>
-    <a href="#route">Route</a>
-    <a href="#itinerary">Days</a>
-    <a href="#quiet">Hidden Gems</a>
-    <a href="#budget">Budget</a>
-    <a href="#checklist">Checklist</a>
-  </div>
+  <div class="nav-links" id="navLinks"></div>
 </nav>
 
 <!-- ── HERO ──────────────────────────────── -->
 <section class="hero" id="top">
   <div class="hero-bg"></div>
   <div class="hero-pattern"></div>
-  <div class="hero-jp">日本旅行</div>
-
+  <div class="hero-jp" id="heroJp"></div>
   <div class="hero-content">
-    <div class="hero-label">Oct 10 – Oct 24, 2026 &nbsp;·&nbsp; 15 Days</div>
+    <div class="hero-label" id="heroLabel"></div>
     <h1 class="hero-title">Japan<br><em>2026</em></h1>
-    <p class="hero-subtitle">Kochi → Bangkok → Osaka → Kyoto → Hiroshima → Okinawa → Tokyo → Bangkok → Kochi</p>
-
-    <div class="hero-meta">
-      <div class="meta-item">
-        <span class="label">Booking</span>
-        <span class="value">PNR G9395C</span>
-      </div>
-      <div class="meta-item">
-        <span class="label">Airline</span>
-        <span class="value">AirAsia / Thai AirAsia X</span>
-      </div>
-      <div class="meta-item">
-        <span class="label">Budget</span>
-        <span class="value">₹2,00,000</span>
-      </div>
-      <div class="meta-item">
-        <span class="label">Cities</span>
-        <span class="value">5 + Layover</span>
-      </div>
-    </div>
+    <p class="hero-subtitle" id="heroSubtitle"></p>
+    <div class="hero-meta" id="heroMeta"></div>
   </div>
-
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span>Scroll to explore</span>
@@ -881,1108 +896,338 @@
 
 <!-- ── FLIGHTS STRIP ─────────────────────── -->
 <div id="flights" class="flights-strip">
-  <div class="flights-ticker">
-
-    <div class="flight-card">
-      <div class="badge">Leg 1</div>
-      <div>
-        <div class="flight-route">
-          <span class="airport-code">COK</span>
-          <span class="route-arrow">→</span>
-          <span class="airport-code">DMK</span>
-        </div>
-        <div class="flight-detail">Kochi → Bangkok Don Mueang</div>
-        <div class="flight-time">Oct 10 &nbsp;23:10 IST → Oct 11 &nbsp;03:10 IST</div>
-        <div class="flight-num">FD 171 · AirAsia</div>
-      </div>
-    </div>
-
-    <div class="flight-card">
-      <div class="badge" style="background:#8a3010;">Rescheduled</div>
-      <div>
-        <div class="flight-route">
-          <span class="airport-code">DMK</span>
-          <span class="route-arrow">→</span>
-          <span class="airport-code">KIX</span>
-        </div>
-        <div class="flight-detail">Bangkok Don Mueang → Osaka Kansai</div>
-        <div class="flight-time">Oct 11 &nbsp;09:50 local → 18:25 local</div>
-        <div class="flight-num">XJ 610 · Thai AirAsia X</div>
-        <div class="rescheduled-tag">⚠ Was 12:00 → rescheduled to 09:50</div>
-      </div>
-    </div>
-
-    <div class="flight-card">
-      <div class="badge" style="background:#4a6741;">Internal</div>
-      <div>
-        <div class="flight-route">
-          <span class="airport-code">KIX</span>
-          <span class="route-arrow">→</span>
-          <span class="airport-code">OKA</span>
-        </div>
-        <div class="flight-detail">Osaka → Okinawa Naha</div>
-        <div class="flight-time">~Oct 18 &nbsp;·&nbsp; ~2h 11m</div>
-        <div class="flight-num">Peach Aviation · ~₹6,300</div>
-      </div>
-    </div>
-
-    <div class="flight-card">
-      <div class="badge" style="background:#4a6741;">Internal</div>
-      <div>
-        <div class="flight-route">
-          <span class="airport-code">OKA</span>
-          <span class="route-arrow">→</span>
-          <span class="airport-code">NRT</span>
-        </div>
-        <div class="flight-detail">Okinawa → Tokyo Narita</div>
-        <div class="flight-time">~Oct 21 &nbsp;·&nbsp; ~2h 58m</div>
-        <div class="flight-num">Jetstar Japan · ~₹4,700</div>
-      </div>
-    </div>
-
-    <div class="flight-card">
-      <div class="badge">Leg 2</div>
-      <div>
-        <div class="flight-route">
-          <span class="airport-code">NRT</span>
-          <span class="route-arrow">→</span>
-          <span class="airport-code">DMK</span>
-        </div>
-        <div class="flight-detail">Tokyo Narita → Bangkok Don Mueang</div>
-        <div class="flight-time">Oct 24 &nbsp;05:45 IST → 13:10 IST</div>
-        <div class="flight-num">XJ 601 · Thai AirAsia X</div>
-      </div>
-    </div>
-
-    <div class="flight-card">
-      <div class="badge">Leg 3</div>
-      <div>
-        <div class="flight-route">
-          <span class="airport-code">DMK</span>
-          <span class="route-arrow">→</span>
-          <span class="airport-code">COK</span>
-        </div>
-        <div class="flight-detail">Bangkok Don Mueang → Kochi</div>
-        <div class="flight-time">Oct 24 &nbsp;18:50 IST → 22:30 IST</div>
-        <div class="flight-num">FD 170 · AirAsia</div>
-      </div>
-    </div>
-
-  </div>
+  <div class="flights-ticker" id="flightsTicker"></div>
 </div>
 
 <!-- ── ROUTE ──────────────────────────────── -->
 <section id="route" class="route-section">
   <div class="section-eyebrow">The Journey</div>
   <h2 class="section-title">Route Overview</h2>
-
-  <div class="route-visual">
-    <div class="route-city">
-      <div class="city-dot transit"></div>
-      <div class="city-name">Kochi</div>
-      <div class="city-dates">Oct 10</div>
-      <div class="city-nights">Depart</div>
-    </div>
-    <div class="route-line flight"></div>
-    <div class="route-city">
-      <div class="city-dot transit"></div>
-      <div class="city-name">Bangkok</div>
-      <div class="city-dates">Oct 11</div>
-      <div class="city-nights">Layover</div>
-    </div>
-    <div class="route-line flight"></div>
-    <div class="route-city">
-      <div class="city-dot"></div>
-      <div class="city-name">Osaka</div>
-      <div class="city-dates">Oct 11–12</div>
-      <div class="city-nights">2 Nights</div>
-    </div>
-    <div class="route-line"></div>
-    <div class="route-city">
-      <div class="city-dot"></div>
-      <div class="city-name">Kyoto</div>
-      <div class="city-dates">Oct 12–15</div>
-      <div class="city-nights">3 Nights</div>
-    </div>
-    <div class="route-line"></div>
-    <div class="route-city">
-      <div class="city-dot"></div>
-      <div class="city-name">Nara</div>
-      <div class="city-dates">Oct 15</div>
-      <div class="city-nights">Day Trip</div>
-    </div>
-    <div class="route-line"></div>
-    <div class="route-city">
-      <div class="city-dot"></div>
-      <div class="city-name">Hiroshima</div>
-      <div class="city-dates">Oct 16–17</div>
-      <div class="city-nights">2 Nights</div>
-    </div>
-    <div class="route-line"></div>
-    <div class="route-city">
-      <div class="city-dot"></div>
-      <div class="city-name">Miyajima</div>
-      <div class="city-dates">Oct 17</div>
-      <div class="city-nights">Day Trip</div>
-    </div>
-    <div class="route-line flight"></div>
-    <div class="route-city">
-      <div class="city-dot" style="background: var(--sage); box-shadow: 0 0 0 2px var(--sage);"></div>
-      <div class="city-name">Okinawa</div>
-      <div class="city-dates">Oct 18–21</div>
-      <div class="city-nights">3 Nights</div>
-    </div>
-    <div class="route-line flight"></div>
-    <div class="route-city">
-      <div class="city-dot"></div>
-      <div class="city-name">Tokyo</div>
-      <div class="city-dates">Oct 21–24</div>
-      <div class="city-nights">3 Nights</div>
-    </div>
-    <div class="route-line flight"></div>
-    <div class="route-city">
-      <div class="city-dot transit"></div>
-      <div class="city-name">Bangkok</div>
-      <div class="city-dates">Oct 24</div>
-      <div class="city-nights">Transit</div>
-    </div>
-    <div class="route-line flight"></div>
-    <div class="route-city">
-      <div class="city-dot transit"></div>
-      <div class="city-name">Kochi</div>
-      <div class="city-dates">Oct 24</div>
-      <div class="city-nights">Home</div>
-    </div>
-  </div>
+  <div class="route-visual" id="routeVisual"></div>
 </section>
 
 <!-- ── ITINERARY ──────────────────────────── -->
 <section id="itinerary" class="itinerary-section">
   <div class="section-eyebrow">Day by Day</div>
   <h2 class="section-title" style="color:var(--paper);">Full Itinerary</h2>
-
-  <div class="city-blocks">
-
-    <!-- OSAKA -->
-    <div class="city-block">
-      <div class="city-header">
-        <div class="city-flag">🏯</div>
-        <div class="city-block-name">Osaka</div>
-        <div class="city-block-jp">大阪</div>
-        <div class="city-block-dates">Oct 11 – 12</div>
-        <div class="city-block-nights">2 nights</div>
-      </div>
-      <div class="day-list">
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 1</div>
-            <span class="day-date">Oct 11</span>
-          </div>
-          <div class="day-content">
-            <h4>Arrival — Arrive KIX 18:25 local</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Transit</span>
-                <span class="place-desc"><span class="place-name">Haruka Express</span> — KIX to Namba/Tennoji (~75 min, ¥1,880). Check in to hostel in Namba or Shinsaibashi area.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag main">Evening</span>
-                <span class="place-desc"><span class="place-name">Dotonbori</span> — iconic neon canal. Try Takoyaki at Kukuru 🐙</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Hidden</span>
-                <span class="place-desc"><span class="place-name">Hozenji Yokocho</span> — a lantern-lit mossy alley beside a tiny moss-draped temple. Far quieter than the Dotonbori chaos just 50m away.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 2</div>
-            <span class="day-date">Oct 12</span>
-          </div>
-          <div class="day-content">
-            <h4>Quiet Osaka</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Morning</span>
-                <span class="place-desc"><span class="place-name">Osaka Castle</span> (¥600) — arrive before 9am, walk the Nishinomaru Garden for autumn foliage 🍁</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Hidden</span>
-                <span class="place-desc"><span class="place-name">Nakazaki-cho</span> — Osaka's most bohemian neighbourhood. Vintage coffee shops, old wooden townhouses, almost zero tourists. Perfect afternoon wander.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag food">Food</span>
-                <span class="place-desc"><span class="place-name">Kuromon Ichiba Market</span> — lunch with fresh sashimi and grilled scallops straight from the stalls</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag main">Evening</span>
-                <span class="place-desc"><span class="place-name">Shinsekai</span> — retro 1950s district. Kushikatsu at Daruma. 🍢</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- KYOTO -->
-    <div class="city-block">
-      <div class="city-header">
-        <div class="city-flag">⛩️</div>
-        <div class="city-block-name">Kyoto</div>
-        <div class="city-block-jp">京都</div>
-        <div class="city-block-dates">Oct 12 – 15</div>
-        <div class="city-block-nights">3 nights</div>
-      </div>
-      <div class="day-list">
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 3</div>
-            <span class="day-date">Oct 12</span>
-          </div>
-          <div class="day-content">
-            <h4>Arrive Kyoto — Fushimi & Gion</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Afternoon</span>
-                <span class="place-desc"><span class="place-name">Fushimi Inari Taisha</span> — hike past the main torii gates to Yotsutsuji intersection halfway up. Go after 4pm when day-trippers leave — the upper mountain trails become blissfully silent. Free, 24/7.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Hidden</span>
-                <span class="place-desc"><span class="place-name">Shinbashi-dori</span> in Gion — narrow stone-paved canal lane at dusk, lit by paper lanterns. Less photographed than Hanamikoji but more atmospheric. 🏮</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 4</div>
-            <span class="day-date">Oct 13</span>
-          </div>
-          <div class="day-content">
-            <h4>Kurama & Kibune — Secret Mountain Villages</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag quiet">Very Quiet</span>
-                <span class="place-desc"><span class="place-name">Kurama → Kibune trail</span> — Eizan Railway to Kurama (40 min). Hike through ancient cedar forest past Kurama-dera Temple, then descend into Kibune village. Almost no foreign tourists. Lunch at riverside kawadoko terrace restaurant above the stream. 🌲</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag food">Evening</span>
-                <span class="place-desc"><span class="place-name">Pontocho Alley</span> — Kyoto's narrow riverside dining street. Kaiseki or yakitori dinner. 🍶</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 5</div>
-            <span class="day-date">Oct 14</span>
-          </div>
-          <div class="day-content">
-            <h4>Arashiyama + Classic Temples</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Early AM</span>
-                <span class="place-desc"><span class="place-name">Arashiyama Bamboo Grove</span> 🎋 — arrive before 7:30am for silence, mist, and the ethereal early light. Completely different from the crowd-filled daytime.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Hidden</span>
-                <span class="place-desc"><span class="place-name">Jojakko-ji Temple</span> — a 5-minute walk from the bamboo grove that almost nobody visits. Moss-covered stone steps winding through maple trees. More atmospheric than Kinkaku-ji with a fraction of the visitors. 🍂</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag main">Afternoon</span>
-                <span class="place-desc"><span class="place-name">Kinkaku-ji</span> Golden Pavilion (¥500) + <span class="place-name">Ryoan-ji</span> rock garden</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 6</div>
-            <span class="day-date">Oct 15</span>
-          </div>
-          <div class="day-content">
-            <h4>Eastern Kyoto + Nara Day Trip</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Morning</span>
-                <span class="place-desc"><span class="place-name">Kiyomizu-dera</span> (¥400) + walk Ninenzaka & Sannenzaka stone lanes</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag main">Midday</span>
-                <span class="place-desc">Train to <span class="place-name">Nara</span> (45 min). Deer park 🦌, Todai-ji giant Buddha (¥600), Kasuga Taisha shrine</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Hidden</span>
-                <span class="place-desc"><span class="place-name">Isuien Garden</span> — a hidden two-section strolling garden in Nara that most visitors skip. Uses "borrowed scenery" to frame Todai-ji's roof perfectly from within. ¥1,200. 🌿</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- HIROSHIMA -->
-    <div class="city-block">
-      <div class="city-header">
-        <div class="city-flag">☮️</div>
-        <div class="city-block-name">Hiroshima</div>
-        <div class="city-block-jp">広島</div>
-        <div class="city-block-dates">Oct 16 – 17</div>
-        <div class="city-block-nights">2 nights</div>
-      </div>
-      <div class="day-list">
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 7</div>
-            <span class="day-date">Oct 16</span>
-          </div>
-          <div class="day-content">
-            <h4>Hiroshima — Peace + History</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Morning</span>
-                <span class="place-desc">Shinkansen Kyoto → Hiroshima (~1.5h, JR Pass ✅). <span class="place-name">Peace Memorial Museum</span> (¥200) — deeply powerful, allow 2–3 hrs. Peace Park & Atomic Bomb Dome.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Quiet</span>
-                <span class="place-desc"><span class="place-name">Shukkei-en Garden</span> — a 400-year-old miniature landscape garden in the heart of Hiroshima. Serene, almost always uncrowded, beautifully kept. 🌊</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag food">Dinner</span>
-                <span class="place-desc"><span class="place-name">Okonomi-mura</span> — 6-floor building of Hiroshima-style okonomiyaki stalls. Each floor has its own family-run shop. 🥞</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 8</div>
-            <span class="day-date">Oct 17</span>
-          </div>
-          <div class="day-content">
-            <h4>Miyajima Island</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">All Day</span>
-                <span class="place-desc">JR Ferry to <span class="place-name">Miyajima</span> (JR Pass ✅). <span class="place-name">Itsukushima Shrine</span> floating torii at high tide ⛩️. Hike Mt. Misen (1.5h) for sea views.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Hidden Gem</span>
-                <span class="place-desc"><span class="place-name">Daisho-in Temple</span> — at the foot of Mt. Misen, past the tourist path. Spinning prayer wheels, stone Buddhas in knitted hats, multi-level sub-temples. Rarely crowded. 🙏</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag food">Try</span>
-                <span class="place-desc">Momiji Manju (maple leaf cakes) 🍁 and freshly grilled oysters 🦪 from island stalls</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- OKINAWA -->
-    <div class="city-block">
-      <div class="city-header">
-        <div class="city-flag">🌊</div>
-        <div class="city-block-name">Okinawa</div>
-        <div class="city-block-jp">沖縄</div>
-        <div class="city-block-dates">Oct 18 – 21</div>
-        <div class="city-block-nights">3 nights</div>
-      </div>
-      <div class="day-list">
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 9</div>
-            <span class="day-date">Oct 18</span>
-          </div>
-          <div class="day-content">
-            <h4>Arrive Okinawa — Naha & Shuri</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Afternoon</span>
-                <span class="place-desc"><span class="place-name">Shuri Castle</span> 首里城 — the vibrant red-lacquered palace of the Ryukyu Kingdom. A UNESCO World Heritage site with an aesthetic utterly distinct from mainland Japan. (¥400) 🏯</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag food">Evening</span>
-                <span class="place-desc"><span class="place-name">Makishi Public Market</span> — choose fresh seafood from the 1F stalls, take it upstairs to a 2F restaurant who cooks it for you. A genuine Okinawan tradition. 🐟</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 10</div>
-            <span class="day-date">Oct 19</span>
-          </div>
-          <div class="day-content">
-            <h4>Limestone Cliffs & Hidden Caves</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag quiet">Very Quiet</span>
-                <span class="place-desc"><span class="place-name">Cape Manzamo</span> (万座毛) — dramatic limestone cliffs carved by the sea into an elephant-trunk arch. Wild flowers, free entry, morning crowds near zero. Arrive at sunrise for the full drama. 🌊</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Hidden</span>
-                <span class="place-desc"><span class="place-name">Ryugudo Cave</span> — 450m illuminated limestone cave inside a hill in central Okinawa. Atmospheric, rarely visited by foreign tourists. ¥1,200</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">UNESCO</span>
-                <span class="place-desc"><span class="place-name">Katsuren Castle Ruins</span> — hilltop Ryukyuan fortress with 360° panoramic views over the turquoise sea. UNESCO listed, almost always uncrowded. Free outer grounds. 🏰</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 11</div>
-            <span class="day-date">Oct 20</span>
-          </div>
-          <div class="day-content">
-            <h4>Beaches + Churaumi Aquarium</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Morning</span>
-                <span class="place-desc"><span class="place-name">Manza Beach / Moon Beach</span> in Onna Village — Okinawa's crystal clear water 🏖️. October is still warm (~26°C) and far less crowded than peak summer.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag main">Afternoon</span>
-                <span class="place-desc"><span class="place-name">Churaumi Aquarium</span> (美ら海水族館) — one of the world's largest, with an 8.2m deep tank housing whale sharks (¥2,180). The adjacent <span class="place-name">Emerald Beach</span> inside the park is free and stunning.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 12</div>
-            <span class="day-date">Oct 21</span>
-          </div>
-          <div class="day-content">
-            <h4>Sacred Forest Shrine + Depart for Tokyo</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Morning</span>
-                <span class="place-desc"><span class="place-name">Himeyuri Peace Museum</span> — memorial to student nurses in WWII. Quieter and more intimate than Hiroshima's museum. ¥310</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">UNESCO · Sacred</span>
-                <span class="place-desc"><span class="place-name">Sefa-utaki</span> (斎場御嶽) — Okinawa's most sacred Ryukyuan shrine, hidden in a lush forest of ancient banyan trees. Enter through mossy limestone rock formations into a space that feels genuinely ancient. ¥300. 🌳</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag main">Evening</span>
-                <span class="place-desc">✈ Fly OKA → NRT with Jetstar Japan (~3 hrs). Arrive Tokyo night.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- TOKYO -->
-    <div class="city-block">
-      <div class="city-header">
-        <div class="city-flag">🗼</div>
-        <div class="city-block-name">Tokyo</div>
-        <div class="city-block-jp">東京</div>
-        <div class="city-block-dates">Oct 21 – 24</div>
-        <div class="city-block-nights">3 nights</div>
-      </div>
-      <div class="day-list">
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 13</div>
-            <span class="day-date">Oct 22</span>
-          </div>
-          <div class="day-content">
-            <h4>Old Tokyo — Asakusa & Yanaka</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">Morning</span>
-                <span class="place-desc"><span class="place-name">Senso-ji Temple</span> — Tokyo's oldest Buddhist temple. Arrive before 7am to see it in the mist, before tourists arrive. Nakamise-dori shopping street.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Very Quiet</span>
-                <span class="place-desc"><span class="place-name">Yanaka Ginza</span> — Tokyo's most nostalgic old shopping street. Tofu shops, sembei cracker stalls, cats dozing on rooftops. Almost no tourists despite being walkable from central Tokyo. 🐱</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Quiet</span>
-                <span class="place-desc"><span class="place-name">Koenji</span> evening — Tokyo's indie/bohemian district. Antique shops, vinyl record stores, great izakayas, zero tourist vibe. 🎸</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 14</div>
-            <span class="day-date">Oct 23</span>
-          </div>
-          <div class="day-content">
-            <h4>Modern Tokyo + Last Shopping</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag food">Breakfast</span>
-                <span class="place-desc"><span class="place-name">Tsukiji Outer Market</span> — sushi breakfast at 7am 🍣. The inner market moved to Toyosu, but the outer market remains vibrant and authentic.</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Hidden</span>
-                <span class="place-desc"><span class="place-name">Hamarikyu Gardens</span> — a 300-year-old shogunate garden surrounded by skyscrapers. A surreal, peaceful contrast in central Tokyo. ¥300 🏯</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag main">Afternoon</span>
-                <span class="place-desc"><span class="place-name">Shibuya Scramble Crossing</span> + <span class="place-name">Shibuya Sky</span> observation deck at sunset (¥2,000)</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag quiet">Quiet</span>
-                <span class="place-desc"><span class="place-name">Shimokitazawa</span> — Tokyo's indie music and vintage fashion neighbourhood. No chain stores, no tourists, great record shops and pour-over coffee. 🎶</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="day-entry">
-          <div>
-            <div class="day-num">DAY 15</div>
-            <span class="day-date">Oct 24</span>
-          </div>
-          <div class="day-content">
-            <h4>Departure Day</h4>
-            <div class="places-list">
-              <div class="place-item">
-                <span class="place-tag main">05:45 IST</span>
-                <span class="place-desc">✈ XJ 601 departs Tokyo NRT → Bangkok DMK (arrives 13:10 IST)</span>
-              </div>
-              <div class="place-item">
-                <span class="place-tag main">18:50 IST</span>
-                <span class="place-desc">✈ FD 170 departs Bangkok DMK → Kochi COK (arrives 22:30 IST). Home. 🏠</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
+  <div class="city-blocks" id="cityBlocks"></div>
 </section>
 
 <!-- ── QUIET PLACES ────────────────────────── -->
 <section id="quiet" class="quiet-section">
   <div class="section-eyebrow">Off the Beaten Path</div>
   <h2 class="section-title">Hidden Gems — Crowd Guide</h2>
-
-  <div class="quiet-grid">
-
-    <div class="quiet-card">
-      <div class="city-badge">Osaka</div>
-      <h3>Hozenji Yokocho</h3>
-      <p>Lantern-lit mossy alley beside a tiny moss-draped temple. 50 metres from Dotonbori chaos, feels like a different century.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Very Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Osaka</div>
-      <h3>Nakazaki-cho</h3>
-      <p>Osaka's bohemian quarter — vintage coffee shops, old wooden machiya townhouses. Almost entirely unknown to foreign tourists.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Very Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Kyoto</div>
-      <h3>Kurama & Kibune</h3>
-      <p>Two mountain villages linked by a cedar forest hike. Riverside kawadoko lunch above the stream. Almost no foreign tourists make it here.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Kyoto</div>
-      <h3>Jojakko-ji Temple</h3>
-      <p>A 5-min walk from the Arashiyama bamboo grove that virtually nobody visits. Moss-covered steps through maple trees. October colours are stunning.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Very Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Nara</div>
-      <h3>Isuien Garden</h3>
-      <p>A two-section strolling garden that uses "borrowed scenery" to frame Todai-ji's great roof. Most visitors to Nara walk right past.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Hiroshima</div>
-      <h3>Shukkei-en Garden</h3>
-      <p>A 400-year-old miniature landscape garden in central Hiroshima. Serene, almost always uncrowded — a world away from the Peace Park.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Very Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Miyajima</div>
-      <h3>Daisho-in Temple</h3>
-      <p>Past the tourist trail, spinning prayer wheels and stone Buddhas in hand-knitted hats. Multiple sub-temples in a cedar grove — rarely crowded.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Okinawa</div>
-      <h3>Cape Manzamo</h3>
-      <p>Dramatic limestone cliffs shaped like an elephant's trunk by the sea. Free entry, wild flowers, arrive at sunrise for near-total solitude.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Very Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Okinawa</div>
-      <h3>Katsuren Castle Ruins</h3>
-      <p>A hilltop Ryukyuan fortress on a peninsula with 360° sea views. UNESCO listed. Almost always quiet — one of Okinawa's best kept secrets.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Very Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Okinawa</div>
-      <h3>Sefa-utaki</h3>
-      <p>Okinawa's holiest Ryukyuan shrine hidden inside a banyan forest. Enter through towering limestone formations into a space that feels genuinely ancient. UNESCO.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Tokyo</div>
-      <h3>Yanaka Ginza</h3>
-      <p>Tokyo's most nostalgic old shopping street — tofu shops, sembei crackers, cats on rooftops. Almost no tourists despite being walkable from Ueno.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Low</span>
-      </div>
-    </div>
-
-    <div class="quiet-card">
-      <div class="city-badge">Tokyo</div>
-      <h3>Shimokitazawa</h3>
-      <p>Tokyo's indie music and vintage fashion hub. No chain stores, no tourist traps — just record shops, coffee, and neighbourhood bars. Zero tourist vibe.</p>
-      <div class="crowd-meter">
-        <div class="crowd-dots">
-          <div class="crowd-dot filled"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-          <div class="crowd-dot"></div>
-        </div>
-        <span class="crowd-label">Very Low</span>
-      </div>
-    </div>
-
-  </div>
+  <div class="quiet-grid" id="quietGrid"></div>
 </section>
 
 <!-- ── BUDGET ──────────────────────────────── -->
 <section id="budget" class="budget-section">
   <div class="section-eyebrow">Money</div>
   <h2 class="section-title">Budget Breakdown</h2>
-
-  <div class="budget-grid">
-    <div>
-      <div class="budget-bars" id="budgetBars">
-        <div class="budget-item">
-          <div class="budget-item-top">
-            <span class="budget-name">Accommodation (14 nights)</span>
-            <span class="budget-amount">₹55,000</span>
-          </div>
-          <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:0.916"></div></div>
-        </div>
-        <div class="budget-item">
-          <div class="budget-item-top">
-            <span class="budget-name">Okinawa Internal Flights (Peach + Jetstar)</span>
-            <span class="budget-amount">₹11,000</span>
-          </div>
-          <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:0.183"></div></div>
-        </div>
-        <div class="budget-item">
-          <div class="budget-item-top">
-            <span class="budget-name">JR Pass (7-day)</span>
-            <span class="budget-amount">₹22,000</span>
-          </div>
-          <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:0.367"></div></div>
-        </div>
-        <div class="budget-item">
-          <div class="budget-item-top">
-            <span class="budget-name">Food (~₹2,000/day × 14)</span>
-            <span class="budget-amount">₹30,000</span>
-          </div>
-          <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:0.5"></div></div>
-        </div>
-        <div class="budget-item">
-          <div class="budget-item-top">
-            <span class="budget-name">Local Transport (IC Card)</span>
-            <span class="budget-amount">₹10,000</span>
-          </div>
-          <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:0.167"></div></div>
-        </div>
-        <div class="budget-item">
-          <div class="budget-item-top">
-            <span class="budget-name">Activities & Entry Fees</span>
-            <span class="budget-amount">₹15,000</span>
-          </div>
-          <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:0.25"></div></div>
-        </div>
-        <div class="budget-item">
-          <div class="budget-item-top">
-            <span class="budget-name">Shopping & Miscellaneous</span>
-            <span class="budget-amount">₹12,000</span>
-          </div>
-          <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:0.2"></div></div>
-        </div>
-      </div>
-      <div class="budget-total">
-        <span class="label">Total Estimated</span>
-        <span class="big">₹1,55,000</span>
-      </div>
-    </div>
-
-    <div class="budget-summary">
-      <h3>The Buffer</h3>
-      <p>With flights already booked via AirAsia (PNR G9395C), the remaining spend fits well within ₹2 lakhs — leaving a healthy emergency buffer.</p>
-      <p>Note: XJ 610 has been <strong>rescheduled</strong> from 12:00 to 09:50 (Bangkok → Osaka). Make sure to check in earlier accordingly — be at DMK by 06:50 at the latest.</p>
-      <span class="buffer-amount">₹45,000 buffer</span>
-      <p style="margin-top:1rem;">Consider Okinawa car rental for ¥3,000–5,000/day — it unlocks the whole island.</p>
-    </div>
-  </div>
+  <div class="budget-grid" id="budgetGrid"></div>
 </section>
 
 <!-- ── FOOD ────────────────────────────────── -->
 <section class="food-section">
   <div class="section-eyebrow">Eat</div>
   <h2 class="section-title">Must-Try Foods by City</h2>
-  <div class="food-grid">
-    <div class="food-city">
-      <div class="food-city-name">Osaka</div>
-      <div class="food-items">
-        <div class="food-item">Takoyaki at Kukuru 🐙</div>
-        <div class="food-item">Okonomiyaki at Mizuno</div>
-        <div class="food-item">Kushikatsu at Daruma</div>
-        <div class="food-item">Ramen at Kinryu</div>
-      </div>
-    </div>
-    <div class="food-city">
-      <div class="food-city-name">Kyoto</div>
-      <div class="food-items">
-        <div class="food-item">Kaiseki lunch set</div>
-        <div class="food-item">Yudofu tofu hot pot</div>
-        <div class="food-item">Matcha parfait — Nakamura Tokichi 🍵</div>
-        <div class="food-item">Pontocho riverside dinner</div>
-      </div>
-    </div>
-    <div class="food-city">
-      <div class="food-city-name">Hiroshima</div>
-      <div class="food-items">
-        <div class="food-item">Hiroshima okonomiyaki (Okonomi-mura)</div>
-        <div class="food-item">Fresh grilled oysters 🦪</div>
-        <div class="food-item">Tsukemen dipping ramen</div>
-      </div>
-    </div>
-    <div class="food-city">
-      <div class="food-city-name">Okinawa</div>
-      <div class="food-items">
-        <div class="food-item">Goya champuru (bitter melon stir fry)</div>
-        <div class="food-item">Okinawa soba 🍜</div>
-        <div class="food-item">Rafute braised pork belly</div>
-        <div class="food-item">Awamori rice spirit 🍶</div>
-        <div class="food-item">Blue Seal ice cream 🍦</div>
-        <div class="food-item">Makishi Market seafood</div>
-      </div>
-    </div>
-    <div class="food-city">
-      <div class="food-city-name">Tokyo</div>
-      <div class="food-items">
-        <div class="food-item">Tsukiji sushi breakfast 🍣</div>
-        <div class="food-item">Yakitori under Yurakucho tracks</div>
-        <div class="food-item">Ichiran solo ramen booth</div>
-        <div class="food-item">Tempura at Daikokuya</div>
-        <div class="food-item">Conveyor belt sushi at Uobei</div>
-      </div>
-    </div>
-  </div>
+  <div class="food-grid" id="foodGrid"></div>
 </section>
 
 <!-- ── CHECKLIST ───────────────────────────── -->
 <section id="checklist" class="checklist-section">
   <div class="section-eyebrow">Prepare</div>
   <h2 class="section-title">Pre-Departure Checklist</h2>
-
-  <div class="checklist-grid">
-    <div class="checklist-group">
-      <h3>Documents & Bookings</h3>
-      <div class="check-items">
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Apply for Japan Visa (Indian passport — Japanese Consulate, Chennai/Delhi/Mumbai)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Buy JR Pass online before departing India — saves ~30% vs buying at airport</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Book Peach Aviation KIX → OKA (around Oct 18, Tues/Wed cheapest)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Book Jetstar Japan OKA → NRT (around Oct 21, ~$47)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">⚠️ Note rescheduled flight XJ 610: departs DMK 09:50 (was 12:00) — be at airport by 06:50</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Book Shinkansen reserved seats (Hiroshima ↔ Tokyo) in advance</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">International Driving Permit (RTO) if renting car in Okinawa</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="checklist-group">
-      <h3>Tech & Money</h3>
-      <div class="check-items">
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Pre-book Pocket Wi-Fi or Japan SIM at KIX arrivals (IIJmio or Mobal)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Exchange some INR to JPY before departure (better rates than airport)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Inform bank of international travel dates</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Download Google Maps offline packs: Osaka, Kyoto, Hiroshima, Okinawa, Tokyo</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Download Google Translate Japanese offline pack</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Book Churaumi Aquarium tickets online (sells out in October)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Check AirAsia baggage allowance for PNR G9395C</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="checklist-group">
-      <h3>Packing</h3>
-      <div class="check-items">
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Comfortable walking shoes (15,000+ steps/day expected)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Light jacket + layers (Osaka/Kyoto: 15–22°C · Okinawa: 24–28°C · Tokyo: 14–20°C)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Power bank (Type A plug — same as India, no adapter needed ✅)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Cash wallet (Japan is still very cash-heavy — JPY essential)</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="checklist-group">
-      <h3>At the Airport</h3>
-      <div class="check-items">
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Get Suica IC Card at KIX on arrival (works for trains + buses + vending machines nationwide)</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Activate JR Pass at KIX JR office on Day 1</span>
-        </div>
-        <div class="check-item" onclick="this.classList.toggle('done')">
-          <div class="check-box"></div>
-          <span class="check-text">Pick up Pocket Wi-Fi / SIM at KIX arrival hall</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <div class="checklist-grid" id="checklistGrid"></div>
 </section>
 
 <!-- ── FOOTER ──────────────────────────────── -->
-<footer>
-  <p>Japan 2026 &nbsp;·&nbsp; <span>PNR G9395C</span> &nbsp;·&nbsp; Built from Gmail + Google Calendar data &nbsp;·&nbsp; 15 days, 5 cities, ₹2L budget</p>
-  <p style="margin-top:0.5rem;">日本旅行計画 &nbsp;·&nbsp; Oct 10 – Oct 24, 2026</p>
-</footer>
+<footer id="footer"></footer>
 
+<!-- ── DATA ENGINE ─────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 <script>
-  // ── Nav show on scroll ───────────────────
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('visible', window.scrollY > window.innerHeight * 0.5);
-  });
+(async function JapanDays() {
+  const DATA_DIR = 'data';
+  const FILES = ['trip', 'flights', 'route', 'itinerary', 'hidden-gems', 'budget', 'food', 'checklist'];
 
-  // ── Budget bar animation ─────────────────
-  const bars = document.querySelectorAll('.budget-bar-fill');
-  bars.forEach(bar => {
-    const w = getComputedStyle(bar).getPropertyValue('--w') || bar.style.getPropertyValue('--w');
-    bar.style.setProperty('animation-delay', '0s');
-    bar.style.transform = `scaleX(0)`;
-  });
+  async function loadYAML(name) {
+    const res = await fetch(`${DATA_DIR}/${name}.yaml`);
+    if (!res.ok) throw new Error(`Failed to load ${name}.yaml: ${res.status}`);
+    const text = await res.text();
+    return jsyaml.load(text);
+  }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const fills = entry.target.querySelectorAll('.budget-bar-fill');
-        fills.forEach((fill, i) => {
-          const w = fill.style.getPropertyValue('--w');
-          setTimeout(() => {
-            fill.style.transition = `transform 1.2s cubic-bezier(0.4,0,0.2,1)`;
-            fill.style.transform = `scaleX(${w})`;
-          }, i * 120);
-        });
-        observer.unobserve(entry.target);
+  async function loadAllData() {
+    const entries = await Promise.all(FILES.map(async f => [f, await loadYAML(f)]));
+    return Object.fromEntries(entries);
+  }
+
+  function esc(str) {
+    const el = document.createElement('span');
+    el.textContent = str;
+    return el.innerHTML;
+  }
+
+  // ── Renderers ──────────────────────────────
+
+  function renderNav(data) {
+    const container = document.getElementById('navLinks');
+    container.innerHTML = data.trip.nav_links.map(l =>
+      `<a href="${esc(l.href)}">${esc(l.text)}</a>`
+    ).join('');
+  }
+
+  function renderHero(data) {
+    const t = data.trip;
+    document.getElementById('heroJp').textContent = t.hero_jp;
+    document.getElementById('heroLabel').textContent = `${t.dates}  ·  ${t.duration}`;
+    document.getElementById('heroSubtitle').textContent = t.route_summary;
+    document.getElementById('heroMeta').innerHTML = t.meta.map(m =>
+      `<div class="meta-item">
+        <span class="label">${esc(m.label)}</span>
+        <span class="value">${esc(m.value)}</span>
+      </div>`
+    ).join('');
+  }
+
+  function renderFlights(data) {
+    const container = document.getElementById('flightsTicker');
+    container.innerHTML = data.flights.flights.map(f => {
+      const badgeStyle = f.badge_style ? ` style="${esc(f.badge_style)}"` : '';
+      const rescheduledHTML = f.rescheduled
+        ? `<div class="rescheduled-tag">${esc(f.rescheduled_note)}</div>` : '';
+      return `<div class="flight-card">
+        <div class="badge"${badgeStyle}>${esc(f.badge)}</div>
+        <div>
+          <div class="flight-route">
+            <span class="airport-code">${esc(f.from_code)}</span>
+            <span class="route-arrow">→</span>
+            <span class="airport-code">${esc(f.to_code)}</span>
+          </div>
+          <div class="flight-detail">${esc(f.from_city)} → ${esc(f.to_city)}</div>
+          <div class="flight-time">${esc(f.time)}</div>
+          <div class="flight-num">${esc(f.flight_num)}</div>
+          ${rescheduledHTML}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderRoute(data) {
+    const container = document.getElementById('routeVisual');
+    let html = '';
+    data.route.route.forEach((city, i) => {
+      const dotClass = city.transit ? 'city-dot transit' : 'city-dot';
+      const dotStyle = city.special_style ? ` style="${city.special_style}"` : '';
+      html += `<div class="route-city">
+        <div class="${dotClass}"${dotStyle}></div>
+        <div class="city-name">${esc(city.name)}</div>
+        <div class="city-dates">${esc(city.dates)}</div>
+        <div class="city-nights">${esc(city.nights)}</div>
+      </div>`;
+      if (city.line_after) {
+        const lineClass = city.line_after === 'flight' ? 'route-line flight' : 'route-line';
+        html += `<div class="${lineClass}"></div>`;
       }
     });
-  }, { threshold: 0.3 });
+    container.innerHTML = html;
+  }
 
-  const budgetEl = document.getElementById('budgetBars');
-  if (budgetEl) observer.observe(budgetEl);
+  function renderItinerary(data) {
+    const container = document.getElementById('cityBlocks');
+    container.innerHTML = data.itinerary.cities.map(city => {
+      const daysHTML = city.days.map(day => {
+        const placesHTML = day.places.map(p =>
+          `<div class="place-item">
+            <span class="place-tag ${esc(p.tag)}">${esc(p.tag_text)}</span>
+            <span class="place-desc"><span class="place-name">${esc(p.name)}</span> — ${esc(p.desc)}</span>
+          </div>`
+        ).join('');
+        return `<div class="day-entry">
+          <div>
+            <div class="day-num">${esc(day.num)}</div>
+            <span class="day-date">${esc(day.date)}</span>
+          </div>
+          <div class="day-content">
+            <h4>${esc(day.title)}</h4>
+            <div class="places-list">${placesHTML}</div>
+          </div>
+        </div>`;
+      }).join('');
 
-  // ── City block reveal ────────────────────
-  const cityObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        cityObs.unobserve(entry.target);
-      }
+      return `<div class="city-block">
+        <div class="city-header">
+          <div class="city-flag">${city.flag}</div>
+          <div class="city-block-name">${esc(city.name)}</div>
+          <div class="city-block-jp">${esc(city.jp)}</div>
+          <div class="city-block-dates">${esc(city.dates)}</div>
+          <div class="city-block-nights">${esc(city.nights)}</div>
+        </div>
+        <div class="day-list">${daysHTML}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderHiddenGems(data) {
+    const container = document.getElementById('quietGrid');
+    container.innerHTML = data['hidden-gems'].gems.map(gem => {
+      const dots = Array.from({length: 5}, (_, i) =>
+        `<div class="crowd-dot${i < gem.crowd_level ? ' filled' : ''}"></div>`
+      ).join('');
+      return `<div class="quiet-card">
+        <div class="city-badge">${esc(gem.city)}</div>
+        <h3>${esc(gem.name)}</h3>
+        <p>${esc(gem.description)}</p>
+        <div class="crowd-meter">
+          <div class="crowd-dots">${dots}</div>
+          <span class="crowd-label">${esc(gem.crowd_label)}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderBudget(data) {
+    const b = data.budget;
+    const container = document.getElementById('budgetGrid');
+    const barsHTML = b.items.map(item =>
+      `<div class="budget-item">
+        <div class="budget-item-top">
+          <span class="budget-name">${esc(item.name)}</span>
+          <span class="budget-amount">${esc(item.amount)}</span>
+        </div>
+        <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:${item.weight}"></div></div>
+      </div>`
+    ).join('');
+
+    const paragraphs = b.summary.paragraphs.map(p => `<p>${p}</p>`).join('');
+
+    container.innerHTML = `
+      <div>
+        <div class="budget-bars" id="budgetBars">${barsHTML}</div>
+        <div class="budget-total">
+          <span class="label">Total Estimated</span>
+          <span class="big">${esc(b.total)}</span>
+        </div>
+      </div>
+      <div class="budget-summary">
+        <h3>${esc(b.summary.title)}</h3>
+        ${paragraphs}
+        <span class="buffer-amount">${esc(b.summary.buffer_amount)}</span>
+        <p style="margin-top:1rem;">${esc(b.summary.extra_note)}</p>
+      </div>`;
+  }
+
+  function renderFood(data) {
+    const container = document.getElementById('foodGrid');
+    container.innerHTML = data.food.cities.map(city =>
+      `<div class="food-city">
+        <div class="food-city-name">${esc(city.name)}</div>
+        <div class="food-items">
+          ${city.items.map(item => `<div class="food-item">${esc(item)}</div>`).join('')}
+        </div>
+      </div>`
+    ).join('');
+  }
+
+  function renderChecklist(data) {
+    const container = document.getElementById('checklistGrid');
+    container.innerHTML = data.checklist.groups.map(group =>
+      `<div class="checklist-group">
+        <h3>${esc(group.title)}</h3>
+        <div class="check-items">
+          ${group.items.map(item =>
+            `<div class="check-item" onclick="this.classList.toggle('done')">
+              <div class="check-box"></div>
+              <span class="check-text">${esc(item)}</span>
+            </div>`
+          ).join('')}
+        </div>
+      </div>`
+    ).join('');
+  }
+
+  function renderFooter(data) {
+    const f = data.trip.footer;
+    document.getElementById('footer').innerHTML = `
+      <p>${f.line1}</p>
+      <p style="margin-top:0.5rem;">${f.line2}</p>`;
+  }
+
+  // ── Animations ─────────────────────────────
+
+  function initAnimations() {
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('visible', window.scrollY > window.innerHeight * 0.5);
     });
-  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.city-block').forEach(el => cityObs.observe(el));
+    const bars = document.querySelectorAll('.budget-bar-fill');
+    bars.forEach(bar => {
+      bar.style.transform = 'scaleX(0)';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fills = entry.target.querySelectorAll('.budget-bar-fill');
+          fills.forEach((fill, i) => {
+            const w = fill.style.getPropertyValue('--w');
+            setTimeout(() => {
+              fill.style.transition = 'transform 1.2s cubic-bezier(0.4,0,0.2,1)';
+              fill.style.transform = `scaleX(${w})`;
+            }, i * 120);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const budgetEl = document.getElementById('budgetBars');
+    if (budgetEl) observer.observe(budgetEl);
+
+    const cityObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          cityObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.city-block').forEach(el => cityObs.observe(el));
+  }
+
+  // ── Boot ───────────────────────────────────
+
+  try {
+    const data = await loadAllData();
+
+    renderNav(data);
+    renderHero(data);
+    renderFlights(data);
+    renderRoute(data);
+    renderItinerary(data);
+    renderHiddenGems(data);
+    renderBudget(data);
+    renderFood(data);
+    renderChecklist(data);
+    renderFooter(data);
+
+    initAnimations();
+
+    const loader = document.getElementById('loadingScreen');
+    loader.classList.add('hidden');
+    setTimeout(() => loader.remove(), 600);
+  } catch (err) {
+    console.error('Failed to load trip data:', err);
+    document.getElementById('loadingScreen').innerHTML = `
+      <div class="loading-text" style="color: var(--vermilion);">
+        Error loading data: ${err.message}<br>
+        Make sure YAML files exist in the data/ folder.
+      </div>`;
+  }
+})();
 </script>
 </body>
 </html>

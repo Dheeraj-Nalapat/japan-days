@@ -1,0 +1,72 @@
+gems:
+  - city: "Osaka"
+    name: "Hozenji Yokocho"
+    description: "Lantern-lit mossy alley beside a tiny moss-draped temple. 50 metres from Dotonbori chaos, feels like a different century."
+    crowd_level: 1
+    crowd_label: "Very Low"
+
+  - city: "Osaka"
+    name: "Nakazaki-cho"
+    description: "Osaka's bohemian quarter — vintage coffee shops, old wooden machiya townhouses. Almost entirely unknown to foreign tourists."
+    crowd_level: 1
+    crowd_label: "Very Low"
+
+  - city: "Kyoto"
+    name: "Kurama & Kibune"
+    description: "Two mountain villages linked by a cedar forest hike. Riverside kawadoko lunch above the stream. Almost no foreign tourists make it here."
+    crowd_level: 2
+    crowd_label: "Low"
+
+  - city: "Kyoto"
+    name: "Jojakko-ji Temple"
+    description: "A 5-min walk from the Arashiyama bamboo grove that virtually nobody visits. Moss-covered steps through maple trees. October colours are stunning."
+    crowd_level: 1
+    crowd_label: "Very Low"
+
+  - city: "Nara"
+    name: "Isuien Garden"
+    description: "A two-section strolling garden that uses \"borrowed scenery\" to frame Todai-ji's great roof. Most visitors to Nara walk right past."
+    crowd_level: 2
+    crowd_label: "Low"
+
+  - city: "Hiroshima"
+    name: "Shukkei-en Garden"
+    description: "A 400-year-old miniature landscape garden in central Hiroshima. Serene, almost always uncrowded — a world away from the Peace Park."
+    crowd_level: 1
+    crowd_label: "Very Low"
+
+  - city: "Miyajima"
+    name: "Daisho-in Temple"
+    description: "Past the tourist trail, spinning prayer wheels and stone Buddhas in hand-knitted hats. Multiple sub-temples in a cedar grove — rarely crowded."
+    crowd_level: 2
+    crowd_label: "Low"
+
+  - city: "Okinawa"
+    name: "Cape Manzamo"
+    description: "Dramatic limestone cliffs shaped like an elephant's trunk by the sea. Free entry, wild flowers, arrive at sunrise for near-total solitude."
+    crowd_level: 1
+    crowd_label: "Very Low"
+
+  - city: "Okinawa"
+    name: "Katsuren Castle Ruins"
+    description: "A hilltop Ryukyuan fortress on a peninsula with 360° sea views. UNESCO listed. Almost always quiet — one of Okinawa's best kept secrets."
+    crowd_level: 1
+    crowd_label: "Very Low"
+
+  - city: "Okinawa"
+    name: "Sefa-utaki"
+    description: "Okinawa's holiest Ryukyuan shrine hidden inside a banyan forest. Enter through towering limestone formations into a space that feels genuinely ancient. UNESCO."
+    crowd_level: 2
+    crowd_label: "Low"
+
+  - city: "Tokyo"
+    name: "Yanaka Ginza"
+    description: "Tokyo's most nostalgic old shopping street — tofu shops, sembei crackers, cats on rooftops. Almost no tourists despite being walkable from Ueno."
+    crowd_level: 2
+    crowd_label: "Low"
+
+  - city: "Tokyo"
+    name: "Shimokitazawa"
+    description: "Tokyo's indie music and vintage fashion hub. No chain stores, no tourist traps — just record shops, coffee, and neighbourhood bars. Zero tourist vibe."
+    crowd_level: 1
+    crowd_label: "Very Low"
