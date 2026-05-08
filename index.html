@@ -904,6 +904,9 @@
   .map-section {
     background: var(--parchment);
     padding: 6rem 2rem;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
   }
   .trip-map {
     width: 100%;
@@ -912,6 +915,8 @@
     overflow: hidden;
     margin-top: 2rem;
     border: 2px solid rgba(26,18,8,0.08);
+    position: relative;
+    z-index: 0;
   }
   .leaflet-popup-content-wrapper {
     border-radius: 8px;
