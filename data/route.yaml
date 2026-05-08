@@ -12,45 +12,52 @@ route:
     line_after: "flight"
 
   - name: "Osaka"
-    dates: "Oct 11–12"
-    nights: "2 Nights"
+    dates: "Oct 11–15"
+    nights: "4 Nights"
     transit: false
     line_after: "train"
 
-  - name: "Kyoto"
-    dates: "Oct 12–15"
-    nights: "3 Nights"
+  - name: "Koyasan"
+    dates: "Oct 14"
+    nights: "1 Night"
     transit: false
+    special_style: "background: var(--sage); box-shadow: 0 0 0 2px var(--sage);"
     line_after: "train"
 
   - name: "Nara"
-    dates: "Oct 15"
+    dates: "Oct 13"
     nights: "Day Trip"
     transit: false
     line_after: "train"
 
-  - name: "Hiroshima"
+  - name: "Kobe"
+    dates: "Oct 13"
+    nights: "Day Trip"
+    transit: false
+    line_after: "train"
+
+  - name: "Kyoto"
     dates: "Oct 16–17"
     nights: "2 Nights"
     transit: false
     line_after: "train"
 
-  - name: "Miyajima"
-    dates: "Oct 17"
-    nights: "Day Trip"
+  - name: "Hiroshima"
+    dates: "Oct 18"
+    nights: "1 Night"
     transit: false
     line_after: "flight"
 
   - name: "Okinawa"
-    dates: "Oct 18–21"
+    dates: "Oct 19–21"
     nights: "3 Nights"
     transit: false
     special_style: "background: var(--sage); box-shadow: 0 0 0 2px var(--sage);"
     line_after: "flight"
 
   - name: "Tokyo"
-    dates: "Oct 21–24"
-    nights: "3 Nights"
+    dates: "Oct 22–23"
+    nights: "2 Nights"
     transit: false
     line_after: "flight"
 

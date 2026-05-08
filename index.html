@@ -844,6 +844,114 @@
     line-height: 1.4;
   }
 
+  /* ── ACCOMMODATION ────────────────────────────── */
+  .accommodation-section { background: var(--ink); color: var(--paper); }
+  .accommodation-section .section-eyebrow { color: var(--torii); }
+  .accommodation-section .section-title { color: var(--paper); }
+  .accommodation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .stay-card {
+    background: rgba(245,240,232,0.06);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .stay-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .stay-card-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    background: linear-gradient(135deg, rgba(192,57,43,0.15), rgba(107,124,94,0.12));
+  }
+  .stay-card-body { padding: 1.5rem; }
+  .stay-city {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--torii);
+    margin-bottom: 0.5rem;
+  }
+  .stay-card h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    color: var(--paper);
+  }
+  .stay-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.8;
+  }
+  .stay-meta strong { color: var(--gold); }
+  .stay-status {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-top: 0.5rem;
+  }
+  .stay-status.book { background: rgba(192,57,43,0.25); color: #e74c3c; }
+  .stay-status.pending { background: rgba(184,134,11,0.2); color: var(--gold); }
+  .stay-status.booked { background: rgba(107,124,94,0.25); color: var(--sage); }
+
+  /* ── LOCATIONS (METRO GUIDE) ────────────────── */
+  .locations-section { background: var(--cream); }
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .location-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    background: var(--paper);
+    border-radius: 6px;
+    border-left: 3px solid var(--sage);
+    transition: transform 0.2s;
+  }
+  .location-row:hover { transform: translateX(4px); }
+  .location-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .location-metro {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--torii);
+    letter-spacing: 0.05em;
+  }
+  .location-time {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--mist);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  [data-theme="dark"] .accommodation-section { background: var(--paper); }
+  [data-theme="dark"] .accommodation-section .section-title { color: var(--ink); }
+  [data-theme="dark"] .stay-card { background: rgba(255,255,255,0.04); }
+  [data-theme="dark"] .stay-card h3 { color: var(--ink); }
+  [data-theme="dark"] .stay-meta { color: rgba(232,224,212,0.5); }
+  [data-theme="dark"] .locations-section { background: var(--cream); }
+  [data-theme="dark"] .location-row { background: rgba(255,255,255,0.03); }
+
   /* ── CHECKLIST ──────────────────────────────── */
   .checklist-section { background: var(--cream); }
 
@@ -2062,6 +2170,13 @@
   <div class="city-blocks" id="cityBlocks"></div>
 </section>
 
+<!-- ── ACCOMMODATION ──────────────────────── -->
+<section id="accommodation" class="accommodation-section">
+  <div class="section-eyebrow">Where to Stay</div>
+  <h2 class="section-title">Accommodation</h2>
+  <div class="accommodation-grid" id="accommodationGrid"></div>
+</section>
+
 <!-- ── QUIET PLACES ────────────────────────── -->
 <section id="quiet" class="quiet-section">
   <div class="section-eyebrow">Off the Beaten Path</div>
@@ -2088,6 +2203,13 @@
   <div class="section-eyebrow">Prepare</div>
   <h2 class="section-title">Pre-Departure Checklist</h2>
   <div class="checklist-grid" id="checklistGrid"></div>
+</section>
+
+<!-- ── LOCATIONS (METRO GUIDE) ────────────── -->
+<section id="locations" class="locations-section">
+  <div class="section-eyebrow">Navigate</div>
+  <h2 class="section-title">Where Things Are</h2>
+  <div id="locationsGrid"></div>
 </section>
 
 <!-- ── MAP ─────────────────────────────────── -->
@@ -2127,7 +2249,7 @@
 <script>
 (async function JapanDays() {
   const DATA_DIR = 'data';
-  const FILES = ['trip', 'flights', 'route', 'itinerary', 'hidden-gems', 'budget', 'food', 'checklist'];
+  const FILES = ['trip', 'flights', 'route', 'itinerary', 'hidden-gems', 'budget', 'food', 'checklist', 'accommodation', 'locations'];
 
   async function loadYAML(name) {
     const res = await fetch(`${DATA_DIR}/${name}.yaml`);
@@ -2414,6 +2536,51 @@
       if (item.classList.contains('done')) state[item.dataset.ck] = true;
     });
     localStorage.setItem('jd-checklist', JSON.stringify(state));
+  }
+
+  function renderAccommodation(data) {
+    if (!data.accommodation || !data.accommodation.stays) return;
+    const container = document.getElementById('accommodationGrid');
+    container.innerHTML = data.accommodation.stays.map(s => {
+      const statusClass = s.status || 'pending';
+      const statusLabel = s.status === 'book' ? 'Book Now' : s.status === 'booked' ? 'Booked' : 'Pending';
+      return `<div class="stay-card">
+        <img class="stay-card-img" src="${esc(s.image || '')}" alt="${esc(s.city)}" loading="lazy"
+             onerror="this.style.display='none'">
+        <div class="stay-card-body">
+          <div class="stay-city">${esc(s.city)}</div>
+          <h3>${esc(s.type)} — ${esc(s.area)}</h3>
+          <div class="stay-meta">
+            <div><strong>${esc(s.nights)}</strong></div>
+            <div>${esc(s.dates)}</div>
+            ${s.cost_per_night !== 'TBD' ? `<div>${esc(s.cost_per_night)}/night → <strong>${esc(s.total)}</strong></div>` : ''}
+            ${s.notes ? `<div style="margin-top:0.5rem;opacity:0.7;">${esc(s.notes)}</div>` : ''}
+          </div>
+          <span class="stay-status ${statusClass}">${statusLabel}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderLocations(data) {
+    if (!data.locations || !data.locations.cities) return;
+    const container = document.getElementById('locationsGrid');
+    container.innerHTML = data.locations.cities.map(city =>
+      `<div style="margin-bottom:2rem;">
+        <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--torii);margin-bottom:0.3rem;">
+          ${esc(city.name)} — Base: ${esc(city.base)}
+        </div>
+        <div class="locations-grid">
+          ${city.places.map(p =>
+            `<div class="location-row">
+              <span class="location-name">${esc(p.name)}</span>
+              <span class="location-metro">${esc(p.metro_stop)}</span>
+              <span class="location-time">${esc(p.time_from_base)}</span>
+            </div>`
+          ).join('')}
+        </div>
+      </div>`
+    ).join('');
   }
 
   function renderFooter(data) {
@@ -3161,10 +3328,12 @@
     renderFlights(data);
     renderRoute(data);
     renderItinerary(data);
+    renderAccommodation(data);
     renderHiddenGems(data);
     renderBudget(data);
     renderFood(data);
     renderChecklist(data);
+    renderLocations(data);
     renderMap(data);
     renderFooter(data);
 

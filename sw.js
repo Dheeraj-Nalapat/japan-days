@@ -1,4 +1,4 @@
-const CACHE_NAME = 'japan-days-v2';
+const CACHE_NAME = 'japan-days-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -12,6 +12,8 @@ const ASSETS = [
   './data/hidden-gems.yaml',
   './data/budget.yaml',
   './data/checklist.yaml',
+  './data/accommodation.yaml',
+  './data/locations.yaml',
   'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js',
   'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js',
   'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js',

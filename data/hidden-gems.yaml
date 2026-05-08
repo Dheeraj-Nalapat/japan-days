@@ -6,13 +6,13 @@ gems:
     description: "Lantern-lit mossy alley beside a tiny moss-draped temple. 50 metres from Dotonbori chaos, feels like a different century."
     crowd_level: 1
     crowd_label: "Very Low"
-    image: "https://images.unsplash.com/photo-1759746334715-fae30ec56600?w=800&h=500&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "A narrow, stone-paved alley centered around Hozenji Temple with its famous moss-covered Fudo Myo-o statue. Visitors splash water on the statue for good luck, and centuries of this practice have given it a thick, sacred moss coating. The surrounding lane is lined with traditional lanterns and intimate restaurants. Despite being just 50 metres from the neon chaos of Dotonbori, the atmosphere is completely different — quiet, romantic, and timeless."
+      full_desc: "A narrow, stone-paved alley centered around Hozenji Temple with its famous moss-covered Fudo Myo-o statue. Visitors splash water on the statue for good luck, and centuries of this practice have given it a thick, sacred moss coating. Despite being just 50 metres from Dotonbori, the atmosphere is completely different — quiet, romantic, and timeless."
       best_time: "After dark (19:00–22:00) when lanterns are lit"
       how_to_get: "From Dotonbori, walk south past the Hozenji bridge. The alley is on your left."
       nearby: "Dotonbori (50m), Shinsaibashi Shopping Street (5 min walk)"
-      crowd_tips: "Always quiet compared to Dotonbori. Weekday evenings are the most atmospheric. The few restaurants here are small and intimate — reservations recommended for dinner."
+      crowd_tips: "Always quiet compared to Dotonbori. Weekday evenings are the most atmospheric."
 
   - city: "Osaka"
     name: "Nakazaki-cho"
@@ -23,158 +23,218 @@ gems:
     crowd_label: "Very Low"
     image: "https://images.unsplash.com/photo-1770284212085-20ef07376ffa?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "A retro neighbourhood of pre-war wooden machiya townhouses that have been converted into indie coffee shops, vintage clothing stores, art galleries, and tiny bars. It's Osaka's answer to Tokyo's Shimokitazawa — deeply local, creative, and almost completely undiscovered by foreign tourists. The contrast between the narrow old streets and the surrounding modern city is striking."
+      full_desc: "A retro neighbourhood of pre-war wooden machiya townhouses converted into indie coffee shops, vintage clothing stores, art galleries, and tiny bars. Osaka's answer to Shimokitazawa — deeply local, creative, and almost completely undiscovered by foreign tourists."
       best_time: "Weekday afternoons (13:00–17:00). Most cafes open from 11:00"
       how_to_get: "Direct exit from Nakazakicho Station (Tanimachi Line). Or 10 min walk north from Umeda."
       nearby: "Umeda Sky Building (15 min walk), Tenjinbashisuji Shopping Street (10 min)"
-      crowd_tips: "Virtually no foreign tourists. Weekend afternoons see some local visitors but it never feels crowded. Wander without a map — the charm is in the random discoveries."
+      crowd_tips: "Virtually no foreign tourists. Weekend afternoons see some local visitors but it never feels crowded."
 
-  - city: "Kyoto"
-    name: "Kurama & Kibune"
-    lat: 35.1180
-    lng: 135.7700
-    description: "Two mountain villages linked by a cedar forest hike. Riverside kawadoko lunch above the stream. Almost no foreign tourists make it here."
+  - city: "Koyasan"
+    name: "Okunoin Cemetery"
+    lat: 34.2158
+    lng: 135.5920
+    description: "2km lantern-lit path through 600-year-old cedar trees past 200,000 tombstones. One of the most atmospheric places in Japan."
     crowd_level: 2
     crowd_label: "Low"
-    image: "https://images.unsplash.com/photo-1527974361724-67fd5ebfd6d2?w=800&h=500&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1601823984263-b87b59798b70?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "Two ancient mountain villages 30 minutes north of Kyoto, connected by a stunning hiking trail through towering cedar forest. Kurama village has a 1,200-year-old temple and an excellent onsen (hot spring). Kibune village is famous for its riverside kawadoko restaurants — wooden platforms suspended above the rushing stream where you eat traditional cuisine with the water flowing beneath your feet."
-      best_time: "October for autumn colours. May–September for kawadoko dining. Weekdays are quietest."
-      how_to_get: "Eizan Railway from Demachiyanagi Station to Kurama (30 min, ¥420). Hike over the mountain to Kibune, then train back."
-      nearby: "Kifune Shrine (in Kibune), Kurama Onsen (in Kurama)"
-      crowd_tips: "Very few foreign tourists make it here. Weekday mornings are virtually empty. The trail itself is never crowded. Book kawadoko restaurants in advance during peak season."
+      full_desc: "Japan's largest cemetery and one of its most sacred sites — a 2km path through towering ancient cedar trees, past 200,000 tombstones and memorial pagodas spanning over 1,000 years. At dusk, stone lanterns are lit along the path. At the end, the Torodo Hall of Lamps houses 10,000 eternally burning lanterns."
+      best_time: "Dusk (17:00–18:30) for the lantern-lit experience. Also atmospheric at dawn."
+      how_to_get: "Okunoin-mae bus stop from Koyasan town centre. Or 30 min walk from main street."
+      nearby: "Kongobu-ji Temple (10 min), Danjo Garan (15 min)"
+      crowd_tips: "Very few tourists at dusk. The path is long enough that even midday visitors spread out. Walk slowly and respectfully."
 
-  - city: "Kyoto"
-    name: "Jojakko-ji Temple"
-    lat: 35.0220
-    lng: 135.6710
-    description: "A 5-min walk from the Arashiyama bamboo grove that virtually nobody visits. Moss-covered steps through maple trees. October colours are stunning."
+  - city: "Koyasan"
+    name: "Shukubo Temple Stay"
+    lat: 34.2130
+    lng: 135.5850
+    description: "Overnight in a Buddhist monastery — tatami rooms, vegetarian shojin ryori cuisine, morning prayer ceremony at 6am."
     crowd_level: 1
     crowd_label: "Very Low"
-    image: "https://images.unsplash.com/photo-1527974361724-67fd5ebfd6d2?w=800&h=500&fit=crop&q=80&crop=bottom"
+    image: "https://images.unsplash.com/photo-1580537659466-0a9bfa916a54?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "A small Nichiren Buddhist temple on a wooded hillside in Arashiyama, founded in 1596. Moss-covered stone steps wind upward through ancient Japanese maple trees to a multi-story pagoda with panoramic views over Kyoto. In October and November, the maples explode with colour — fiery reds and oranges framing the weathered wooden pagoda. Despite being a 5-minute walk from the famously crowded bamboo grove, almost nobody visits."
-      best_time: "Late October to mid-November for peak autumn colours. Early morning (09:00 opening) is quietest."
-      how_to_get: "From Arashiyama Bamboo Grove, walk north 5 minutes past Nonomiya Shrine."
-      nearby: "Arashiyama Bamboo Grove (5 min), Okochi Sanso Villa (3 min), Tenryu-ji Temple (10 min)"
-      crowd_tips: "Even during Kyoto's busiest autumn season, this temple sees a fraction of the visitors at nearby sites. Arrive at 9am opening for near-solitude. ¥500 admission."
+      full_desc: "A shukubo is a temple lodging experience unique to Koyasan. Sleep in a traditional tatami room with futon bedding, eat exquisite vegetarian shojin ryori cuisine, and attend the morning prayer ceremony at 6am with monks chanting in a candlelit hall."
+      best_time: "The morning prayer at 6am is the highlight. Book for midweek for quieter experience."
+      how_to_get: "Book at shukubo.net or directly at Eko-in, Fukuchi-in, or other temples. Arrive by 17:00."
+      nearby: "Okunoin Cemetery (10 min bus), Danjo Garan pagodas (5 min walk)"
+      crowd_tips: "Temple stays are inherently intimate — typically 10–20 guests per temple. The experience is deeply personal and quiet."
 
   - city: "Nara"
     name: "Isuien Garden"
     lat: 34.6889
     lng: 135.8419
-    description: "A two-section strolling garden that uses \"borrowed scenery\" to frame Todai-ji's great roof. Most visitors to Nara walk right past."
+    description: "A two-section strolling garden that uses 'borrowed scenery' to frame Todai-ji's great roof. Most visitors to Nara walk right past."
     crowd_level: 2
     crowd_label: "Low"
     image: "https://images.unsplash.com/photo-1748525591561-f19fdfe637b5?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "An exquisite Meiji-era strolling garden using the 'shakkei' (borrowed scenery) technique to frame Todai-ji's massive roof and the surrounding Wakakusayama hills as part of its composition. The garden has two distinct sections: the front garden with ponds and stepping stones, and the rear garden with a waterfall and tea house. The seamless blending of designed and natural scenery is masterful."
-      best_time: "Mid-morning (10:00–12:00) for best light on the borrowed scenery. Spring and autumn are most colourful."
+      full_desc: "An exquisite Meiji-era strolling garden using the 'shakkei' (borrowed scenery) technique to frame Todai-ji's massive roof and the surrounding hills. The front garden has ponds and stepping stones; the rear garden has a waterfall and tea house."
+      best_time: "Mid-morning (10:00–12:00) for best light. Spring and autumn are most colourful."
       how_to_get: "Between Todai-ji and central Nara — look for the entrance on the main path. Easy to miss."
-      nearby: "Todai-ji (5 min walk), Kasuga Taisha (15 min walk), Nara National Museum (3 min)"
-      crowd_tips: "Almost always uncrowded — most Nara visitors walk right past the entrance. The tea house serves matcha (¥500 extra) with a view of Todai-ji's roof. Closed Tuesdays. ¥1,200 admission."
+      nearby: "Todai-ji (5 min walk), Kasuga Taisha (15 min walk)"
+      crowd_tips: "Almost always uncrowded. Tea house matcha (¥500 extra) with a view of Todai-ji's roof. Closed Tuesdays. ¥1,200."
+
+  - city: "Kobe"
+    name: "Kitano Ijinkan"
+    lat: 34.7010
+    lng: 135.1920
+    description: "Western-style foreign residences on a hillside with sea views. Quiet, European-feeling streets — unlike anywhere else in Japan."
+    crowd_level: 2
+    crowd_label: "Low"
+    image: "https://images.unsplash.com/photo-1592806088932-05058af0ad8d?w=800&h=500&fit=crop&q=80"
+    extended:
+      full_desc: "A hillside neighbourhood of ornate Western-style residences built by foreign traders in the late 19th century — Victorian, colonial, and Art Nouveau architecture with stunning harbour views. The streets feel more European than Japanese, with cafes, boutiques, and panoramic viewpoints."
+      best_time: "Afternoon (13:00–17:00) for best light on the sea views. Weekdays are quietest."
+      how_to_get: "Shin-Kobe Station or Sannomiya Station — 15 min uphill walk through the neighbourhood."
+      nearby: "Kobe Harborland (20 min walk), Meriken Park (15 min), Sannomiya restaurant district"
+      crowd_tips: "Weekday afternoons are very quiet. The Weathercock House and Former Chinese Consulate are the highlights. Free to walk the streets; individual houses ¥300–500."
+
+  - city: "Kyoto"
+    name: "Kurama & Kibune"
+    lat: 35.1180
+    lng: 135.7700
+    description: "Two mountain villages linked by a cedar forest hike. Riverside kawadoko lunch above the stream. Almost no foreign tourists."
+    crowd_level: 2
+    crowd_label: "Low"
+    image: "https://images.unsplash.com/photo-1527974361724-67fd5ebfd6d2?w=800&h=500&fit=crop&q=80"
+    extended:
+      full_desc: "Two ancient mountain villages 30 minutes north of Kyoto, connected by a stunning hiking trail through towering cedar forest. Kurama has a 1,200-year-old temple and an excellent onsen. Kibune is famous for riverside kawadoko restaurants."
+      best_time: "October for autumn colours. May–September for kawadoko dining. Weekdays are quietest."
+      how_to_get: "Eizan Railway from Demachiyanagi Station to Kurama (30 min, ¥420). Hike over the mountain to Kibune, then train back."
+      nearby: "Kifune Shrine (in Kibune), Kurama Onsen (in Kurama)"
+      crowd_tips: "Very few foreign tourists. The trail itself is never crowded. Book kawadoko restaurants in advance during peak season."
+
+  - city: "Kyoto"
+    name: "Jojakko-ji Temple"
+    lat: 35.0220
+    lng: 135.6710
+    description: "5 min from the Arashiyama bamboo grove that virtually nobody visits. Moss-covered steps through maple trees. October colours are stunning."
+    crowd_level: 1
+    crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1527974361724-67fd5ebfd6d2?w=800&h=500&fit=crop&q=80&crop=bottom"
+    extended:
+      full_desc: "A small Nichiren Buddhist temple on a wooded hillside in Arashiyama. Moss-covered stone steps wind upward through ancient Japanese maple trees to a pagoda with panoramic views. In October, the maples explode with colour."
+      best_time: "Late October to mid-November for peak autumn colours. 09:00 opening is quietest."
+      how_to_get: "From Arashiyama Bamboo Grove, walk north 5 minutes past Nonomiya Shrine."
+      nearby: "Arashiyama Bamboo Grove (5 min), Okochi Sanso Villa (3 min)"
+      crowd_tips: "Even during autumn, this temple sees a fraction of nearby sites' visitors. ¥500 admission."
+
+  - city: "Kyoto"
+    name: "Shinbashi-dori"
+    lat: 35.0040
+    lng: 135.7740
+    description: "Stone-paved canal lane in Gion at dusk — paper lanterns, willow trees, machiya townhouses. More atmospheric than Hanamikoji."
+    crowd_level: 2
+    crowd_label: "Low"
+    image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=500&fit=crop&q=80"
+    extended:
+      full_desc: "A narrow stone-paved lane alongside the Shirakawa canal in Gion. Traditional wooden machiya with bamboo screens, warm paper lanterns at dusk casting golden light over willow trees and water."
+      best_time: "Dusk (17:00–19:00) when lanterns are lit and light is golden."
+      how_to_get: "Gion-Shijo Station — 5 min walk east along Shijo-dori, then turn north."
+      nearby: "Hanamikoji-dori (5 min), Yasaka Shrine (5 min), Pontocho Alley (10 min)"
+      crowd_tips: "Less photographed than Hanamikoji but more atmospheric. Walk slowly — you may spot a geiko heading to an evening engagement."
 
   - city: "Hiroshima"
     name: "Shukkei-en Garden"
     lat: 34.3989
     lng: 132.4667
-    description: "A 400-year-old miniature landscape garden in central Hiroshima. Serene, almost always uncrowded — a world away from the Peace Park."
+    description: "400-year-old miniature landscape garden in central Hiroshima. Serene, almost always uncrowded — a world away from the Peace Park."
     crowd_level: 1
     crowd_label: "Very Low"
     image: "https://images.unsplash.com/photo-1768946579156-e29e7397b0bc?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "Built in 1620 for the local feudal lord, this 'condensed scenery' garden miniaturises Chinese landscape paintings into a compact strolling space. The central pond with its arched bridges, tea pavilions, and forested miniature hills creates a world apart from the modern city surrounding it. Destroyed by the atomic bomb, it was lovingly restored over decades and now stands as a symbol of renewal."
-      best_time: "Morning (09:00–11:00) for the best light. Late October for autumn colours."
-      how_to_get: "Shukkeien-mae tram stop — 1 minute walk. Or 15 min walk from Hiroshima Station."
+      full_desc: "Built in 1620, this 'condensed scenery' garden miniaturises Chinese landscape paintings. Destroyed by the atomic bomb, lovingly restored — a symbol of renewal."
+      best_time: "Morning (09:00–11:00) for best light. Late October for autumn colours."
+      how_to_get: "Shukkeien-mae tram stop — 1 minute walk."
       nearby: "Peace Memorial Museum (20 min walk), Hiroshima Castle (10 min walk)"
-      crowd_tips: "Almost never crowded. Even on weekends you'll often have sections entirely to yourself. The tea house overlooking the pond is a perfect rest stop. ¥260 admission."
-
-  - city: "Miyajima"
-    name: "Daisho-in Temple"
-    lat: 34.2958
-    lng: 132.3194
-    description: "Past the tourist trail, spinning prayer wheels and stone Buddhas in hand-knitted hats. Multiple sub-temples in a cedar grove — rarely crowded."
-    crowd_level: 2
-    crowd_label: "Low"
-    image: "https://images.unsplash.com/photo-1504109586057-7a2ae83d1338?w=800&h=500&fit=crop&q=80"
-    extended:
-      full_desc: "A sprawling, multi-level temple complex at the foot of Mt. Misen that most tourists walk right past. Features hundreds of Rakan statues — each with a unique face, many wearing hand-knitted hats and scarves placed by devotees. Tibetan-style spinning prayer wheels line the entrance stairs, a fire-walking hall contains sacred flames, and an underground cave displays 88 icons representing the entire Shikoku pilgrimage."
-      best_time: "Morning (08:00–10:00) before the Mt. Misen hikers arrive. Any season."
-      how_to_get: "From Miyajima ferry terminal, walk south along the waterfront past Itsukushima Shrine, then uphill."
-      nearby: "Itsukushima Shrine (10 min walk), Mt. Misen trailhead (at the temple)"
-      crowd_tips: "Always far less crowded than Itsukushima Shrine above. The lower levels and cave section are almost always empty. Free admission. Spin every prayer wheel you pass (clockwise)."
+      crowd_tips: "Almost never crowded. Even on weekends you'll often have sections to yourself. ¥260 admission."
 
   - city: "Okinawa"
     name: "Cape Manzamo"
     lat: 26.5050
     lng: 127.7710
-    description: "Dramatic limestone cliffs shaped like an elephant's trunk by the sea. Free entry, wild flowers, arrive at sunrise for near-total solitude."
+    description: "Dramatic limestone cliffs shaped like an elephant's trunk by the sea. Free entry, wild flowers, sunrise crowds near zero."
     crowd_level: 1
     crowd_label: "Very Low"
     image: "https://images.unsplash.com/photo-1754228811035-d220f70b86d9?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "A dramatic coastal promontory where limestone cliffs have been carved by waves into a distinctive elephant-trunk arch over turquoise waters. The name means '10,000 people can sit' — the grassy plateau above the cliffs is vast and wild with subtropical flowers. The coral reef visible in the clear water below adds streaks of blue and green. At sunrise, the light creates an otherworldly palette across the rock and sea."
-      best_time: "Sunrise for the most dramatic light and zero crowds. Also beautiful at sunset."
-      how_to_get: "70 min drive from Naha. Bus 20 or 120 from Naha Bus Terminal (90 min). Rental car recommended."
-      nearby: "Manza Beach (5 min drive), Moon Beach (10 min drive), Ryukyu Village (20 min)"
-      crowd_tips: "Early morning (before 09:00) is essentially empty. Midday sees some tour buses but the area is large enough to find solitude. Free entry, paved walking paths, free parking."
+      full_desc: "A dramatic coastal promontory where limestone cliffs have been carved into an elephant-trunk arch. The grassy plateau above is vast with subtropical flowers, and turquoise sea below."
+      best_time: "Sunrise for dramatic light and zero crowds."
+      how_to_get: "70 min drive from Naha. Bus 20 or 120 (90 min). Rental car recommended."
+      nearby: "Manza Beach (5 min drive), Moon Beach (10 min drive)"
+      crowd_tips: "Early morning (before 09:00) is essentially empty. Free entry, paved paths, free parking."
 
   - city: "Okinawa"
     name: "Katsuren Castle Ruins"
     lat: 26.3340
     lng: 127.8630
-    description: "A hilltop Ryukyuan fortress on a peninsula with 360° sea views. UNESCO listed. Almost always quiet — one of Okinawa's best kept secrets."
+    description: "Hilltop Ryukyuan fortress with 360° sea views. UNESCO listed. Almost always quiet — one of Okinawa's best kept secrets."
     crowd_level: 1
     crowd_label: "Very Low"
     image: "https://images.unsplash.com/photo-1610971250019-f677bc1300be?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "Ruins of a 12th–15th century castle built by the powerful lord Amawari, who controlled maritime trade with China and Southeast Asia. The stone walls wind up a rocky promontory to a summit platform with 360° views of turquoise Pacific and offshore islands. Roman coins were excavated here — evidence of truly ancient global trade. UNESCO-listed alongside Okinawa's other gusuku (castle) sites."
-      best_time: "Late afternoon (15:00–17:00) when the sun illuminates the sea to the west."
-      how_to_get: "50 min drive from Naha. Limited bus service — rental car strongly recommended."
+      full_desc: "Ruins of a 12th–15th century castle built by lord Amawari for maritime trade. UNESCO-listed stone walls wind up to a summit with 360° views. Roman coins were excavated here."
+      best_time: "Late afternoon (15:00–17:00) when the sun illuminates the western sea."
+      how_to_get: "50 min drive from Naha. Rental car recommended."
       nearby: "Hamahiga Island (nearby bridge-connected island), Ryugudo Cave (30 min drive)"
-      crowd_tips: "One of the quietest UNESCO sites in Japan. You'll likely have the summit to yourself, especially on weekdays. The museum at the base (¥600) provides excellent historical context. Ruins are free."
+      crowd_tips: "One of the quietest UNESCO sites in Japan. You'll likely have the summit to yourself. Ruins are free; museum ¥600."
 
   - city: "Okinawa"
     name: "Sefa-utaki"
     lat: 26.1740
     lng: 127.8280
-    description: "Okinawa's holiest Ryukyuan shrine hidden inside a banyan forest. Enter through towering limestone formations into a space that feels genuinely ancient. UNESCO."
+    description: "Okinawa's holiest Ryukyuan shrine hidden inside a banyan forest. Natural limestone cathedral. UNESCO World Heritage."
     crowd_level: 2
     crowd_label: "Low"
     image: "https://images.unsplash.com/photo-1610971250019-f677bc1300be?w=800&h=500&fit=crop&q=80&crop=top"
     extended:
-      full_desc: "The most sacred site in the Ryukyuan religion, hidden within a primeval forest of ancient banyan and gajumaru trees. No buildings — instead, massive triangular limestone formations create natural cathedral-like spaces. Through the narrow gap between two towering rocks at the main sanctuary, you glimpse Kudaka Island — considered the island where the gods first descended. Kings and high priestesses performed rituals here for centuries."
-      best_time: "Early morning (09:00 opening) for the most atmospheric forest light. Avoid rainy days (slippery paths)."
-      how_to_get: "50 min drive from Naha. Bus from Naha Bus Terminal to Chinen (90 min). Car recommended."
-      nearby: "Kudaka Island ferry terminal (15 min drive), Nirai Kanai Bridge (5 min — stunning ocean viewpoint)"
-      crowd_tips: "Never truly crowded, but mornings are quietest. The limestone paths can be slippery — wear grip shoes. Be respectful — this is an active sacred site, not a ruin. Photography is allowed but keep silence. ¥300 admission."
+      full_desc: "The most sacred site in the Ryukyuan religion, hidden within primeval forest. Massive triangular limestone formations create natural cathedral-like spaces. Through the rock gap, you glimpse Kudaka Island — the island of the gods."
+      best_time: "Early morning (09:00 opening) for atmospheric forest light."
+      how_to_get: "50 min drive from Naha. Car recommended."
+      nearby: "Kudaka Island ferry terminal (15 min drive), Nirai Kanai Bridge (5 min)"
+      crowd_tips: "Never truly crowded, mornings are quietest. Limestone paths are slippery — wear grip shoes. Active sacred site. ¥300."
 
   - city: "Tokyo"
     name: "Yanaka Ginza"
     lat: 35.7275
     lng: 139.7678
-    description: "Tokyo's most nostalgic old shopping street — tofu shops, sembei crackers, cats on rooftops. Almost no tourists despite being walkable from Ueno."
+    description: "Tokyo's most nostalgic old shopping street — tofu shops, sembei crackers, cats on rooftops. Almost no tourists."
     crowd_level: 2
     crowd_label: "Low"
     image: "https://images.unsplash.com/photo-1565707990801-71e6d5f10ac6?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "A lovingly preserved old-school Tokyo shopping street that survived the war, earthquake, and modernisation. Small family-run shops sell handmade tofu, rice crackers (sembei), croquettes, and traditional crafts. Cats are the unofficial mascots — wooden cat sculptures line the rooftops, and real ones lounge in doorways. The adjacent Yanaka Cemetery has beautiful old trees and a contemplative atmosphere."
-      best_time: "Weekday mornings (10:00–12:00) for the quietest experience. Late afternoon for the famous sunset stairs."
-      how_to_get: "Nippori Station (JR Yamanote Line) — 5 min walk downhill via the 'Yuyake Dandan' sunset stairs."
-      nearby: "Ueno Park (20 min walk), Tokyo National Museum (15 min), Nezu Shrine (10 min)"
-      crowd_tips: "Almost no foreign tourists. Weekday mornings are quietest. The 'Yuyake Dandan' stairs at the Nippori entrance face west — arrive before sunset for the view. Try the ¥70 menchi-katsu at the top of the stairs."
+      full_desc: "A lovingly preserved old-school Tokyo shopping street that survived war and modernisation. Small family-run shops, cat mascots, and the famous Yuyake Dandan sunset stairs."
+      best_time: "Weekday mornings (10:00–12:00). Late afternoon for the sunset stairs."
+      how_to_get: "Nippori Station (JR Yamanote Line) — 5 min walk downhill."
+      nearby: "Ueno Park (20 min walk), Tokyo National Museum (15 min)"
+      crowd_tips: "Almost no foreign tourists. Try the ¥70 menchi-katsu at the top of the stairs."
 
   - city: "Tokyo"
     name: "Shimokitazawa"
     lat: 35.6610
     lng: 139.6680
-    description: "Tokyo's indie music and vintage fashion hub. No chain stores, no tourist traps — just record shops, coffee, and neighbourhood bars. Zero tourist vibe."
+    description: "Tokyo's indie music and vintage fashion hub. No chain stores, no tourist traps — just record shops, coffee, and neighbourhood bars."
     crowd_level: 1
     crowd_label: "Very Low"
     image: "https://images.unsplash.com/photo-1764418658791-771bb04efdcd?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "Tokyo's most beloved indie neighbourhood — narrow streets packed with vintage clothing, vinyl records, independent coffee roasters, small theatres, and live music venues. The recent Bonus Track development (open-air micro-shops) and Shimokita Ekiue (station-top market) added a modern layer without losing the creative spirit. Zero chain stores, zero tourist infrastructure — just authentic Tokyo counter-culture."
-      best_time: "Afternoon to evening (14:00–21:00). Live music venues start around 19:00."
-      how_to_get: "Shimokitazawa Station — Keio Inokashira Line from Shibuya (3 min) or Odakyu Line from Shinjuku (10 min)."
-      nearby: "Shibuya (3 min train), Sangenjaya (alternative bar district, 5 min train)"
-      crowd_tips: "Virtually zero foreign tourists. Weekend afternoons are busier with locals but still relaxed. Check live house schedules at Shelter, BASEMENTBAR, or THREE. South side has the best vintage shops."
+      full_desc: "Tokyo's most beloved indie neighbourhood — vintage clothing, vinyl records, independent coffee, small theatres, and live music. Zero chain stores, zero tourist infrastructure."
+      best_time: "Afternoon to evening (14:00–21:00). Live music from 19:00."
+      how_to_get: "Shimokitazawa Station — Keio Inokashira from Shibuya (3 min)."
+      nearby: "Shibuya (3 min train), Sangenjaya (5 min train)"
+      crowd_tips: "Virtually zero foreign tourists. Best vintage shops on the south side. Check live house schedules."
+
+  - city: "Tokyo"
+    name: "Koenji"
+    lat: 35.7050
+    lng: 139.6490
+    description: "Tokyo's indie/bohemian district — antique shops, vinyl records, great izakayas. Zero tourist vibe, pure local energy."
+    crowd_level: 1
+    crowd_label: "Very Low"
+    image: "https://images.unsplash.com/photo-1565707990801-71e6d5f10ac6?w=800&h=500&fit=crop&q=80"
+    extended:
+      full_desc: "A bohemian neighbourhood on the Chuo Line known for second-hand clothing, vinyl records, independent music venues, and friendly neighbourhood izakayas. Creative, slightly anarchic energy — street art and tiny live houses."
+      best_time: "Evening (17:00–late) for izakayas and bars. Afternoon for shopping."
+      how_to_get: "Koenji Station — JR Chuo Line from Shinjuku (10 min)."
+      nearby: "Nakano Broadway (2 stops), Asagaya (1 stop)"
+      crowd_tips: "No foreign tourists. Standing bars (tachinomi) north of the station have the cheapest drinks in Tokyo."
