@@ -1,0 +1,70 @@
+status: "in-progress"
+target_submit_date: "2026-09-01"
+
+requirements:
+  - id: passport
+    name: "Valid Passport"
+    status: done
+    notes: "Valid until 2032"
+  - id: itr
+    name: "Income Tax Returns (2 years)"
+    status: done
+    notes: "FY 2024-25 and FY 2025-26 filed"
+  - id: employee-cert
+    name: "Employee Certificate"
+    status: pending
+    action: "Request from HR"
+  - id: noc
+    name: "NOC from Company"
+    status: pending
+    action: "Request from company"
+  - id: stays-proof
+    name: "Hotel Booking Confirmations"
+    status: pending
+    depends_on: "Book all stays first"
+  - id: itinerary-doc
+    name: "Detailed Trip Itinerary"
+    status: done
+    notes: "Day-by-day plan on the website"
+  - id: bank-statement
+    name: "Bank Statement (6 months)"
+    status: pending
+    action: "Request from bank"
+  - id: photos
+    name: "Passport Photos (4.5x4.5cm)"
+    status: pending
+    notes: "2 recent photos, white background"
+  - id: visa-form
+    name: "Visa Application Form"
+    status: blocked
+    blocked_by: "Needs all documents first"
+  - id: cover-letter
+    name: "Cover Letter"
+    status: pending
+    notes: "Explaining purpose of visit, travel dates, employer details"
+
+timeline:
+  - date: "2026-07-01"
+    title: "Request Employment Documents"
+    description: "Employee Certificate and NOC from company"
+    status: pending
+  - date: "2026-07-05"
+    title: "Book All Accommodations"
+    description: "Finalize Kyoto, Hiroshima, Okinawa, Tokyo stays"
+    status: pending
+  - date: "2026-07-07"
+    title: "Collect Financial Documents"
+    description: "Bank statements, salary slips, ITR copies"
+    status: pending
+  - date: "2026-07-08"
+    title: "Prepare Application Package"
+    description: "Itinerary doc, cover letter, passport photos"
+    status: pending
+  - date: "2026-07-10"
+    title: "Submit Visa Application"
+    description: "Submit at Japanese Consulate"
+    status: pending
+  - date: "2026-07-25"
+    title: "Visa Processing Complete"
+    description: "~7 working days processing"
+    status: pending

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan 2026 — Checklist</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+</head>
+<body>
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-jp">日本</div>
+  <div class="loading-text">Loading checklist...</div>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">日本 2026</a>
+  <div class="nav-links" id="navLinks"></div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-pattern"></div>
+  <div class="page-header-content">
+    <div class="page-header-eyebrow">Prepare</div>
+    <h1 class="page-header-title">Pre-Departure Checklist</h1>
+    <div class="page-header-jp">準備チェック</div>
+    <div class="page-header-sub" id="checkProgress"></div>
+  </div>
+</div>
+
+<section class="checklist-section" id="checklist">
+  <div class="checklist-grid" id="checklistGrid"></div>
+</section>
+
+<footer id="footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+JD.boot(['trip', 'checklist'], async function(data) {
+  renderChecklist(data);
+  updateProgress();
+});
+
+function renderChecklist(data) {
+  const saved = JSON.parse(localStorage.getItem('jd-checklist') || '{}');
+  const container = document.getElementById('checklistGrid');
+  container.innerHTML = data.checklist.groups.map((group, gi) =>
+    `<div class="checklist-group">
+      <h3>${JD.esc(group.title)}</h3>
+      <div class="check-items">
+        ${group.items.map((item, ii) => {
+          const key = `${gi}-${ii}`;
+          const done = saved[key] ? ' done' : '';
+          return `<div class="check-item${done}" data-ck="${key}" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <span class="check-text">${JD.esc(item)}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`
+  ).join('');
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  const state = {};
+  document.querySelectorAll('.check-item').forEach(item => {
+    if (item.classList.contains('done')) state[item.dataset.ck] = true;
+  });
+  localStorage.setItem('jd-checklist', JSON.stringify(state));
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = document.querySelectorAll('.check-item').length;
+  const done = document.querySelectorAll('.check-item.done').length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  const el = document.getElementById('checkProgress');
+  if (el) el.textContent = `${done} of ${total} items complete (${pct}%)`;
+}
+
+window.toggleCheck = toggleCheck;
+</script>
+</body>
+</html>

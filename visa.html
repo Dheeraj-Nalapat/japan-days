@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan 2026 — Visa Tracker</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+</head>
+<body>
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-jp">日本</div>
+  <div class="loading-text">Loading visa tracker...</div>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">日本 2026</a>
+  <div class="nav-links" id="navLinks"></div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-pattern"></div>
+  <div class="page-header-content">
+    <div class="page-header-eyebrow">Documents</div>
+    <h1 class="page-header-title">Visa Application</h1>
+    <div class="page-header-jp">ビザ申請</div>
+    <div class="page-header-sub" id="visaTargetDate"></div>
+  </div>
+</div>
+
+<section class="visa-section">
+  <div class="visa-progress" id="visaProgress"></div>
+  <div class="visa-grid">
+    <div>
+      <div class="section-eyebrow">Requirements</div>
+      <h2 class="section-title" style="font-size:1.5rem">Document Checklist</h2>
+      <div class="visa-req-list" id="visaReqList"></div>
+    </div>
+    <div>
+      <div class="section-eyebrow">Milestones</div>
+      <h2 class="section-title" style="font-size:1.5rem">Application Timeline</h2>
+      <div class="visa-timeline" id="visaTimeline"></div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+JD.boot(['trip', 'visa'], async function(data) {
+  renderVisa(data);
+});
+
+function renderVisa(data) {
+  const v = data.visa;
+
+  const targetEl = document.getElementById('visaTargetDate');
+  if (v.target_submit_date) {
+    const d = new Date(v.target_submit_date);
+    const now = new Date();
+    const diff = Math.ceil((d - now) / 86400000);
+    targetEl.textContent = diff > 0
+      ? `Target submission: ${v.target_submit_date} (${diff} days away)`
+      : `Target date was ${v.target_submit_date}`;
+  }
+
+  const total = v.requirements.length;
+  const done = v.requirements.filter(r => r.status === 'done').length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('visaProgress').innerHTML = `
+    <div class="visa-progress-label">
+      <span>Overall Progress</span>
+      <span class="visa-progress-pct">${done}/${total} complete (${pct}%)</span>
+    </div>
+    <div class="visa-progress-bar-track">
+      <div class="visa-progress-bar-fill" style="width:${pct}%"></div>
+    </div>`;
+
+  document.getElementById('visaReqList').innerHTML = v.requirements.map(req => {
+    const badge = req.status;
+    const badgeLabel = req.status === 'done' ? '✓ Done' : req.status === 'blocked' ? '⊘ Blocked' : '○ Pending';
+    let detail = '';
+    if (req.notes) detail = req.notes;
+    else if (req.action) detail = `Action: ${req.action}`;
+    else if (req.depends_on) detail = `Depends on: ${req.depends_on}`;
+    else if (req.blocked_by) detail = `Blocked: ${req.blocked_by}`;
+    return `<div class="visa-req-item" data-status="${badge}">
+      <span class="visa-req-badge ${badge}">${badgeLabel}</span>
+      <div class="visa-req-info">
+        <div class="visa-req-name">${JD.esc(req.name)}</div>
+        ${detail ? `<div class="visa-req-detail">${JD.esc(detail)}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('visaTimeline').innerHTML = v.timeline.map(item => {
+    const d = new Date(item.date);
+    const now = new Date();
+    const isPast = d < now;
+    const dotClass = isPast ? 'done' : 'pending';
+    const dateStr = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    return `<div class="visa-tl-item">
+      <div class="visa-tl-dot ${dotClass}"></div>
+      <div class="visa-tl-date">${dateStr}</div>
+      <div class="visa-tl-title">${JD.esc(item.title)}</div>
+      <div class="visa-tl-desc">${JD.esc(item.description)}</div>
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

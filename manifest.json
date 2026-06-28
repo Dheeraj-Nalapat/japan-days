@@ -17,27 +17,27 @@
   ],
   "shortcuts": [
     {
-      "name": "Today's Plan",
-      "short_name": "Today",
-      "url": "./index.html?view=today",
+      "name": "Itinerary",
+      "short_name": "Days",
+      "url": "./itinerary.html",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Logistics",
+      "short_name": "Logistics",
+      "url": "./logistics.html",
+      "icons": [{ "src": "icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Visa Tracker",
+      "short_name": "Visa",
+      "url": "./visa.html",
       "icons": [{ "src": "icon.svg", "sizes": "any" }]
     },
     {
       "name": "Checklist",
       "short_name": "Checklist",
-      "url": "./index.html?view=checklist",
-      "icons": [{ "src": "icon.svg", "sizes": "any" }]
-    },
-    {
-      "name": "Budget",
-      "short_name": "Budget",
-      "url": "./index.html?view=budget",
-      "icons": [{ "src": "icon.svg", "sizes": "any" }]
-    },
-    {
-      "name": "Map",
-      "short_name": "Map",
-      "url": "./index.html?view=map",
+      "url": "./checklist.html",
       "icons": [{ "src": "icon.svg", "sizes": "any" }]
     }
   ]

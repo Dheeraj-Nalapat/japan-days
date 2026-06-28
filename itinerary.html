@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan 2026 — Itinerary</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-jp">日本</div>
+  <div class="loading-text">Loading itinerary...</div>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">日本 2026</a>
+  <div class="nav-links" id="navLinks"></div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-pattern"></div>
+  <div class="page-header-content">
+    <div class="page-header-eyebrow">Day by Day</div>
+    <h1 class="page-header-title">Full Itinerary</h1>
+    <div class="page-header-jp">旅程</div>
+  </div>
+</div>
+
+<section class="itinerary-section" id="itinerary">
+  <div class="city-blocks" id="cityBlocks"></div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-panel" id="modalPanel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<footer id="footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+let _modalData = {};
+
+function renderItinerary(data) {
+  _modalData = data;
+  const savedNotes = JSON.parse(localStorage.getItem('jd-day-notes') || '{}');
+  const container = document.getElementById('cityBlocks');
+  container.innerHTML = data.itinerary.cities.map((city, ci) => {
+    const daysHTML = city.days.map((day, di) => {
+      const noteKey = `${ci}-${di}`;
+      const noteVal = savedNotes[noteKey] || '';
+      const hasNotes = noteVal ? ' has-notes' : '';
+      const placesHTML = day.places.map((p, pi) => {
+        const clickable = p.extended ? ` onclick="openPlaceModal(${ci},${di},${pi})"` : '';
+        const mapsQ = (p.extended && p.extended.maps_query) || p.name + ' Japan';
+        const mapsAnchor = `<a class="place-maps" href="${JD.mapsLink(mapsQ)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍</a>`;
+        return `<div class="place-item"${clickable}>
+          <span class="place-tag ${JD.esc(p.tag)}">${JD.esc(p.tag_text)}</span>
+          <span class="place-desc"><span class="place-name">${JD.esc(p.name)}</span>${mapsAnchor} — ${JD.esc(p.desc)}</span>
+        </div>`;
+      }).join('');
+      return `<div class="day-entry">
+        <div>
+          <div class="day-num">${JD.esc(day.num)}</div>
+          <span class="day-date">${JD.esc(day.date)}</span>
+        </div>
+        <div class="day-content">
+          <h4>${JD.esc(day.title)}</h4>
+          <div class="places-list">${placesHTML}</div>
+          <button class="day-notes-toggle${hasNotes}" onclick="toggleDayNotes(this)" data-nk="${noteKey}">📝 Notes</button>
+          <div class="day-notes-area" data-nk="${noteKey}">
+            <textarea placeholder="Booking refs, restaurant names, tips..." data-nk="${noteKey}" oninput="saveDayNote(this)">${JD.esc(noteVal)}</textarea>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    const slug = JD.citySlug(city.name);
+    const cityImg = city.image
+      ? `<img class="city-header-img" src="${JD.esc(city.image)}" alt="${JD.esc(city.name)}" loading="lazy" onerror="this.style.display='none'">` : '';
+    return `<div class="city-block visible" id="city-${slug}">
+      <div class="city-header">
+        ${cityImg}
+        <div class="city-flag">${city.flag}</div>
+        <div class="city-block-name">${JD.esc(city.name)}</div>
+        <div class="city-block-jp">${JD.esc(city.jp)}</div>
+        <div class="city-block-dates">${JD.esc(city.dates)}</div>
+        <div class="city-block-nights">${JD.esc(city.nights)}</div>
+      </div>
+      <div class="day-list">${daysHTML}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleDayNotes(btn) {
+  const area = btn.nextElementSibling;
+  area.classList.toggle('open');
+  if (area.classList.contains('open')) area.querySelector('textarea').focus();
+}
+
+function saveDayNote(textarea) {
+  const key = textarea.dataset.nk;
+  const notes = JSON.parse(localStorage.getItem('jd-day-notes') || '{}');
+  if (textarea.value.trim()) {
+    notes[key] = textarea.value;
+  } else {
+    delete notes[key];
+  }
+  localStorage.setItem('jd-day-notes', JSON.stringify(notes));
+  const btn = textarea.closest('.day-content').querySelector('.day-notes-toggle');
+  btn.classList.toggle('has-notes', !!textarea.value.trim());
+}
+
+function openPlaceModal(ci, di, pi) {
+  const place = _modalData.itinerary.cities[ci].days[di].places[pi];
+  const ext = place.extended;
+  if (!ext) return;
+
+  const metaItems = [
+    ext.hours ? {label: 'Hours', value: ext.hours} : null,
+    ext.time_needed ? {label: 'Time Needed', value: ext.time_needed} : null,
+    ext.station ? {label: 'Nearest Station', value: ext.station} : null,
+  ].filter(Boolean);
+
+  const metaHTML = metaItems.length ? `<div class="modal-meta">${metaItems.map(m =>
+    `<div class="modal-meta-item"><div class="modal-meta-label">${JD.esc(m.label)}</div><div class="modal-meta-value">${JD.esc(m.value)}</div></div>`
+  ).join('')}</div>` : '';
+
+  const tipHTML = ext.tips ? `<div class="modal-tip"><div class="modal-tip-label">💡 Tips</div><p>${JD.esc(ext.tips)}</p></div>` : '';
+
+  const activityHTML = ext.activity ? `<div class="modal-activity">
+    <div class="modal-activity-label">🎯 Activity Info</div>
+    <div class="modal-activity-grid">
+      ${ext.activity.booking ? `<div class="modal-activity-item"><strong>Booking</strong>${JD.esc(ext.activity.booking)}</div>` : ''}
+      ${ext.activity.cost ? `<div class="modal-activity-item"><strong>Cost</strong>${JD.esc(ext.activity.cost)}</div>` : ''}
+      ${ext.activity.duration ? `<div class="modal-activity-item"><strong>Duration</strong>${JD.esc(ext.activity.duration)}</div>` : ''}
+      ${ext.activity.what_to_bring ? `<div class="modal-activity-item"><strong>What to Bring</strong>${JD.esc(ext.activity.what_to_bring)}</div>` : ''}
+    </div>
+  </div>` : '';
+
+  const mapHTML = ext.maps_query ? `<a class="modal-maps-link" href="${JD.mapsLink(ext.maps_query)}" target="_blank" rel="noopener">📍 Open in Google Maps</a>` : '';
+
+  JD.openModal(`
+    <div class="modal-tag">${JD.esc(place.tag_text)}</div>
+    <div class="modal-title">${JD.esc(place.name)}</div>
+    <div class="modal-subtitle">${JD.esc(place.desc)}</div>
+    <div class="modal-body"><p>${JD.esc(ext.full_desc)}</p></div>
+    ${metaHTML}
+    ${tipHTML}
+    ${activityHTML}
+    ${mapHTML}
+  `);
+}
+
+window.toggleDayNotes = toggleDayNotes;
+window.saveDayNote = saveDayNote;
+window.openPlaceModal = openPlaceModal;
+
+JD.boot(['trip', 'itinerary'], async function(data) {
+  renderItinerary(data);
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 800);
+  }
+});
+</script>
+</body>
+</html>

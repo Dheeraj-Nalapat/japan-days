@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan 2026 — Logistics</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1208">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-jp">日本</div>
+  <div class="loading-text">Loading travel plan...</div>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">日本 2026</a>
+  <div class="nav-links" id="navLinks"></div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
+</nav>
+
+<section class="page-header">
+  <div class="page-header-pattern"></div>
+  <div class="page-header-content">
+    <div class="page-header-eyebrow">Travel & Money</div>
+    <h1 class="page-header-title">Logistics</h1>
+    <div class="page-header-jp">旅行手配</div>
+  </div>
+</section>
+
+<div id="flights" class="flights-strip"><div class="flights-ticker" id="flightsTicker"></div></div>
+
+<section id="accommodation" class="accommodation-section">
+  <div class="section-eyebrow">Where to Stay</div>
+  <h2 class="section-title">Accommodation</h2>
+  <div class="accommodation-grid" id="accommodationGrid"></div>
+</section>
+
+<section id="budget" class="budget-section">
+  <div class="section-eyebrow">Money</div>
+  <h2 class="section-title">Budget Breakdown</h2>
+  <div class="budget-grid" id="budgetGrid"></div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-panel" id="modalPanel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<footer id="footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+function renderFlights(data) {
+  const container = document.getElementById('flightsTicker');
+  const cardsHTML = data.flights.flights.map(f => {
+    const badgeStyle = f.badge_style ? ` style="${JD.esc(f.badge_style)}"` : '';
+    const rescheduledHTML = f.rescheduled
+      ? `<div class="rescheduled-tag">${JD.esc(f.rescheduled_note)}</div>` : '';
+    return `<div class="flight-card">
+      <div class="badge"${badgeStyle}>${JD.esc(f.badge)}</div>
+      <div>
+        <div class="flight-route">
+          <span class="airport-code">${JD.esc(f.from_code)}</span>
+          <span class="route-arrow">→</span>
+          <span class="airport-code">${JD.esc(f.to_code)}</span>
+        </div>
+        <div class="flight-detail">${JD.esc(f.from_city)} → ${JD.esc(f.to_city)}</div>
+        <div class="flight-time">${JD.esc(f.time)}</div>
+        <div class="flight-num">${JD.esc(f.flight_num)}</div>
+        ${rescheduledHTML}
+      </div>
+    </div>`;
+  }).join('');
+  container.innerHTML = cardsHTML + cardsHTML;
+}
+
+function renderAccommodation(data) {
+  if (!data.accommodation || !data.accommodation.stays) return;
+  const container = document.getElementById('accommodationGrid');
+  container.innerHTML = data.accommodation.stays.map(s => {
+    const statusClass = s.status || 'pending';
+    const statusLabel = s.status === 'book' ? 'Book Now' : s.status === 'booked' ? 'Booked' : 'Pending';
+    return `<div class="stay-card">
+      <img class="stay-card-img" src="${JD.esc(s.image || '')}" alt="${JD.esc(s.city)}" loading="lazy" onerror="this.style.display='none'">
+      <div class="stay-card-body">
+        <div class="stay-city">${JD.esc(s.city)}</div>
+        <h3>${JD.esc(s.type)} — ${JD.esc(s.area)}</h3>
+        <div class="stay-meta">
+          <div><strong>${JD.esc(s.nights)}</strong></div>
+          <div>${JD.esc(s.dates)}</div>
+          ${s.cost_per_night !== 'TBD' ? `<div>${JD.esc(s.cost_per_night)}/night → <strong>${JD.esc(s.total)}</strong></div>` : ''}
+          ${s.notes ? `<div style="margin-top:0.5rem;opacity:0.7;">${JD.esc(s.notes)}</div>` : ''}
+        </div>
+        <span class="stay-status ${statusClass}">${statusLabel}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderBudget(data) {
+  const b = data.budget;
+  const container = document.getElementById('budgetGrid');
+  const barsHTML = b.items.map(item =>
+    `<div class="budget-item">
+      <div class="budget-item-top">
+        <span class="budget-name">${JD.esc(item.name)}</span>
+        <span class="budget-amount">${JD.esc(item.amount)}</span>
+      </div>
+      <div class="budget-bar-track"><div class="budget-bar-fill" style="--w:${item.weight}"></div></div>
+    </div>`
+  ).join('');
+  const paragraphs = b.summary.paragraphs.map(p => `<p>${p}</p>`).join('');
+  container.innerHTML = `
+    <div>
+      <div class="budget-bars" id="budgetBars">${barsHTML}</div>
+      <div class="budget-total">
+        <span class="label">Total Estimated</span>
+        <span class="big">${JD.esc(b.total)}</span>
+      </div>
+    </div>
+    <div class="budget-summary">
+      <h3>${JD.esc(b.summary.title)}</h3>
+      ${paragraphs}
+      <span class="buffer-amount">${JD.esc(b.summary.buffer_amount)}</span>
+      <p style="margin-top:1rem;">${JD.esc(b.summary.extra_note)}</p>
+    </div>`;
+
+  const bars = document.querySelectorAll('.budget-bar-fill');
+  bars.forEach(bar => { bar.style.transform = 'scaleX(0)'; });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.budget-bar-fill').forEach((fill, i) => {
+          const w = fill.style.getPropertyValue('--w');
+          setTimeout(() => {
+            fill.style.transition = 'transform 1.2s cubic-bezier(0.4,0,0.2,1)';
+            fill.style.transform = `scaleX(${w})`;
+          }, i * 120);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const budgetEl = document.getElementById('budgetBars');
+  if (budgetEl) observer.observe(budgetEl);
+}
+
+let _jpyRate = null;
+async function renderCurrency(data) {
+  try {
+    const resp = await fetch('https://api.exchangerate-api.com/v4/latest/INR');
+    const rateData = await resp.json();
+    _jpyRate = rateData.rates.JPY;
+  } catch {
+    try {
+      const resp2 = await fetch('https://open.er-api.com/v6/latest/INR');
+      const rateData2 = await resp2.json();
+      _jpyRate = rateData2.rates.JPY;
+    } catch { return; }
+  }
+  if (!_jpyRate) return;
+
+  const widget = document.createElement('div');
+  widget.className = 'currency-widget';
+  widget.innerHTML = `<div class="currency-row"><span class="currency-label">Live Rate</span><span class="currency-rate">₹1 = ¥${_jpyRate.toFixed(2)}</span><span class="currency-jpy">via exchangerate-api.com</span></div>`;
+  const budgetGrid = document.getElementById('budgetGrid');
+  if (budgetGrid) budgetGrid.parentNode.insertBefore(widget, budgetGrid.nextSibling);
+
+  document.querySelectorAll('.budget-amount').forEach(el => {
+    const num = parseInt(el.textContent.replace(/[₹,\s]/g, ''), 10);
+    if (!isNaN(num)) {
+      const jpy = Math.round(num * _jpyRate);
+      const span = document.createElement('span');
+      span.className = 'currency-jpy';
+      span.textContent = `≈ ¥${jpy.toLocaleString()}`;
+      el.parentNode.appendChild(span);
+    }
+  });
+}
+
+JD.boot(['trip', 'flights', 'accommodation', 'budget'], async function(data) {
+  renderFlights(data);
+  renderAccommodation(data);
+  renderBudget(data);
+  renderCurrency(data);
+});
+</script>
+</body>
+</html>

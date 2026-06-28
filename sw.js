@@ -1,7 +1,14 @@
-const CACHE_NAME = 'japan-days-v3';
+const CACHE_NAME = 'japan-days-v4';
 const ASSETS = [
   './',
   './index.html',
+  './itinerary.html',
+  './logistics.html',
+  './explore.html',
+  './visa.html',
+  './checklist.html',
+  './css/shared.css',
+  './js/shared.js',
   './icon.svg',
   './manifest.json',
   './data/trip.yaml',
@@ -14,8 +21,8 @@ const ASSETS = [
   './data/checklist.yaml',
   './data/accommodation.yaml',
   './data/locations.yaml',
+  './data/visa.yaml',
   'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js',
-  'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js',
   'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js',
   'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css',
   'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap'

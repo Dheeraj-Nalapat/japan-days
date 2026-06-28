@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan 2026 — Explore</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a1208">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/shared.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css">
+</head>
+<body>
+
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-jp">日本</div>
+  <div class="loading-text">Loading travel plan...</div>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">日本 2026</a>
+  <div class="nav-links" id="navLinks"></div>
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
+</nav>
+
+<section class="page-header">
+  <div class="page-header-pattern"></div>
+  <div class="page-header-content">
+    <div class="page-header-eyebrow">Discover</div>
+    <h1 class="page-header-title">Explore Japan</h1>
+    <div class="page-header-jp">探索</div>
+  </div>
+</section>
+
+<section id="quiet" class="quiet-section">
+  <div class="section-eyebrow">Off the Beaten Path</div>
+  <h2 class="section-title">Hidden Gems — Crowd Guide</h2>
+  <div class="quiet-grid" id="quietGrid"></div>
+</section>
+
+<section id="food" class="food-section">
+  <div class="section-eyebrow">Eat</div>
+  <h2 class="section-title">Must-Try Foods by City</h2>
+  <div class="food-grid" id="foodGrid"></div>
+</section>
+
+<section id="locations" class="locations-section">
+  <div class="section-eyebrow">Navigate</div>
+  <h2 class="section-title">Where Things Are</h2>
+  <div id="locationsGrid"></div>
+</section>
+
+<section id="map" class="map-section">
+  <div class="section-eyebrow">Explore</div>
+  <h2 class="section-title">Interactive Map</h2>
+  <div id="tripMap" class="trip-map"></div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal-panel" id="modalPanel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<footer id="footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="js/shared.js"></script>
+<script>
+let _modalData = {};
+
+function renderHiddenGems(data) {
+  _modalData = data;
+  const container = document.getElementById('quietGrid');
+  container.innerHTML = data['hidden-gems'].gems.map((gem, gi) => {
+    const dots = Array.from({length: 5}, (_, i) =>
+      `<div class="crowd-dot${i < gem.crowd_level ? ' filled' : ''}"></div>`
+    ).join('');
+    const imgHTML = gem.image
+      ? `<div style="overflow:hidden"><img class="quiet-card-img" src="${JD.esc(gem.image)}" alt="${JD.esc(gem.name)}" loading="lazy" onerror="this.style.display='none'"></div>` : '';
+    const click = gem.extended ? ` onclick="openGemModal(${gi})"` : '';
+    const mapsQ = gem.name + ' ' + gem.city + ' Japan';
+    const mapsUrl = JD.mapsLink(mapsQ);
+    return `<div class="quiet-card"${click}>
+      ${imgHTML}
+      <div class="quiet-card-body">
+        <div class="city-badge">${JD.esc(gem.city)}</div>
+        <h3>${JD.esc(gem.name)}</h3>
+        <p>${JD.esc(gem.description)}</p>
+        <div class="crowd-meter">
+          <div class="crowd-dots">${dots}</div>
+          <span class="crowd-label">${JD.esc(gem.crowd_label)}</span>
+        </div>
+        <a class="gem-maps-link" href="${mapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📍 Google Maps</a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderFood(data) {
+  _modalData.food = data.food;
+  const container = document.getElementById('foodGrid');
+  container.innerHTML = data.food.cities.map((city, ci) =>
+    `<div class="food-city">
+      <div class="food-city-name">${JD.esc(city.name)}</div>
+      <div class="food-items">
+        ${city.items.map((item, fi) => {
+          const name = typeof item === 'string' ? item : item.name;
+          const hasExt = typeof item === 'object' && item.extended;
+          const click = hasExt ? ` onclick="openFoodModal(${ci},${fi})"` : '';
+          return `<div class="food-item"${click}>${JD.esc(name)}</div>`;
+        }).join('')}
+      </div>
+    </div>`
+  ).join('');
+}
+
+function renderLocations(data) {
+  if (!data.locations || !data.locations.cities) return;
+  const container = document.getElementById('locationsGrid');
+  container.innerHTML = data.locations.cities.map(city =>
+    `<div style="margin-bottom:2rem;">
+      <div style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--torii);margin-bottom:0.3rem;">
+        ${JD.esc(city.name)} — Base: ${JD.esc(city.base)}
+      </div>
+      <div class="locations-grid">
+        ${city.places.map(p =>
+          `<div class="location-row">
+            <span class="location-name">${JD.esc(p.name)}</span>
+            <span class="location-metro">${JD.esc(p.metro_stop)}</span>
+            <span class="location-time">${JD.esc(p.time_from_base)}</span>
+          </div>`
+        ).join('')}
+      </div>
+    </div>`
+  ).join('');
+}
+
+function renderMap(data) {
+  const mapEl = document.getElementById('tripMap');
+  if (!mapEl || typeof L === 'undefined') return;
+  const map = L.map('tripMap', { scrollWheelZoom: false }).setView([33.5, 134], 6);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 18
+  }).addTo(map);
+  const cityIcon = L.divIcon({ className: '', html: '<div style="background:#c0392b;width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>', iconSize: [14,14], iconAnchor: [7,7] });
+  const gemIcon = L.divIcon({ className: '', html: '<div style="background:#2ecc71;width:10px;height:10px;border-radius:50%;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>', iconSize: [10,10], iconAnchor: [5,5] });
+  const bounds = [];
+  data.itinerary.cities.forEach(city => {
+    if (!city.lat) return;
+    const pos = [city.lat, city.lng];
+    bounds.push(pos);
+    const places = city.days.flatMap(d => d.places.map(p => p.name)).join(', ');
+    L.marker(pos, { icon: cityIcon }).addTo(map)
+      .bindPopup(`<div class="map-popup-city">${JD.esc(city.dates)}</div><div class="map-popup-title">${city.flag} ${JD.esc(city.name)}</div><div class="map-popup-desc">${JD.esc(city.nights)} · ${JD.esc(places.slice(0, 120))}…</div>`);
+  });
+  data['hidden-gems'].gems.forEach(gem => {
+    if (!gem.lat) return;
+    const pos = [gem.lat, gem.lng];
+    bounds.push(pos);
+    L.marker(pos, { icon: gemIcon }).addTo(map)
+      .bindPopup(`<div class="map-popup-city">Hidden Gem · ${JD.esc(gem.city)}</div><div class="map-popup-title">${JD.esc(gem.name)}</div><div class="map-popup-desc">${JD.esc(gem.description.slice(0, 100))}…</div>`);
+  });
+  if (bounds.length > 1) map.fitBounds(bounds, { padding: [30, 30] });
+  const routeCoords = data.itinerary.cities.filter(c => c.lat).map(c => [c.lat, c.lng]);
+  if (routeCoords.length > 1) L.polyline(routeCoords, { color: '#c0392b', weight: 2, opacity: 0.4, dashArray: '6 4' }).addTo(map);
+}
+
+function openGemModal(gi) {
+  const gem = _modalData['hidden-gems'].gems[gi];
+  if (!gem || !gem.extended) return;
+  const ext = gem.extended;
+  const infoBlocks = [
+    ext.best_time ? {label: 'Best Time', value: ext.best_time} : null,
+    ext.how_to_get ? {label: 'How to Get There', value: ext.how_to_get} : null,
+    ext.nearby ? {label: 'Nearby', value: ext.nearby} : null,
+    ext.crowd_tips ? {label: 'Crowd Tips', value: ext.crowd_tips} : null,
+  ].filter(Boolean);
+  const infoHTML = infoBlocks.length ? `<div class="modal-gem-info">${infoBlocks.map(b =>
+    `<div class="modal-gem-block"><div class="modal-gem-block-label">${JD.esc(b.label)}</div><div class="modal-gem-block-value">${JD.esc(b.value)}</div></div>`
+  ).join('')}</div>` : '';
+  JD.openModal(`
+    <div class="modal-tag">${JD.esc(gem.city)} · Hidden Gem</div>
+    <div class="modal-title">${JD.esc(gem.name)}</div>
+    <div class="modal-subtitle">${JD.esc(gem.description)}</div>
+    <div class="modal-body"><p>${JD.esc(ext.full_desc)}</p></div>
+    ${infoHTML}
+  `);
+}
+
+function openFoodModal(ci, fi) {
+  const city = _modalData.food.cities[ci];
+  const food = city.items[fi];
+  if (!food.extended) return;
+  const ext = food.extended;
+  const whereHTML = ext.where ? `<div class="modal-food-where">📍 ${JD.esc(ext.where)}</div>` : '';
+  const metaHTML = `<div class="modal-food-meta">
+    ${ext.price ? `<span class="modal-food-badge">💰 ${JD.esc(ext.price)}</span>` : ''}
+    ${ext.dietary ? `<span class="modal-food-badge">🍽️ ${JD.esc(ext.dietary)}</span>` : ''}
+  </div>`;
+  JD.openModal(`
+    <div class="modal-tag">${JD.esc(city.name)} · Food</div>
+    <div class="modal-title">${JD.esc(food.name)}</div>
+    ${whereHTML}
+    ${metaHTML}
+    <div class="modal-body"><p>${JD.esc(ext.description)}</p></div>
+  `);
+}
+
+window.openGemModal = openGemModal;
+window.openFoodModal = openFoodModal;
+
+JD.boot(['trip', 'itinerary', 'hidden-gems', 'food', 'locations'], async function(data) {
+  renderHiddenGems(data);
+  renderFood(data);
+  renderLocations(data);
+  renderMap(data);
+});
+</script>
+</body>
+</html>
