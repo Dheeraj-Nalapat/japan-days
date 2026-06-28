@@ -2,7 +2,7 @@ title: "Japan 2026 — Dheeraj's Travel Plan"
 dates: "Oct 11 – Oct 24, 2026"
 duration: "14 Days · 13 Nights"
 departure_date: "2026-10-10T00:00:00+05:30"
-route_summary: "Kochi → Bangkok → Osaka → Koyasan → Kyoto → Hiroshima → Okinawa → Tokyo → Bangkok → Kochi"
+route_summary: "Kochi → Bangkok → Osaka → Koyasan → Kyoto → Hiroshima → Miyajima → Tokyo → Bangkok → Kochi"
 hero_jp: "日本旅行"
 
 meta:
@@ -13,7 +13,7 @@ meta:
   - label: "Budget"
     value: "₹2,00,000"
   - label: "Cities"
-    value: "6 + Layover"
+    value: "5 + Layover"
 
 nav_links:
   - text: "Itinerary"
@@ -28,5 +28,5 @@ nav_links:
     href: "checklist.html"
 
 footer:
-  line1: "Japan 2026 · PNR G9395C · 14 days, 6 cities, ₹2L budget"
+  line1: "Japan 2026 · PNR G9395C · 14 days, 5 cities, ₹2L budget"
   line2: "日本旅行計画 · Oct 11 – Oct 24, 2026"

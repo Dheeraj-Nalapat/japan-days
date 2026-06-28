@@ -125,45 +125,6 @@ cities:
           price: "¥850–1,100"
           dietary: "Contains wheat, pork, seafood. Not vegetarian."
 
-  - name: "Okinawa"
-    items:
-      - name: "Goya champuru (bitter melon stir fry)"
-        extended:
-          description: "Okinawa's signature dish — bitter melon stir-fried with tofu, egg, and pork belly. Key to Okinawan longevity."
-          where: "Any local shokudo. Try Makishi Public Market 2F restaurants."
-          price: "¥600–900"
-          dietary: "Contains egg, pork. Can be made vegetarian on request."
-      - name: "Okinawa soba 🍜"
-        extended:
-          description: "Not buckwheat soba — thick wheat noodles in clear pork and bonito broth, topped with braised soki and pickled ginger."
-          where: "Kishimoto Shokudo in Nago (est. 1905) or Hamaya near Makishi"
-          price: "¥550–800"
-          dietary: "Contains wheat, pork. Not vegetarian."
-      - name: "Rafute braised pork belly 🍖"
-        extended:
-          description: "Slow-cooked for hours in awamori rice spirit, soy sauce, and brown sugar. Melts on the tongue."
-          where: "Yunangi in Naha (famous for home-style Okinawan cooking)"
-          price: "¥800–1,200"
-          dietary: "Pork. Not halal. Not vegetarian. Gluten-free."
-      - name: "Awamori rice spirit 🍶"
-        extended:
-          description: "Okinawa's indigenous distilled spirit, made from Thai indica rice. 30–43% ABV. Aged kusu develops whisky-like complexity."
-          where: "Any izakaya. Helios Pub (craft cocktails) in Naha."
-          price: "¥400–800 per glass"
-          dietary: "Alcohol. Gluten-free. Vegan."
-      - name: "Blue Seal ice cream 🍦"
-        extended:
-          description: "Okinawan institution since 1948. Unique flavours: beni-imo (purple sweet potato), shikuwasa citrus, salt cookie."
-          where: "Blue Seal shops across Naha, Chatan, and American Village"
-          price: "¥300–500"
-          dietary: "Contains dairy. Some flavours contain egg."
-      - name: "Makishi Market seafood 🐟"
-        extended:
-          description: "Choose seafood from colourful ground-floor stalls — tropical fish, giant prawns, sea grapes — take upstairs to cook."
-          where: "Makishi Public Market, Kokusai Street area, Naha"
-          price: "¥2,000–3,000 (including cooking fee)"
-          dietary: "Seafood. Cooking styles include sashimi, grilled, fried."
-
   - name: "Tokyo"
     items:
       - name: "Tsukiji sushi breakfast 🍣"

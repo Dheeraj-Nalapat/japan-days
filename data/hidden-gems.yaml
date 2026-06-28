@@ -149,50 +149,20 @@ gems:
       nearby: "Peace Memorial Museum (20 min walk), Hiroshima Castle (10 min walk)"
       crowd_tips: "Almost never crowded. Even on weekends you'll often have sections to yourself. ¥260 admission."
 
-  - city: "Okinawa"
-    name: "Cape Manzamo"
-    lat: 26.5050
-    lng: 127.7710
-    description: "Dramatic limestone cliffs shaped like an elephant's trunk by the sea. Free entry, wild flowers, sunrise crowds near zero."
+  - city: "Miyajima"
+    name: "Miyajima at Dawn"
+    lat: 34.2959
+    lng: 132.3197
+    description: "The floating Itsukushima torii and shrine at sunrise — once the day-trippers leave and before they return, the island is yours and the deer."
     crowd_level: 1
     crowd_label: "Very Low"
-    image: "https://images.unsplash.com/photo-1754228811035-d220f70b86d9?w=800&h=500&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1768946579156-e29e7397b0bc?w=800&h=500&fit=crop&q=80"
     extended:
-      full_desc: "A dramatic coastal promontory where limestone cliffs have been carved into an elephant-trunk arch. The grassy plateau above is vast with subtropical flowers, and turquoise sea below."
-      best_time: "Sunrise for dramatic light and zero crowds."
-      how_to_get: "70 min drive from Naha. Bus 20 or 120 (90 min). Rental car recommended."
-      nearby: "Manza Beach (5 min drive), Moon Beach (10 min drive)"
-      crowd_tips: "Early morning (before 09:00) is essentially empty. Free entry, paved paths, free parking."
-
-  - city: "Okinawa"
-    name: "Katsuren Castle Ruins"
-    lat: 26.3340
-    lng: 127.8630
-    description: "Hilltop Ryukyuan fortress with 360° sea views. UNESCO listed. Almost always quiet — one of Okinawa's best kept secrets."
-    crowd_level: 1
-    crowd_label: "Very Low"
-    image: "https://images.unsplash.com/photo-1610971250019-f677bc1300be?w=800&h=500&fit=crop&q=80"
-    extended:
-      full_desc: "Ruins of a 12th–15th century castle built by lord Amawari for maritime trade. UNESCO-listed stone walls wind up to a summit with 360° views. Roman coins were excavated here."
-      best_time: "Late afternoon (15:00–17:00) when the sun illuminates the western sea."
-      how_to_get: "50 min drive from Naha. Rental car recommended."
-      nearby: "Hamahiga Island (nearby bridge-connected island), Ryugudo Cave (30 min drive)"
-      crowd_tips: "One of the quietest UNESCO sites in Japan. You'll likely have the summit to yourself. Ruins are free; museum ¥600."
-
-  - city: "Okinawa"
-    name: "Sefa-utaki"
-    lat: 26.1740
-    lng: 127.8280
-    description: "Okinawa's holiest Ryukyuan shrine hidden inside a banyan forest. Natural limestone cathedral. UNESCO World Heritage."
-    crowd_level: 2
-    crowd_label: "Low"
-    image: "https://images.unsplash.com/photo-1610971250019-f677bc1300be?w=800&h=500&fit=crop&q=80&crop=top"
-    extended:
-      full_desc: "The most sacred site in the Ryukyuan religion, hidden within primeval forest. Massive triangular limestone formations create natural cathedral-like spaces. Through the rock gap, you glimpse Kudaka Island — the island of the gods."
-      best_time: "Early morning (09:00 opening) for atmospheric forest light."
-      how_to_get: "50 min drive from Naha. Car recommended."
-      nearby: "Kudaka Island ferry terminal (15 min drive), Nirai Kanai Bridge (5 min)"
-      crowd_tips: "Never truly crowded, mornings are quietest. Limestone paths are slippery — wear grip shoes. Active sacred site. ¥300."
+      full_desc: "Itsukushima Shrine (UNESCO) is a complex of vermilion halls built on stilts over the sea, with its iconic offshore torii. The secret is to sleep on the island: after ~17:00 the crowds vanish, the torii is illuminated at night, and at dawn you can have the shrine almost to yourself in soft morning light."
+      best_time: "Dawn (around shrine opening, 06:30). Also magical illuminated after dark."
+      how_to_get: "JR ferry from Miyajimaguchi (~10 min). Stay overnight on the island."
+      nearby: "Mt Misen ropeway (bay views, wild monkeys), Daisho-in Temple, Omotesando shopping street"
+      crowd_tips: "Check the tide table — high tide makes the torii 'float'; low tide lets you walk out to it. ¥300 shrine entry + ¥100 visitor tax."
 
   - city: "Tokyo"
     name: "Yanaka Ginza"

@@ -22,28 +22,6 @@ flights:
     rescheduled: true
     rescheduled_note: "⚠ Was 12:00 → rescheduled to 09:50"
 
-  - badge: "Internal"
-    badge_style: "background:#4a6741;"
-    from_code: "KIX"
-    to_code: "OKA"
-    from_city: "Osaka"
-    to_city: "Okinawa Naha"
-    time: "~Oct 18 · ~2h 11m"
-    flight_num: "Peach Aviation"
-    cost: "~₹6,300"
-    rescheduled: false
-
-  - badge: "Internal"
-    badge_style: "background:#4a6741;"
-    from_code: "OKA"
-    to_code: "NRT"
-    from_city: "Okinawa"
-    to_city: "Tokyo Narita"
-    time: "~Oct 21 · ~2h 58m"
-    flight_num: "Jetstar Japan"
-    cost: "~₹4,700"
-    rescheduled: false
-
   - badge: "Leg 2"
     badge_style: ""
     from_code: "NRT"
